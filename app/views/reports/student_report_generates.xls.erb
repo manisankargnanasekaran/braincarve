@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Name</Data></Cell>
+        <Cell><Data ss:Type="String">Joining Date</Data></Cell>
+        <Cell><Data ss:Type="String">Age</Data></Cell>
+        <Cell><Data ss:Type="String">Contact Number</Data></Cell>
+        <Cell><Data ss:Type="String">Level</Data></Cell>
+      </Row>   
+      <Row>
+        <Cell><Data ss:Type="String"><%= @students_report.student_name %></Data></Cell>
+      <Cell><Data ss:Type="String"><%= @students_report.registration_date.to_date.strftime("%d-%m-%Y") if @students_report.registration_date%></Data></Cell>
+        <Cell><Data ss:Type="String"><%= @students_report.age %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= @students_report.contact_no %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= @students_report.level %></Data></Cell>
+      </Row>
+      <Row>  
+         <Cell><Data ss:Type="String"> Student Payments </Data></Cell> 
+         </Row>
+
+
+      <Row>
+       <Cell><Data ss:Type="String">Payer Name</Data></Cell>
+        <Cell><Data ss:Type="String">Amount</Data></Cell>
+        <Cell><Data ss:Type="String">Reference Number</Data></Cell>
+        <Cell><Data ss:Type="String">Fee Type</Data></Cell>
+        <Cell><Data ss:Type="String">Date</Data></Cell>
+        </Row>
+        <% @student_fee.each do |student| %>
+        <Row>
+        <Cell><Data ss:Type="String"><%= student.payer_name %></Data></Cell>
+        
+        <Cell><Data ss:Type="String"><%= student.amount%></Data></Cell>
+        <Cell><Data ss:Type="String"><%= student.reference_number %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= student.fee_type %></Data></Cell>
+        <Cell><Data ss:Type="String"><%=  student.dated.to_date.strftime("%d-%m-%Y")%></Data></Cell>
+      </Row>
+        <%end%>
+
+         <Row>  
+         <Cell><Data ss:Type="String"> Student Attendance </Data></Cell> 
+         </Row>
+
+
+        <% s = 0 %>
+        <Row>
+        <Cell><Data ss:Type="String">Attend Class</Data></Cell>
+        <Cell><Data ss:Type="String">Date</Data></Cell>
+      </Row>
+        <% @attendance.each do |student| %>
+        <Row>
+        <Cell><Data ss:Type="String"><%= s += 1 %></Data></Cell>
+
+        <Cell><Data ss:Type="String"><%= student.date.to_date.strftime("%d-%m-%Y") %></Data></Cell>
+      </Row>
+        <%end%>
+    </Table>
+  </Worksheet>
+</Workbook>
+
+  
+
+   

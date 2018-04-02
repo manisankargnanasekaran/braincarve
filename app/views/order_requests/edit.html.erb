@@ -1,0 +1,8 @@
+<div class="card">
+<div class="card-header">
+    <h4>Edit Order
+    <%= link_to "<i class='btn btn-info btn-sm'> Back</i>".html_safe, order_requests_path, class: "pull-right" %></h4>
+</div>
+<div class="card-body"><%= render 'form', order_request: @order_request %></div>
+</div>
+

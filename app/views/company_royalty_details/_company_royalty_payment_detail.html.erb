@@ -1,0 +1,48 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+ <div class="modal-header">Payment Detail<button type="button" class="close" data-dismiss="modal">&times;</button></div>
+<div class="modal-body">
+<div class="table">
+
+<%# @payment_detail = InvoicePayment.find_by(invoice_id: params[:id]) %>
+<% @payment_detail = CompanyRoyaltyDetail.find(params[:id]) %>
+
+<div class="row">
+  <div class="col-md-4">Payment Date</div>
+  <div class="col-md-1"><strong>:</strong></div>
+  <div class="col-md-3"><strong><%= @payment_detail.payment_date.to_date.strftime("%d-%m-%Y") if @payment_detail.payment_date %></strong></div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">Payment Mode</div>
+  <div class="col-md-1"><strong>:</strong></div>
+  <div class="col-md-3"><strong><%= @payment_detail.payment_mode %></strong></div>
+</div>
+
+<% if @payment_detail.reference_no.present? %>
+<div class="row">
+  <div class="col-md-4">Reference Number</div>
+  <div class="col-md-1"><strong>:</strong></div>
+  <div class="col-md-3"><strong><%= @payment_detail.reference_no %></strong></div>
+</div>
+<%end%>
+
+<div class="row">
+  <div class="col-md-4">Amount Paid</div>
+  <div class="col-md-1"><strong>:</strong></div>
+  <div class="col-md-3"><strong><%= @payment_detail.amount %></strong></div>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+
+<style type="text/css">
+  .modal-header{
+    background-color: #646873;
+  }
+  .center{
+    align-content: center;  }
+</style>

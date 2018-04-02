@@ -1,0 +1,129 @@
+<div class="card" id ="table-scroll">
+	<div class="card-header">
+
+		<h3> Student Details
+			<div class="pull-right">
+			  <%= link_to "<i class='fa fa-download'></i>".html_safe, student_report_generates_path(id: params[:student_id], format: "xls" ) %>
+			</div>
+			<div class=" col-md-2 pull-right">
+			  <%= link_to "<i class='fa fa-reply'></i>".html_safe, student_reports_path, class: " head-title pull-right", data: { confirm: 'Do you want to go to previous page?' } %>
+			</div>
+		</h3>
+	</div>
+	<table id="student_repot" class="table table-striped display" cellspacing="0" width="100%">
+	 <thead>
+	   <tr>
+		    <th>Name</th>
+		    <th> Joining Date </th>
+		    <th>Age</th>
+		    <th>Contact Number</th>
+		    <th> Level</th>
+	    </tr>
+	  </thead>
+		<tbody>
+		
+      <tr>
+	      <td class="std-name"><%= @students_report.student_name %></td> 
+	      <td class="reg-date"><%= @students_report.registration_date.to_date.strftime("%d-%m-%Y") if @students_report.registration_date%></td>      
+	      <td class="std-class"><%= @students_report.age %></td>      
+	      <td class="cont-no"><%= @students_report.contact_no %></td>
+	      <td class="sch-name"><%= @students_report.level %></td> 
+	       </td> 
+	    </tr>
+		   
+		  </tbody>
+		</table>
+
+
+	<h5> Student Payments</h5>
+		<table class="table table-striped display" cellspacing="0" width="100%">
+		 <thead>
+		   <tr>
+		   <th> Sl.No </th>
+		    <th>Payer Name</th>
+		    <th> Amount </th>
+            <th>Level </th>
+		    <th>Reference Number</th>
+		    <th>Fee Type</th>
+		    <th> Date</th>
+		    
+		   </tr>
+		 </thead>
+		 <tbody>
+		  <% b = 0 %>
+		    <% @student_fee.each do |student| %>
+		      <tr>
+		          <td class="std-name"><%= b += 1 %></td> 
+			      <td class="std-name"><%= student.payer_name %></td> 
+			      <td class="reg-date"><%= student.amount%></td> 
+			      <td class="cont-no"><%= student.level %></td>     
+			      <td class="std-class"><%= student.reference_number %></td>      
+			      <td class="cont-no"><%= student.fee_type %></td>
+			      <td class="sch-name"><%= student.dated.to_date.strftime("%d-%m-%Y") %></td> 
+			       </td> 
+			    </tr>
+		    <% end %>
+		  </tbody>
+		</table>
+	
+<h5> Student Attendance</h5>
+		<table class="table table-striped display" cellspacing="0" width="100%">
+		 <thead>
+		   <tr>
+		    
+		    <th> Sl.No </th>
+		    <th> Level </th>
+		    <th>Payment Mode</th>
+		   
+		    
+		   </tr>
+		 </thead>
+		 <tbody>
+		 <% s = 0 %>
+		    <% @attendance.each do |student| %>
+		    
+		      <tr>
+			      <td class="std-name"><%= s += 1 %></td> 
+			      <td class="std-name"><%= student.level %></td>
+			      <td class ="sch-name"><%= student.date.to_date.strftime("%d-%m-%Y") %></td> 
+			       </td> 
+			    </tr>
+		    <% end %>
+		  </tbody>
+		</table>
+	</div>
+
+
+
+
+
+
+</div>
+</div>
+
+</div>
+
+
+
+
+ <script type="text/javascript">
+$(document).ready(function() {
+
+ $("#student_report").dataTable({
+   // columnDefs: [
+   // {orderable: false, targets: -1},
+   // {orderable: false, targets: -2},
+   // {orderable: false, targets: -3},
+   // ]
+ });
+
+});
+</script>
+
+<style>
+#table-scroll {
+  height:800px;
+  overflow:auto;  
+  margin-top:20px;
+}
+</style>

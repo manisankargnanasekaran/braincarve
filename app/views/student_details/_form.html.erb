@@ -1,0 +1,72 @@
+<%= form_with(model: student_detail, local: true) do |form| %>
+  <% if student_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(student_detail.errors.count, "error") %> prohibited this student_detail from being saved:</h2>
+
+      <ul>
+      <% student_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :student_id %>
+    <%= form.text_field :student_id, id: :student_detail_student_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :father_name %>
+    <%= form.text_field :father_name, id: :student_detail_father_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :father_occupation %>
+    <%= form.text_field :father_occupation, id: :student_detail_father_occupation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :father_email %>
+    <%= form.text_field :father_email, id: :student_detail_father_email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :father_contact_no %>
+    <%= form.text_field :father_contact_no, id: :student_detail_father_contact_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mother_name %>
+    <%= form.text_field :mother_name, id: :student_detail_mother_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mother_occupation %>
+    <%= form.text_field :mother_occupation, id: :student_detail_mother_occupation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mother_email %>
+    <%= form.text_field :mother_email, id: :student_detail_mother_email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mother_contact_no %>
+    <%= form.text_field :mother_contact_no, id: :student_detail_mother_contact_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :known_by %>
+    <%= form.text_field :known_by, id: :student_detail_known_by %>
+  </div>
+
+  <div class="field">
+    <%= form.label :reason_to_enroll %>
+    <%= form.text_field :reason_to_enroll, id: :student_detail_reason_to_enroll %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

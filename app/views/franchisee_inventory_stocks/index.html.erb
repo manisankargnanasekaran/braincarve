@@ -1,0 +1,47 @@
+<div class="card">
+<div class="card-header">
+  <h3>Stock Details</h3>
+</div>
+<div class="card-body">
+<table id="stock_table" class="table table-striped display" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>Item Name</th>
+      <th>Available Quantity</th>
+      <th>&nbsp;</th>
+      <!-- <th>&nbsp;</th>
+      <th>&nbsp;</th> -->
+    </tr>
+  </thead>
+
+  <tbody>
+     <% @franchisee_inventory_stocks.each do |franchisee_inventory_stock| %>
+      <tr>
+        <td><%= franchisee_inventory_stock.inventory_item.book if franchisee_inventory_stock.inventory_item %></td>
+        <td><%= franchisee_inventory_stock.available_qty %></td>
+        <td></td>
+        <!-- <td></td>
+        <td></td> -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+<style type="text/css">
+.btn-orange{
+background-color: #E26616;
+color: #fff;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#stock_table").dataTable({
+    columnDefs: [
+    {orderable: false, targets: -1},
+    {orderable: false, targets: -2},
+    {orderable: false, targets: -3},
+    ]
+  });
+});
+</script>

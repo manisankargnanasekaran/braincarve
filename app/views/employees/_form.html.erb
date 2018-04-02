@@ -1,0 +1,465 @@
+<ul id="progressbar" class="justify-content-center">
+    <li class="step">Official</li>    
+    <li class="step">Salary</li>
+    <li class="step">Personal</li>
+    <li class="step">Contact</li>
+  </ul>
+
+  <!-- One "tab" for each step in the form: -->
+
+<%= form_for @employee, :validate => true do |form| %>
+  <!-- tab-1 -->
+  <div class="tab">
+    <h1 class="tab-title">Official Details</h1>
+  <div class="row">
+       
+       <div class="col-md-4 form-group">
+       <label class="col-sm-12 col-md-12 control-label">Prefix <b>*</b></label>
+      <div class="col-sm-10 col-md-12 ">
+           <%= form.select :prefix, salutations.map{|day| [day, day]}, {},{prompt: true, class: "form-control mandatory"} %>
+       </div>
+    </div>
+
+     <div class="col-md-4 form-group">
+      <label class="col-sm-12 col-md-12 control-label">First Name <b>*</b></label>
+      <div class="col-sm-9 col-md-12 ">
+          <%= form.text_field :first_name, id: :employee_first_name, class: "form-control mandatory"%>
+        </div>
+    </div>
+
+      <div class="col-md-4 form-group">
+         <label class="col-sm-12 col-md-12 control-label">Last Name <b>*</b></label>
+            <div class="col-sm-9 col-md-12">
+              <%= form.text_field :last_name, id: :employee_last_name, class: "form-control mandatory" %>
+            </div>
+        </div>
+
+  </div>
+                
+       <div class="row">
+
+        <div class="col-md-4 form-group">
+          <label class="col-sm-12 col-md-12 control-label">Employee Id <b>*</b></label>
+          <div class="col-sm-9 col-md-12 ">
+            <%= form.text_field :employee_identity, id: :employee_employee_identity, value: form.object.employee_identity, class: "form-control mandatory"%>
+            </div>
+        </div>
+
+        <div class="col-md-4 form-group">
+          <label class="col-sm-12 col-md-12 control-label">Email Id </label>
+          <div class="col-sm-9 col-md-12 ">
+            <%= form.text_field :email_id, id: :employee_email_id, class: "form-control" %>
+            </div>
+        </div>
+
+        <div class="col-md-4 form-group">
+          <label class="col-sm-12 col-md-12 control-label">Department </label>
+          <div class="col-sm-9 col-md-12 ">
+             <%= form.text_field :department, id: :employee_department, class: "form-control" %>
+            </div>
+           </div>
+       
+        </div>
+              
+           <div class="row">
+
+          <div class="col-md-4 form-group">
+            <label class="col-sm-12 col-md-12 control-label">Job Title </label>
+            <div class="col-sm-9 col-md-12 ">
+               <%= form.text_field :job_title, id: :employee_job_title, class: "form-control"%>
+          </div>
+        </div>
+
+         <div class="form-group col-md-4">
+            <label for="firstName" class="col-sm-10 col-md-12  control-label">Date of Joining <b>*</b></label>
+              <div class="col-sm-9 col-md-12">
+                <%= form.text_field :date_of_joining, id: :date_of_joining, class: "form-control mandatory" %>
+              </div>
+          </div>
+
+        </div>
+
+               
+  </div>
+  <!-- tab-1 ends -->
+
+<!-- tab-2 -->
+<%= form.fields_for :employee_salary, :validate => true do |salary| %>
+  <div class="tab">
+  <h1 class="tab-title">Salary Details</h1>
+
+   <div class="row">
+          <div class="col-md-4 form-group">
+          <label class="col-sm-12 col-md-12 control-label">Salary <b>*</b></label>
+          <div class="col-sm-9 col-md-12 ">
+              <%= salary.text_field :salary_amount, id: :employee_salary_amount, class: "form-control mandatory" %>
+            </div>
+           </div>
+
+          <div class="col-md-4 form-group">
+            <label class="col-sm-12 col-md-12 control-label">Account Holder Name <b>*</b></label>
+            <div class="col-sm-9 col-md-12 ">
+                <%= salary.text_field :account_holder_name, id: :employee_account_holder_name, class: "form-control mandatory" %>
+          </div>
+        </div>
+
+         <div class="col-md-4 form-group">
+          <label class="col-sm-12 col-md-12 control-label">Account Number <b>*</b></label>
+          <div class="col-sm-9 col-md-12 ">
+              <%= salary.text_field :account_number, id: :employee_account_number, class: "form-control mandatory" %>
+            </div>
+           </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-4 form-group">
+            <label class="col-sm-12 col-md-12 control-label">IFSC Code <b>*</b></label>
+            <div class="col-sm-9 col-md-12 ">
+              <%= salary.text_field :ifsc_code, id: :employee_ifsc_code, class: "form-control mandatory" %>
+          </div>
+        </div>
+
+        <div class="col-md-4 form-group">
+            <label class="col-sm-12 col-md-12 control-label">Bank Name <b>*</b></label>
+            <div class="col-sm-9 col-md-12 ">
+                <%= salary.text_field :bank_name, id: :employee_bank_name, class: "form-control mandatory" %>
+              </div>
+             </div>
+
+              <div class="col-md-4 form-group">
+              <label class="col-sm-12 col-md-12 control-label">Account Type <b>*</b></label>
+              <div class="col-sm-9 col-md-12 ">
+                <%= salary.text_field :account_type, id: :employee_account_type, class: "form-control mandatory" %>
+            </div>
+          </div>
+
+        </div>
+
+  </div>
+<%end%> 
+  <!-- tab-2 ends-->
+
+  <!-- tab-3 -->
+ <%= form.fields_for :employee_personal, :validate => true do |personal| %>
+  <div class="tab">
+    <h1 class="tab-title">Personal Details</h1>
+     
+     <div class="row">
+          <div class="col-md-4 form-group">
+            <label class="col-sm-12 col-md-12 control-label">Nationality <b>*</b></label>
+            <div class="col-sm-9 col-md-12 ">
+                <%= personal.text_field :nationality, id: :employee_nationality, class: "form-control" %>
+              </div>
+             </div>
+
+            <div class="col-md-4 form-group">
+              <label class="col-sm-12 col-md-12 control-label">Date of Birth <b>*</b></label>
+              <div class="col-sm-9 col-md-12 ">
+                 <%= personal.text_field :date_of_birth, id: :birthdate, class: "form-control mandatory" %>
+            </div>
+          </div>
+
+          <div class="col-md-4 form-group">
+            <label class="col-sm-12 col-md-12 control-label">Blood Group</label>
+            <div class="col-sm-9 col-md-12 ">
+                 <%= personal.text_field :blood_group, id: :employee_blood_group, class: "form-control" %>
+              </div>
+          </div>
+        </div>
+
+
+          <div class="row">
+
+          <div class="col-md-4 form-group">
+          <label class="col-sm-12 col-md-12 control-label">Gender <b>*</b></label>
+          <div class="col-sm-9 col-md-12 ">
+                <ul>
+                  <ul> <%= personal.radio_button :gender, 'Male', :value => "Male",required: true %>Male</ul>
+                    <ul><%= personal.radio_button :gender, 'Female', :value => "Female" %>Female</ul>
+                </ul>   
+            </div>
+           </div>
+
+          <div class="col-md-4 form-group">
+            <label class="col-sm-12 col-md-12 control-label">Marital Status <b>*</b></label>
+            <div class="col-sm-9 col-md-12 ">
+               <ul>
+                   <ul><%= personal.radio_button :marrital_status, 'true', :value => true,required: true %>Married</ul>
+                    <ul><%= personal.radio_button :marrital_status, 'false', :value => false %>Unmarried</ul>
+                </ul>
+          </div>
+        </div>
+
+        </div>
+
+  </div>
+<% end %>
+   <!-- tab-3 ends-->
+
+  <!-- tab-4 -->
+  <div class="tab">
+  <h1 class="tab-title">Contact Details</h1>
+<%= form.fields_for :employee_contact, :validate => true do |contact| %>
+  <div class="row">
+          <div class="col-md-4 form-group">
+            <label class="col-sm-12 col-md-12 control-label">Contact Number <b>*</b></label>
+            <div class="col-sm-9 col-md-12 ">
+                <%= contact.text_field :contact_no, id: :employee_contact_no, class: "form-control mandatory" %>
+              </div>
+          </div>
+
+          <div class="col-md-4 form-group">
+            <label class="col-sm-12 col-md-12 control-label">City</label>
+            <div class="col-sm-9 col-md-12 ">
+                <%= contact.text_field :city, id: :employee_city, class: "form-control" %>
+              </div>
+          </div>
+
+          <div class="col-md-4 form-group">
+            <label class="col-sm-12 col-md-12 control-label">State</label>
+            <div class="col-sm-9 col-md-12 ">
+                <%= contact.text_field :state, id: :employee_state, class: "form-control", :required=> true%>
+              </div>
+          </div>
+        </div>
+
+        <div class="row">    
+
+          <div class="col-md-4 form-group">
+            <label class="col-sm-12 col-md-12 control-label">Country</label>
+            <div class="col-sm-9 col-md-12 ">
+                 <%= contact.text_field :country, id: :employee_country, class: "form-control" %>
+              </div>
+          </div>
+
+          <div class="form-group col-md-4">
+          <label for="firstName" class="col-sm-3 col-md-12 control-label">Pincode <b>*</b></label>
+            <div class="col-sm-9 col-md-12">
+              <%= contact.text_field :pincode, id: :employee_pincode, class: "form-control mandatory" %>
+            </div>
+        </div>
+            
+        <div class="col-md form-group">
+              <label class="col-sm-12 col-md-12 control-label">Address <b>*</b></label>
+              <div class="col-sm-9 col-md-12 ">
+                <%= contact.text_area :address, id: :employee_address, class: "form-control mandatory" %>
+            </div>
+          </div>           
+
+        </div>
+<%end%>
+
+<%= form.fields_for :profile_image, :validate=>true do |profile| %> 
+        <div class="row">        
+            <div class="col-md-4 f-upload">
+                  <label class="col-sm-3 col-md-12 control-label" for="employee_profile_image_attributes_image_url">Upload Profile Image</label>
+                  <div class="col-sm-9 col-md-12">
+                  <input id="employee_profile_image" class="form-control" name="employee[profile_image_attributes][image_url]" data-validate="true" type="file">
+                  </div>
+                </div>
+        </div>
+<%end%>
+
+<br>
+
+<div class="row">
+    <div class="col-md-4 form-group">
+        <label class="col-sm-12 col-md-12 control-label">Upload Resume</label>
+            <div class="col-sm-9 col-md-12 ">
+                  <%= form.file_field :resume, class: "form-control" %>
+            </div>
+        </div>
+</div>
+
+<!-- <div class="field">
+    add an image....
+    <%#= form.file_field :resume %>
+  </div> -->
+  
+</div>
+
+   <!-- tab-4 ends-->
+
+  <div style="overflow:auto;">
+    <div style="float:right;">
+      <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+      <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+      <button type="submit" id="submitBtn">Submit</button>
+    </div>
+  </div> 
+
+  <div>
+      <b>*</b> Fields are Required
+  </div>
+
+<% end %>
+
+
+
+<!-- Style for Multistep form - start -->
+
+<style type="text/css">
+#regForm {
+  background-color: #ffffff;
+  margin: 0 auto;
+  padding: 25px 30px;
+  width: 100%;
+  min-width: 250px;
+}
+input {
+  padding: 10px;
+  font-size: 17px;
+  font-family: Raleway;
+  border: 1px solid #aaaaaa;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #fdebe1;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+
+.multi-step-form button {
+  background-color: #828488;
+color: #ffffff;
+border: none;
+padding: 10px 20px;
+font-size: 17px;
+font-family: Raleway;
+cursor: pointer;
+border-radius: 30px;
+}
+
+.multi-step-form button:hover {
+  opacity: 0.8;
+  /*background-color: #e67a3f;*/
+}
+
+#prevBtn {
+  background-color: #bbbbbb;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+  .step.finish:after{
+   background-color: #E67A3F !important;
+  }
+
+  #progressbar li .finish:before, #progressbar li .finish:after{
+        background: #27AE60 !important;
+            color: white;
+  }
+  #progressbar li.finish:before{
+    background: #E67A3F !important;
+            color: white;
+  }
+
+.multi-step-form .tab-title{
+font-size: 20px;
+font-weight: 600;
+margin-bottom: 30px;
+color: #828488;
+}
+
+
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    counter-reset: step;
+    width: 75%;
+    margin: 0 auto;
+}
+#progressbar li {
+    list-style-type: none;
+    color: #e67b40;
+    text-transform: uppercase;
+    font-size: 12px;
+    width:20.33%;
+    float: left;
+    position: relative;
+    text-align: center;
+}
+#progressbar li.active:before{
+    /*background: #E67A3F; */
+    background: #D4530D;
+    color: white;
+}
+#progressbar li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 20px;
+    line-height: 20px;
+    display: block;
+    font-size: 10px;
+    color: #fff;
+    background: #848282;
+    border-radius: 3px;
+    margin: 0 auto 5px auto;
+}
+#progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: #848282;
+    position: absolute;
+    left: 57%;
+    top: 9px;
+    z-index: 22s;
+}
+#progressbar li:nth-last-child(1):after{
+   content: none;
+} 
+.f-upload input{
+  overflow:hidden;
+}
+@media only screen and (max-width:767px){
+  #progressbar{
+    margin: 0 auto;
+    padding: 0px;
+    width: 100%;
+  }
+  #progressbar li:after{
+    left: 61%;
+  }
+  #regForm{
+  padding: 25px 0px;
+  }
+  #progressbar li{
+    width: 24.33%!important;
+    font-size: 9px;
+  }
+}
+</style>
+
+
+<style type="text/css">
+  .temp_form-control {
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+    transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+  }
+
+</style>
+
+
+<script src="/assets/employee_validation.js" type="text/javascript"></script>
+

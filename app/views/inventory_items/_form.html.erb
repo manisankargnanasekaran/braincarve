@@ -1,0 +1,89 @@
+<%= form_for(inventory_item, validate: true) do |form| %>
+  <div class="row">
+    <div class="form-group col-md-4">
+      <%= form.label :book, "Item" %>      
+            <%= form.text_field :book, id: :inventory_item_book, class: "form-control" %>
+    </div>
+
+ <!--  <div class="form-group col-md-4">
+    <%#= form.label :class_level, "Class" %>
+    <%#= form.select :class_level, class_level.map{|k|[k ,k]}, {prompt: true}, class: "form-control" %>
+  </div> -->
+
+    <div class="form-group col-md-2">
+      <%= form.label :min_quantity, "Minimum Quantity" %>      
+            <%= form.text_field :min_quantity, id: :inventory_item_min_quantity, class: "form-control" %>
+    </div>
+
+    <div class="form-group col-md-2">
+        <%= form.label :unit, "Scale" %>      
+        <%#= form.text_field :unit, id: :inventory_item_unit, class: "form-control" %>
+        <%= form.select :unit, item_scale.map{|k|[k ,k]}, {prompt: true}, class: "form-control" %>
+    </div>
+
+  </div>
+
+   <div class="row">
+      
+      <div class="form-group col-md-4">
+        <%= form.label :gst_percentage, "GST(%)" %>      
+              <%= form.text_field :gst_percentage, id: :inventory_item_gst_percentage, class: "form-control" %>
+      </div>
+
+      <div class="form-group col-md-4">
+        <%= form.label :cost_per_item, "Cost Per Item" %>
+              <%= form.text_field :cost_per_item, id: :inventory_item_cost_per_item, class: "form-control" %>
+      </div>
+  </div>
+
+<br>
+  <div class="actions submit_n_cancel">
+   <%= link_to "Cancel", inventory_items_path, class: "btn btn-info btn-sm" %>&nbsp; | &nbsp;<%= form.submit "Create", class: "btn btn-info btn-sm" %>
+  </div>
+<% end %>
+
+
+<script>
+$('#select').selectize({
+  create: true,
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+<%if false%>
+  <%= form_with(model: inventory_item, local: true) do |form| %>
+  <% if inventory_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(inventory_item.errors.count, "error") %> prohibited this inventory_item from being saved:</h2>
+
+      <ul>
+      <% inventory_item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :book %>
+    <%= form.text_field :book, id: :inventory_item_book %>
+  </div>
+
+  <div class="field">
+    <%= form.label :class_level %>
+    <%= form.text_field :class_level, id: :inventory_item_class_level %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+<%end%>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  order_request: one
+  inventory_item: one
+  request_qty: 1
+  cost_per_item: 9.99
+  amount: 9.99
+
+two:
+  order_request: two
+  inventory_item: two
+  request_qty: 1
+  cost_per_item: 9.99
+  amount: 9.99

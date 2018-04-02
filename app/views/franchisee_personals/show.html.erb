@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Franchisee:</strong>
+  <%= @franchisee_personal.franchisee %>
+</p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @franchisee_personal.first_name %>
+</p>
+
+<p>
+  <strong>Middle name:</strong>
+  <%= @franchisee_personal.middle_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @franchisee_personal.last_name %>
+</p>
+
+<p>
+  <strong>Dob:</strong>
+  <%= @franchisee_personal.dob %>
+</p>
+
+<p>
+  <strong>Age:</strong>
+  <%= @franchisee_personal.age %>
+</p>
+
+<p>
+  <strong>Occupation:</strong>
+  <%= @franchisee_personal.occupation %>
+</p>
+
+<p>
+  <strong>Experience:</strong>
+  <%= @franchisee_personal.experience %>
+</p>
+
+<p>
+  <strong>No of owners:</strong>
+  <%= @franchisee_personal.no_of_owners %>
+</p>
+
+<%= link_to 'Edit', edit_franchisee_personal_path(@franchisee_personal) %> |
+<%= link_to 'Back', franchisee_personals_path %>

@@ -1,0 +1,58 @@
+<article class="content item-editor-page" id="franchisee_location">
+  <div class="title-block">        
+  <h4 class="title"> <span class="sparkline bar" data-type="bar"></span> </h4>
+  </div>
+  <form name="item">
+  <div class="card card-block">
+    <div class="row">
+      <div class="form-group">
+        <%= form_for @franchisee,:url => {:controller => "franchisees", :action => "create"} do |f| %>
+         
+
+          <div class="col-xs-4" >
+            <label class="control-label"><%= f.label :location %></label>
+            <div class="form-group">
+              <%#= f.collection_select :meal_restriction_id, MealRestriction.order(:meal_restriction_name), :id, :meal_restriction_name, {:prompt => true}, {class: "form-control", required: true } %>
+              <%= f.text_field :location, id: :franchisee_location %>
+              </div>
+          </div>
+
+
+          <div class="col-xs-4">
+            <label class="control-label"><%= f.label :parent_id %></label>
+            <div class="form-group">
+              <%#= f.text_field :date, :id => "parent_id", class: "form-control boxed", required: true, :readonly=> true %>
+               <%= f.number_field :parent_id, id: :franchisee_parent_id %>
+            </div>
+          </div> 
+          
+          <%= f.hidden_field :franchisee_type_id, value: @franchisee_type.id %>
+
+          <div class="form-group row mrgn-top">
+            <div class="col-sm-10 col-sm-offset-2">
+              <%= f.submit "Submit", :class=>"btn btn-primary" %>
+            </div>
+          </div>
+
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+  </form>
+</article>
+
+<%# to_date = @tenant_details.first.tenant.to_date %>
+
+<!-- <script type="text/javascript">
+  $(function(){
+  	  var today = new Date();  
+      $("#txtFrom").datepicker({      	
+    	dateFormat: 'yy-mm-dd', 
+    	minDate: today,
+    	maxDate: '<%#= to_date %>',
+        autoclose: true, 
+        todayHighlight: true
+    });
+  });
+</script> -->

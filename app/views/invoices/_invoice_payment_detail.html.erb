@@ -1,0 +1,79 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+ <div class="modal-header">Payment Detail<button type="button" class="close" data-dismiss="modal">&times;</button></div>
+<div class="modal-body">
+<div class="table">
+
+<% @payment_detail = InvoicePayment.find_by(invoice_id: params[:id]) %>
+<% @invoice_items = Invoice.find(params[:id]).invoice_items %>
+
+<div class="row">
+  <div class="col-md-4">Payment Date</div>
+  <div class="col-md-1"><strong>:</strong></div>
+  <div class="col-md-3"><strong><%= @payment_detail.payment_date.to_date.strftime("%d-%m-%Y") if @payment_detail.payment_date %></strong></div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">Payment Mode</div>
+  <div class="col-md-1"><strong>:</strong></div>
+  <div class="col-md-3"><strong><%= @payment_detail.payment_mode %></strong></div>
+</div>
+
+<% if @payment_detail.reference_no.present? %>
+<div class="row">
+  <div class="col-md-4">Reference Number</div>
+  <div class="col-md-1"><strong>:</strong></div>
+  <div class="col-md-3"><strong><%= @payment_detail.reference_no %></strong></div>
+</div>
+<%end%>
+
+<div class="row">
+  <div class="col-md-4">Amount Paid</div>
+  <div class="col-md-1"><strong>:</strong></div>
+  <div class="col-md-3"><strong><%= @payment_detail.amount_paid.round if @payment_detail.amount_paid %></strong></div>
+</div>
+
+
+<table class="table table-bordered">
+
+<thead>
+  <th>Item Name</th>
+  <th>Quantity</th>
+  <th>Cost Per Item</th>
+  <th>Amount</th>
+</thead>
+<tbody>
+  <% @invoice_items.map do |item| %>
+   <tr>
+    <td><%= item.inventory_item.book %></td>
+
+   <td><%= item.invoice_qty %></td>
+
+   <td><%= item.cost_per_item.round if item.cost_per_item %></td>
+
+   <td><%= item.amount.round if item.amount %></td>
+  </tr>
+  <% end %>
+</tbody>
+</table>
+
+
+<div class="row pull-right">
+ <div class="col-md-2">Total </div>
+ <div class="col-md-2"><strong>:</strong></div>
+ <div class="col-md-2"><strong><%= @invoice_items.pluck(:amount).sum.round if @invoice_items.pluck(:amount).sum %></strong></div>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+
+<style type="text/css">
+  .modal-header{
+    background-color: #646873;
+  }
+  .center{
+    align-content: center;  }
+</style>

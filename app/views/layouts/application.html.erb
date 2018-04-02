@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>BrainCarve</title>
+    <%= favicon_link_tag 'logo.png' %>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body data-turbolinks="false">
+    <div class="wrapper">
+      
+      <%= render partial: "layouts/sidebar"%>
+      
+      <div class="page container-fluid custome_container">
+        <div class="row">  
+          
+          <%= render partial: "layouts/header"%>
+          
+          <main role="main" class="col-sm-9 ml-sm-auto col-md-12 pt-3 custome_main_container">
+            <%= yield %>
+          </main>
+          <%= render partial: "layouts/footer"%>
+        </div>
+      </div>
+        
+        <br><br>
+    
+    </div>
+  </body>
+ 
+</html>
+
+
+<script type="text/javascript">
+$(document).ready(function () {
+$( "#toggleButton" ).click(function() {
+  $("#sidebar").toggleClass("collapse_sidebar");
+});
+});
+</script>
+
+
+
+<!-- # <body>
+# <%#= render partial: "layouts/header"%>
+# <div class="container-fluid custome_container">
+#   <div class="row">
+# <%#= render partial: "layouts/sidebar"%>
+#     <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3 custome_main_container">
+# <%#= yield %>
+# </main>
+# </div>
+# </div>
+# <br><br>
+# <%#= render partial: "layouts/footer"%>
+# </body> -->
+
+
+
+<!-- 
+<body data-turbolinks="false">
+    <div class="wrapper">
+      
+      <div class="page container-fluid">
+        <div class="row">  
+          
+          <%#= render partial: "layouts/header"%>
+
+          <%#= render partial: "layouts/sidebar"%>
+          
+          <main role="main" class="col-sm-9 ml-sm-auto col-md-12 pt-3 custome_main_container">
+            <%#= yield %>
+          </main>
+          <%#= render partial: "layouts/footer"%>
+        </div>
+      </div>
+        
+        <br><br>
+    
+    </div>
+  </body>
+ -->
+
+
+ <%#= javascript_include_tag "application", "rails.validations", "data-turbolinks-track" => true %>
+    <%#= javascript_include_tag 'jquery', 'rails.validations', 'rails.validations.custom' %>

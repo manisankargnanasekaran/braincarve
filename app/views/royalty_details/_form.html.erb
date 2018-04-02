@@ -1,0 +1,37 @@
+<%= form_with(model: royalty_detail, local: true) do |form| %>
+  <% if royalty_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(royalty_detail.errors.count, "error") %> prohibited this royalty_detail from being saved:</h2>
+
+      <ul>
+      <% royalty_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :franchisee_id %>
+    <%= form.text_field :franchisee_id, id: :royalty_detail_franchisee_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :to_franchisee %>
+    <%= form.number_field :to_franchisee, id: :royalty_detail_to_franchisee %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount %>
+    <%= form.text_field :amount, id: :royalty_detail_amount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :royalty_type %>
+    <%= form.check_box :royalty_type, id: :royalty_detail_royalty_type %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

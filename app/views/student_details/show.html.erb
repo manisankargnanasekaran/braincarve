@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @student_detail.student %>
+</p>
+
+<p>
+  <strong>Father name:</strong>
+  <%= @student_detail.father_name %>
+</p>
+
+<p>
+  <strong>Father occupation:</strong>
+  <%= @student_detail.father_occupation %>
+</p>
+
+<p>
+  <strong>Father email:</strong>
+  <%= @student_detail.father_email %>
+</p>
+
+<p>
+  <strong>Father contact no:</strong>
+  <%= @student_detail.father_contact_no %>
+</p>
+
+<p>
+  <strong>Mother name:</strong>
+  <%= @student_detail.mother_name %>
+</p>
+
+<p>
+  <strong>Mother occupation:</strong>
+  <%= @student_detail.mother_occupation %>
+</p>
+
+<p>
+  <strong>Mother email:</strong>
+  <%= @student_detail.mother_email %>
+</p>
+
+<p>
+  <strong>Mother contact no:</strong>
+  <%= @student_detail.mother_contact_no %>
+</p>
+
+<p>
+  <strong>Known by:</strong>
+  <%= @student_detail.known_by %>
+</p>
+
+<p>
+  <strong>Reason to enroll:</strong>
+  <%= @student_detail.reason_to_enroll %>
+</p>
+
+<%= link_to 'Edit', edit_student_detail_path(@student_detail) %> |
+<%= link_to 'Back', student_details_path %>

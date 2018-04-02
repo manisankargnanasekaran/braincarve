@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  announcement_date: 2018-01-27
+  message: MyString
+  is_for_all: false
+
+two:
+  announcement_date: 2018-01-27
+  message: MyString
+  is_for_all: false

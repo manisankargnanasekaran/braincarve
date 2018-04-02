@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Purchase:</strong>
+  <%= @purchase_item.purchase %>
+</p>
+
+<p>
+  <strong>Inventory item:</strong>
+  <%= @purchase_item.inventory_item %>
+</p>
+
+<p>
+  <strong>Cost per item:</strong>
+  <%= @purchase_item.cost_per_item %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @purchase_item.quantity %>
+</p>
+
+<p>
+  <strong>Amount without gst:</strong>
+  <%= @purchase_item.amount_without_gst %>
+</p>
+
+<p>
+  <strong>Amount with gst:</strong>
+  <%= @purchase_item.amount_with_gst %>
+</p>
+
+<%= link_to 'Edit', edit_purchase_item_path(@purchase_item) %> |
+<%= link_to 'Back', purchase_items_path %>

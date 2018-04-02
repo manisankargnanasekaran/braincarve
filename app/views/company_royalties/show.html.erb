@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Franchisee:</strong>
+  <%= @company_royalty.franchisee %>
+</p>
+
+<p>
+  <strong>Student royalty:</strong>
+  <%= @company_royalty.student_royalty %>
+</p>
+
+<p>
+  <strong>Franchisee royalty:</strong>
+  <%= @company_royalty.franchisee_royalty %>
+</p>
+
+<%= link_to 'Edit', edit_company_royalty_path(@company_royalty) %> |
+<%= link_to 'Back', company_royalties_path %>

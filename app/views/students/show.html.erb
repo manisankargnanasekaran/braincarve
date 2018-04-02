@@ -1,0 +1,443 @@
+<section class="show-profile">
+<div class="card">
+<div class="col-md-12 pt-3">
+<h4 class="pb-0"> Student Detail
+<%= link_to "<i class='btn btn-info btn-sm'> Back</i>".html_safe, students_path, class: "pull-right" %>
+<hr style="border-color: #E26616;">
+</h4>
+</div>
+<div class="row profile">
+<div class="col-md-6">
+<div class="media">
+<!--  <img src="/assets/male-icon.jpeg" alt="" class="image-cover d-flex align-self-start mr-3"> -->
+<div class="media-body">
+  <h5 class="stud-name"><%= @student.student_name %></h5>
+
+  <div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Registration Date<span>:</span></label>
+  <div class="col-md-8">
+    <p class="reg-date"><span><%= @student.registration_date.present? ? @student.registration_date.to_date.strftime("%d-%m-%Y") : nil %></span></p>
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">D.O.B<span>:</span></label>
+  <div class="col-md-8">
+  <p class="dob"><span><%= @student.dob.present? ? @student.dob.to_date.strftime("%d-%m-%Y") : nil %></span></p>
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Age<span>:</span></label>
+  <div class="col-md-8">
+ <p class="age"><span><%= @student.age %></span></p>
+  </div>
+</div>
+ </div>
+ </div>
+</div>
+
+<div class="col-md-6">
+<form class="address-info">
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Contact Number<span>:</span></label>
+  <div class="col-md-8">
+    <p class="con-no"><span><%= @student.contact_no %></span></p>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Gender<span>:</span></label>
+  <div class="col-md-8">
+    <p class="address"><span><%= @student.gender%></span></p>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Address<span>:</span></label>
+  <div class="col-md-8">
+    <p class="address"><span><%= @student.address %></span></p>
+  </div>
+</div>
+</form>
+</div>
+</div>
+</div>
+
+
+<div class="card">
+<div class="row profile">
+
+<div class="col-md-6">
+<h4 >Academic Info</h4>
+<hr style="border-color: #E26616;">
+<div class="Acadamic-prof ml-3">
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Level<span>:</span></label>
+  <div class="col-md-8">
+    <p class="level"><span><%= @student.level %></span></p>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Class<span>:</span></label>
+  <div class="col-md-8">
+    <p class="class"><span><%= @student.student_class %></span></p>
+  </div>
+</div>
+<!--  <div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Reg-date<span>:</span></label>
+  <div class="col-md-8">
+    <p class="reg-date"><span>02/06/2017</span></p>
+  </div>
+</div> -->
+
+<!-- "#{@student.batch.batch_no} - #{@student.batch.day} (#{@student.batch.batch_time} - #{@student.batch.batch_end_time})" -->
+
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Batch Number<span>:</span></label>
+  <div class="col-md-8">
+    <p class="batch"><span><%= @student.batch.batch_no %></span></p>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Batch Time<span>:</span></label>
+  <div class="col-md-8">
+    <p class="batch"><span><%= @student.batch.batch_time.present? ? @student.batch.batch_time.downcase : nil %> to <%= @student.batch.batch_end_time.present? ? @student.batch.batch_end_time.to_time.strftime("%I:%M %p").downcase : nil %></span></p>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Batch Day<span>:</span></label>
+  <div class="col-md-8">
+    <p class="batch"><span><%= @student.batch.day %></span></p>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">School Name<span>:</span></label>
+  <div class="col-md-8">
+    <p class="sch-name"><span><%= @student.school_name %></span></p>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">School Location<span>:</span></label>
+  <div class="col-md-8">
+    <p class="lctn"><span><%= @student.school_location %></span></p>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="col-md-6">
+<h4>Parent's Info</h4>
+<hr style="border-color: #E26616;">
+<div class="Acadamic-prof row">
+<div class="col-12">
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Father's Name<span>:</span></label>
+  <div class="col-md-8">
+    <p class="Father-name"><span><%= @student.student_detail.father_name %></span></p>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Email Id<span>:</span></label>
+  <div class="col-md-8">
+    <p class="f-mail-id"><span><%= @student.student_detail.father_email %></span></p>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Occupation<span>:</span></label>
+  <div class="col-md-8">
+    <p class="ocptn"><span><%= @student.student_detail.father_occupation %></span></p>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Contact Number<span>:</span></label>
+  <div class="col-md-8">
+    <p class="f-con-no"><span><%= @student.student_detail.father_contact_no %></span></p>
+  </div>
+</div>
+</div>
+<div class="col-12">
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Mother's Name<span>:</span></label>
+  <div class="col-md-8">
+    <p class="Mother-name"><span><%= @student.student_detail.mother_name %></span></p>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Email Id<span>:</span></label>
+  <div class="col-md-8">
+    <p class="m-mail-id"><span><%= @student.student_detail.mother_email %></span></p>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Occupation<span>:</span></label>
+  <div class="col-md-8">
+    <p class="ocptn"><span><%= @student.student_detail.mother_occupation %></span></p>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Contact Number<span>:</span></label>
+  <div class="col-md-8">
+    <p class="m-con-no"><span><%= @student.student_detail.mother_contact_no %></span></p>
+  </div>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="card">
+<div class="row profile">
+<div class="col-md-12">
+<h4> Reference</h4>
+<hr style="border-color: #E26616;">
+</div>
+ <div class="row col-md-12 reference">
+  <div class="col-md-6">
+  <div class="form-group">
+  <label for="example-text-input" class="col-md-12 col-form-label">Heard of BrainCarve First at</label>
+  <div class="col-md-12">
+    <p><%= @student.student_detail.known_by %></p>
+  </div>
+</div>
+  </div>
+
+  <div class="col-md-6">
+  <div class="form-group">
+  <label for="example-text-input" class="col-md-12 col-form-label">Reason for Enrolling your child</label>
+  <div class="col-md-12">
+    <p><%= @student.student_detail.reason_to_enroll %></p>
+  </div>
+</div>
+  </div>
+  </div>
+</div>
+</div>  
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%if false%>
+<div class="card">
+  <div class="card-header">
+    <h3>View Student
+      <%= link_to "<i class='btn btn-info btn-sm'> Back</i>".html_safe, students_path, class: "pull-right" %>
+    </h3>
+  </div>
+<div class="card-body">
+<h5>Personal Details</h5>
+<hr style="border-color: #E26616;">
+
+
+<div class="row">
+<div class="col">
+  <div class="row">
+  <span class="col lable_caption">Student Name :</span>
+  <strong class='col'><%= @student.student_name %></strong>
+</div>
+</div>
+<div class="col">
+  <div class="row">
+  <span class="col lable_caption">Registration Date :</span>
+  <strong class="col"><%= @student.registration_date.to_date.strftime("%d-%m-%Y") %></strong>
+</div>
+</div>
+<div class="col">
+  <div class="row">
+  <span class="col lable_caption">Level :</span>
+  <strong class="col"><%= @student.level %></strong></div>
+</div>
+</div>
+
+<br>
+
+<div class="row">
+<div class="col">
+  <div class="row">
+  <span class="col lable_caption">Batch :</span>
+  <strong class="col"><%= @student.batch_id.present? ? "#{@student.batch.batch_no} - #{@student.batch.day} (#{@student.batch.batch_time} - #{@student.batch.batch_end_time})" : nil %></strong>
+</div>
+</div>
+<div class="col">
+  <div class="row">
+  <span class="col lable_caption">Date of Birth :</span>
+  <strong class="col"><%= @student.dob.to_date.strftime("%d-%m-%Y") %></strong>
+</div>
+</div>
+<div class="col">
+  <div class="row">
+  <span class="col lable_caption">Age :</span>
+  <strong class="col"><%= @student.age %></strong>
+</div>
+</div>
+</div>
+
+<br>
+
+<div class="row">
+<div class="col">
+  <div class="row">
+  <span class="col lable_caption">Gender :</span>
+  <strong class="col"><%= @student.gender == 1 ? "Male" : "Female" %></strong>
+</div>
+</div>
+<div class="col">
+  <div class="row">
+  <span class="col lable_caption">Class :</span>
+  <strong class="col"><%= @student.student_class %></strong>
+</div>
+</div>
+<div class="col">
+  <div class="row">
+  <span class="col lable_caption">Contact Number / WhatsApp :</span>
+  <strong class="col"><%= @student.contact_no %></strong>
+</div>
+</div>
+</div>
+
+<br>
+
+<div class="row">
+<div class="col-4">
+  <div class="row">
+  <span class="col lable_caption">Address :</span>
+  <strong class="col"><%= @student.address %></strong>
+</div>
+</div>
+<div class="col-4">
+  <div class="row">
+  <span class="col lable_caption"> Name of School :</span>
+  <strong class="col"><%= @student.school_name %></strong>
+</div>
+</div>
+<div class="col-4">
+  <div class="row">
+  <span class="col lable_caption"> Location of School :</span>
+  <strong class="col"><%= @student.school_location %></strong>
+</div>
+</div>
+</div>
+
+<br>
+<h5>Parent Details</h5>
+<hr style="border-color: #E26616;">
+<div class="row">
+<div class="col">
+  <div class="row">
+  <span class="col lable_caption">Father's Name :</span>
+  <strong class="col"><%= @student.student_detail.father_name %></strong>
+</div>
+</div>
+
+<div class="col">
+  <div class="row">
+  <span class="col lable_caption">Email :</span>
+  <strong class="col"><%= @student.student_detail.father_email %></strong>
+</div>
+</div>
+</div>
+
+<br>
+
+<div class="row">
+<div class="col">
+  <div class="row">
+  <span class="col lable_caption">Occupation :</span>
+  <strong class="col"><%= @student.student_detail.father_occupation %></strong>
+</div>
+</div>
+
+<div class="col">
+  <div class="row">
+  <span class="col lable_caption">Contact Number :</span>
+  <strong class="col"><%= @student.student_detail.father_contact_no %></strong>
+</div>
+</div>
+</div>
+
+<br>
+<hr style="border-color: lightgrey;">
+<br>
+
+<div class="row">
+<div class="col">
+  <div class="row">
+  <span class="col lable_caption">Mother's Name :</span>
+  <strong class="col"><%= @student.student_detail.mother_name %></strong>
+</div>
+</div>
+
+<div class="col">
+  <div class="row">
+  <span class="col lable_caption">Email :</span>
+  <strong class="col"><%= @student.student_detail.mother_email %></strong>
+</div>
+</div>
+</div>
+
+<br>
+
+<div class="row">
+<div class="col">
+  <div class="row">
+  <span class="col lable_caption">Occupation :</span>
+  <strong class="col"><%= @student.student_detail.mother_occupation %></strong>
+</div>
+</div>
+
+<div class="col">
+  <div class="row">
+  <span class="col lable_caption">Contact Number :</span>
+  <strong class="col"><%= @student.student_detail.mother_contact_no %></strong>
+</div>
+</div>
+</div>
+
+<br>
+
+
+<hr style="border-color: #E26616;">
+<div class="row">
+<div class="col">
+  <div class="row">
+  <span class="col lable_caption">Heard of Braincarve first at :</span>
+  <strong class="col"><%= @student.student_detail.known_by %></strong>
+  </div>
+</div>
+<div class="col">
+  <div class="row">
+  <span class="col lable_caption">Reason for Enrolling your child :</span>
+      <strong class="col"><%= @student.student_detail.reason_to_enroll %></strong></div>
+</div>
+</div>
+<br>
+</div>
+</div>
+<br>
+
+<%end%>

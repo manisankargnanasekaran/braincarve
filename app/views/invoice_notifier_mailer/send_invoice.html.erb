@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+ </head>
+ <body>
+    
+      <h5>Hi</h5>
+          <p> Your Order has been processed. Below are the Invoice Details and You can also view in your portal: </p>
+
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Item Name</th>
+        <th>Quantity</th>
+        <th>Cost Per Item</th>
+        <th>GST</th>
+        <th>Amount(with GST)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @grand_total = @order_items.pluck(:amount).sum %>
+      <% @order_items.each do |item| %>
+        <tr>
+          <td><%= item.inventory_item.book %></td>
+          <td><%= item.request_qty %></td>
+          <td><%= item.cost_per_item %></td>
+          <td><%= item.inventory_item.gst_percentage %></td>
+          <td><%= item.amount %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+    <p>Grand Total :    <%= @grand_total %> </p>
+
+      <p>Thank You and have a great day!</p>
+
+ </body>
+</html>
+

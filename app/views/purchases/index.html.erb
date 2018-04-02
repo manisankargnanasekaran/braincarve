@@ -1,0 +1,98 @@
+<div id="pay_slip-modal" class="modal-dialog-lg modal fade"></div>
+<div id="payment_detail-modal" class="modal-dialog-lg modal fade"></div>
+
+
+<div class="card">
+<div class="card-header">
+
+
+  <h3>Purchase Details
+    <%= link_to "<i class='fa fa-plus'></i>".html_safe, new_purchase_path, class: "head-title pull-right" %>
+  </h3>
+
+</div>
+<div class="card-body">
+<table id="purchase_table" class="table table-striped display" cellspacing="0" width="100%">
+ <thead>
+   <tr>
+    <th>Purchase Date</th>
+     <th>Vendor Name</th>
+     <th>Bill Number</th>
+     <th>Total Amount</th>
+    <!--  <th>Balance Amount</th> -->
+     <th>Paid Status</th>
+     <th>&nbsp;</th>
+     <th>&nbsp;</th>
+     <!-- <th>&nbsp;</th> -->
+   </tr>
+ </thead>
+
+ <tbody>
+  <% @purchases.each do |purchase| %>
+     <tr>
+       <td><%= purchase.purchase_date.to_date.strftime("%d-%m-%Y") if purchase.purchase_date %></td>
+       <td><%= purchase.vendor.vendor_name if purchase.vendor %></td>
+       <td><%= purchase.bill_no %></td>
+       <td><%= purchase.total_amount.round if purchase.total_amount %></td>
+       <!-- <td><%#= purchase.balance_amount %></td> -->
+       <td>
+         <% if purchase.paid_status == true %>
+           <%= link_to '<i class="btn-sm btn-blue fa fa-money" aria-hidden="true"> Paid</i>'.html_safe, purchases_payment_detail_path(id: purchase.id), remote: true %>
+         <% else %>
+           <%= link_to '<i class="btn-sm btn-red fa fa-money" aria-hidden="true"> Unpaid</i>'.html_safe, purchases_pay_slip_path(id: purchase.id), remote: true %>
+         <% end %>
+       </td>
+       <td><%= link_to "<i class='btn btn-sm btn-orange fa fa-eye' title='View Purchase Details'></i>".html_safe, purchase %></td> 
+        <td>
+          <% if purchase.paid_status == false %>
+            <%= link_to "<i class='btn btn-sm btn-orange fa fa-trash' title='Delete Purchase'></i>".html_safe, purchase, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </td> 
+     </tr>
+   <% end %>
+ </tbody>
+</table>
+</div>
+<style type="text/css">
+.btn-orange{
+background-color: #E26616
+;
+color: #fff;
+}
+</style>
+
+<style type="text/css">
+.btn-red{
+background-color: #ea3346;
+color: #fff;
+}
+.btn-blue{
+  background-color: #007bff;
+  color: #fff;
+}
+.btn-orange {
+    background-color: #E26616;
+    color: #fff;
+}
+.btn-green{
+  background-color: #059126;
+  color: #fff;
+}
+</style>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+ $("#purchase_table").dataTable({
+   columnDefs: [
+   {orderable: false, targets: -1},
+   {orderable: false, targets: -2},
+   {orderable: false, targets: -3},
+   ]
+ });
+
+});
+</script>
+
+<!--  <td><%#= link_to "<i class='btn btn-sm btn-orange fa fa-pencil' title='Edit Inventory Item'></i>".html_safe, edit_purchase_path(purchase) %></td>
+      <td><%#= link_to "<i class='btn btn-sm btn-orange fa fa-trash' title='Delete Inventory Item'></i>".html_safe, purchase, method: :delete, data: { confirm: 'Are you sure?' } %></td>  -->

@@ -1,0 +1,198 @@
+<div class="card">
+  <div class="card-header-1">
+    <!-- <h3>Payment Detail
+      <!%= link_to "<i class='fa fa-plus'></i>".html_safe, new_franchisee_path, class: "head-title pull-right" %>
+    </h3> -->
+  </div>
+<div class="card-body">
+  <table id="to_company_table_franchisee" class="table table-striped display" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th>Period</th>
+          <th>Franchisee</th>
+          <th>Amount</th>
+          <th>Payment Status</th>
+        </tr>
+      </thead>
+
+        <tbody>
+         <% @royalty_details_2.each do |royalty_detail| %>
+            <tr>
+
+             <td><%=royalty_detail.created_at.strftime("%b-%Y")%></td>
+              <td><%= Franchisee.find(royalty_detail.to_franchisee).location%></td>
+              <td><%= royalty_detail.amount %></td>
+              <td>
+                    <% if royalty_detail.paid_status == true %>
+                        <%#= link_to '<i class="btn-sm btn-blue fa fa-money" aria-hidden="true"> Paid</i>'.html_safe %>
+                        <i class="btn-sm btn-blue fa fa-money" aria-hidden="true"> Paid</i>
+                    <% else %>
+                        <%#= link_to '<i class="btn-sm btn-red fa fa-money" aria-hidden="true"> Unpaid</i>'.html_safe%>
+                        <i class="btn-sm btn-red fa fa-money" aria-hidden="true"> Unpaid</i>
+                    <% end %>
+                  </td>
+            </tr>
+          <% end %>
+        </tbody>
+  </table>
+
+</div>
+
+</div>
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#to_company_table_franchisee").dataTable({
+    columnDefs: [
+    {orderable: false, targets: -1},
+    {orderable: false, targets: -2},
+    {orderable: false, targets: -3},
+    ]
+  });
+});
+</script>
+
+<style type="text/css">
+.btn-red{
+background-color: #ea3346;
+color: #fff;
+border-radius: 1px;
+}
+.btn-blue{
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 1px;
+}
+
+.btn-green{
+  background-color: #059126;
+  color: #fff;
+  border-radius: 1px;
+}
+</style>
+
+<style type="text/css">
+.btn-orange{
+color: #fff;
+}
+.crud{
+    color: green;
+  }
+  .actn{
+/*display: none;*/
+width: 58px;
+/*position: fixed;*/
+background-color: #e26616;
+right: 0px;
+/*top: 303px;*/
+z-index: 10;
+border-radius: 8px;
+height: 104px;
+padding: 12px 5px;
+}
+</style>
+
+
+<!-- actions bar -->
+
+
+<script>
+/*$(document).ready(function(){
+   $( "#actions").hide();
+    $(".show").click(function(){
+        $("#actions").show();
+    });
+   
+});*/
+</script> 
+
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+var table = $('#franchisee_table').DataTable({
+   "scrollY":  '50vh',
+    "crollCollapse": true,
+    "scrollX": true
+});
+    $('#franchisee_table tbody').on('click', 'tr', function () {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+            var id = $(this).attr('id'); 
+            $(".side-pop").show();
+            $("#show").attr("href","/franchisees/"+id);
+            $("#destroy").attr("href","/franchisees/"+id);
+           $("#edit").attr("href","/franchisees/"+id+"/edit");
+    } ); 
+});
+
+  $('.confirmation').on('click', function () {
+        return confirm('Are you sure?');
+    });
+</script>
+
+<style type="text/css">
+  .side-pop{ 
+    height:auto; 
+    padding:2px; 
+    background-color:#E67A3F;
+    border:1px solid #E67A3F; 
+    position:fixed; 
+    top:50%; 
+    right:0; 
+    -webkit-transition: all 0.5s ease;
+    transition:all 0.5s ease; 
+    border-radius:4px 0 0 4px; 
+    margin-top:-100px;
+  }
+.side-pop ul{ 
+  width:auto; 
+  height:auto; 
+  margin:0; 
+  padding:0; 
+}
+.side-pop ul li{ 
+  float:none; 
+  width:30px; 
+  height:20px; 
+  margin:0; padding:0; 
+  list-style:none; 
+  text-align:center; 
+  margin-bottom:10px; 
+  font-size:20px; 
+}
+.side-pop ul li a{ 
+  color:#fff; 
+  display:block; 
+  text-decoration:none; 
+  text-align:center;
+  -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease; 
+    -ms-transition: all 0.2s ease; 
+    -o-transition: all 0.2s ease; 
+    transition: all 0.2s ease; 
+  }
+.side-pop ul li a strong{
+  font-weight:900;
+}  
+.side-pop ul li a:hover{ 
+  color:#f0ebf0;
+  -webkit-transform:scale(1.25); 
+    -moz-transform:scale(1.25); 
+    -ms-transform:scale(1.25); 
+    -o-transform:scale(1.25);
+     transform:scale(1.25);}
+.side-show{
+  right:0px;
+}
+.side-pop .close{ 
+  width:auto; 
+  font-size:15px; 
+  color:#BE2134; 
+  margin-top:5px; 
+  text-align:center;
+}
+</style>

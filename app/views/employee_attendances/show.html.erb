@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <strong>Employee:</strong>
+  <%= @employee_attendance.employee %>
+</p>
+
+<p>
+  <strong>Leave period:</strong>
+  <%= @employee_attendance.leave_period %>
+</p>
+
+<p>
+  <strong>Day count:</strong>
+  <%= @employee_attendance.day_count %>
+</p>
+
+<p>
+  <strong>Reason:</strong>
+  <%= @employee_attendance.reason %>
+</p>
+
+<%= link_to 'Edit', edit_employee_attendance_path(@employee_attendance) %> |
+<%= link_to 'Back', employee_attendances_path %>

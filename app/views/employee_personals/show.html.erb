@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Employee:</strong>
+  <%= @employee_personal.employee %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @employee_personal.gender %>
+</p>
+
+<p>
+  <strong>Marrital status:</strong>
+  <%= @employee_personal.marrital_status %>
+</p>
+
+<p>
+  <strong>Nationality:</strong>
+  <%= @employee_personal.nationality %>
+</p>
+
+<p>
+  <strong>Date of birth:</strong>
+  <%= @employee_personal.date_of_birth %>
+</p>
+
+<p>
+  <strong>Blood group:</strong>
+  <%= @employee_personal.blood_group %>
+</p>
+
+<%= link_to 'Edit', edit_employee_personal_path(@employee_personal) %> |
+<%= link_to 'Back', employee_personals_path %>

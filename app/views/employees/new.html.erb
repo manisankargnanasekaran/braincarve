@@ -1,0 +1,36 @@
+<!-- <div class="card">
+	<div class="card-header">
+		<h3>New Employee
+		<%#= link_to "<i class='fa fa-reply'></i>".html_safe, employees_path, class: "pull-right head-title", data: { confirm: 'Do you want to go to previous page?' } %></h3>
+	</div>
+	<div class="card-body"><%#= render 'form', employee: @employee %></div>
+</div>
+<style type="text/css">
+.btn-orange{
+background-color: #E26616;
+color: #fff;
+}
+</style> -->
+
+
+<div class="card multi-step-form">
+	<div class="card-header">
+		<h3>New Employee
+		<%= link_to "<i class='fa fa-reply'></i>".html_safe, employees_path, class: "pull-right head-title", data: { confirm: 'Do you want to go to previous page?' } %></h3>
+	</div>
+		<div class="card-body">
+
+        <%= render 'form', employee: @employee %>
+
+
+      <!-- Circles which indicates the steps of the form: -->
+ <!--  <div id="progressbar" style="text-align:center;margin-bottom:40px;">
+    <span class="step">Franchisee</span>
+    <span class="step">Onwer</span>
+    <span class="step">Agreement</span>
+    <span class="step">File upoload</span>
+  </div> -->
+
+
+	</div>
+</div>

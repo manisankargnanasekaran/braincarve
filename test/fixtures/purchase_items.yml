@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  purchase: one
+  inventory_item: one
+  cost_per_item: 9.99
+  quantity: 1
+  amount_without_gst: 9.99
+  amount_with_gst: 9.99
+
+two:
+  purchase: two
+  inventory_item: two
+  cost_per_item: 9.99
+  quantity: 1
+  amount_without_gst: 9.99
+  amount_with_gst: 9.99

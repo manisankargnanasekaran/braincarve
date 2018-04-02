@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Name</Data></Cell>
+        <Cell><Data ss:Type="String">Grade</Data></Cell>
+        <Cell><Data ss:Type="String">Level Joind</Data></Cell>
+        <Cell><Data ss:Type="String">Current Level</Data></Cell>
+        <Cell><Data ss:Type="String">Parent Name</Data></Cell>
+         <Cell><Data ss:Type="String">Contact</Data></Cell>
+          <Cell><Data ss:Type="String">Date of Join</Data></Cell>
+           <Cell><Data ss:Type="String">Class Fee</Data></Cell>
+            <Cell><Data ss:Type="String">Royalty</Data></Cell>
+              <Cell><Data ss:Type="String">Center</Data></Cell>
+      </Row>
+    <% @students.each do |student| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= student.student_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= student.student_class %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= student.level_join %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= student.level %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= student.student_detail.father_name %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= student.contact_no %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= student.registration_date.to_date.strftime("%d-%m-%Y") if student.registration_date%></Data></Cell>
+              <Cell><Data ss:Type="String"><%= student.student_detail.student_fee_pays.where(dated: @selected_period, fee_type: "Class Fee").pluck(:amount).sum%></Data></Cell>
+                <Cell><Data ss:Type="String"><%= student.student_detail.student_fee_pays.where(dated: @selected_period, fee_type: "Class Fee").pluck(:amount).sum - student.student_detail.student_fee_pays.where(dated: @selected_period, fee_type: "Class Fee").pluck(:exclude_royalty).sum%></Data></Cell>
+                <Cell><Data ss:Type="String"><%= student.student_detail.student_fee_pays.where(dated: @selected_period, fee_type: "Class Fee").pluck(:exclude_royalty).sum%></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
+
+
+

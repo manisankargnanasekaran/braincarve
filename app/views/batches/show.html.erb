@@ -1,0 +1,59 @@
+<div class="card">
+<div class="card-header">
+  <h3>View Batch
+    <%#= link_to "<i class='btn btn-info btn-sm'> Back</i>".html_safe, batches_path, class: "pull-right" %>
+    <%= link_to "<i class='fa fa-reply'></i>".html_safe, batches_path, class: "head-title pull-right" %>
+  </h3>
+</div>
+<div class="card-body">
+<div class="row">
+  <div class="col-md-2">Batch Number</div>
+  <div class="col-md-1"><strong>:</strong></div>
+  <div class="col-md-3"><strong>Batch - <%= @batch.batch_no %></strong></div>
+</div>
+
+<div class="row">
+  <div class="col-md-2">Day</div>
+  <div class="col-md-1"><strong>:</strong></div>
+  <div class="col-md-3"><strong><%= @batch.day %></strong></div>
+</div>
+
+<div class="row">
+  <div class="col-md-2">Duration</div>
+  <div class="col-md-1"><strong>:</strong></div>
+  <div class="col-md-3"><strong><%= @batch.duration_in_hours %> hours <%= @batch.duration_in_minutes %> minutes </strong></div>
+</div>
+
+<div class="row">
+<div class="col-md-2">Batch Time</div>
+<div class="col-md-1"><strong>:</strong></div>
+<div class="col-md-3"><strong><%= @batch.batch_time.downcase %> to <%= @batch.batch_end_time.to_time.strftime("%I:%M %p").downcase if @batch.batch_end_time%></strong></div>
+</div>
+</div>
+<div id="calendar"></div>
+
+<style type="text/css">
+	.card-body{
+		padding: 30px;
+	}
+</style>
+<!-- <script type="text/javascript">
+$(document).ready(function() {
+    $('#calendar').fullCalendar({
+    })
+});
+</script> -->
+
+
+<script type='text/javascript'>
+
+$(document).ready(function() {
+    $('#calendar').fullCalendar({
+        googleCalendarApiKey: '<7cedf39c4c6300d30b6536fa0444bdc0c596cc2e>',
+        events: {
+            googleCalendarId: 'braincarve@braincarve-190310.calendar.google.com'
+        }
+    });
+});
+
+</script>

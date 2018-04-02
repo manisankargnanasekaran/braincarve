@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  student: one
+  father_name: MyString
+  father_occupation: MyString
+  father_email: MyString
+  father_contact_no: MyString
+  mother_name: MyString
+  mother_occupation: MyString
+  mother_email: MyString
+  mother_contact_no: MyString
+  known_by: MyString
+  reason_to_enroll: MyString
+
+two:
+  student: two
+  father_name: MyString
+  father_occupation: MyString
+  father_email: MyString
+  father_contact_no: MyString
+  mother_name: MyString
+  mother_occupation: MyString
+  mother_email: MyString
+  mother_contact_no: MyString
+  known_by: MyString
+  reason_to_enroll: MyString

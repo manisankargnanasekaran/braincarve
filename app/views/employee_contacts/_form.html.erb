@@ -1,0 +1,52 @@
+<%= form_with(model: employee_contact, local: true) do |form| %>
+  <% if employee_contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(employee_contact.errors.count, "error") %> prohibited this employee_contact from being saved:</h2>
+
+      <ul>
+      <% employee_contact.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :employee_id %>
+    <%= form.text_field :employee_id, id: :employee_contact_employee_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contact_no %>
+    <%= form.text_field :contact_no, id: :employee_contact_contact_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address, id: :employee_contact_address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :country %>
+    <%= form.text_field :country, id: :employee_contact_country %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.text_field :state, id: :employee_contact_state %>
+  </div>
+
+  <div class="field">
+    <%= form.label :city %>
+    <%= form.text_field :city, id: :employee_contact_city %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pincode %>
+    <%= form.text_field :pincode, id: :employee_contact_pincode %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

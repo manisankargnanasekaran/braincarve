@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Franchisee:</strong>
+  <%= @franchisee_contact.franchisee %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @franchisee_contact.address %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @franchisee_contact.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @franchisee_contact.state %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @franchisee_contact.country %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @franchisee_contact.email_id %>
+</p>
+
+<p>
+  <strong>Contact no:</strong>
+  <%= @franchisee_contact.contact_no %>
+</p>
+
+<p>
+  <strong>Land line:</strong>
+  <%= @franchisee_contact.land_line %>
+</p>
+
+<%= link_to 'Edit', edit_franchisee_contact_path(@franchisee_contact) %> |
+<%= link_to 'Back', franchisee_contacts_path %>

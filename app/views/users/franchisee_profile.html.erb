@@ -1,0 +1,602 @@
+<section class="show-profile">
+<div class="card">
+<div class="col-md-12 pt-3">
+<h4 class="pb-0">Franchisee Personal Details
+<div class="pull-right print_n_back" >
+
+    <%= link_to "<i class='btn btn-info btn-sm fa fa-reply' id='backpagebutton'></i>".html_safe, :back, title: "Back" %>
+    <%#= link_to 'Back', :back %>
+
+</div>
+<hr style="border-color: #E26616;">
+</h4>
+</div>
+<div class="pl-4 row">
+  <div class="col-md col-sm">
+  <div class="form-group row">
+  <div class="col-md col-sm-6">
+  <label for="example-text-input" class="col-form-label">
+    Franchisee Type</label>
+  </div>
+  <div class="col-md col-sm-6">
+  <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= @franchisee.franchisee_type %></span></p>
+  </div>
+  </div>
+  </div>
+
+  <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">Location</label></div>
+  <div class="col-md">
+    <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= @franchisee.location %></span></p>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="pl-4 row">
+  <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">
+    Franchisee Parent</label>
+  </div>
+  <div class="col-md">
+  <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= @franchisee.parent %></span></p>
+  </div>
+  </div>
+  </div>  
+   <div class="col-md-6">
+  <div class="form-group row">
+  <div class="col-md-6">
+  <label for="example-text-input" class="col-form-label">
+    Number of Owners</label>
+  </div>
+  <div class="col-md-6">
+  <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= @franchisee.no_of_owners %></span></p>
+  </div>
+  </div>
+  </div>
+</div>
+<div class="pl-4 row">
+  <div class="col-md">
+    <div class="form-group row">
+      <div class="col-md-3">
+        <label for="example-text-input" class="col-form-label">
+          Primary Email Id</label>
+      </div>
+      <div class="col-md-5">
+        <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= @franchisee.user.email_id %></span></p>
+      </div>
+    </div>
+  </div> 
+   
+</div>
+<div class="pl-4 row">
+<div class="col-md">
+    <div class="form-group row">
+      <div class="col-md-3">
+        <label for="example-text-input" class="col-form-label">
+          Student Fee</label>
+      </div>
+      <div class="col-md-5">
+        <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= @franchisee.student_fee %></span></p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<div class="card">
+
+<div class="col-md-12 pt-3">
+<!-- <h4 class="pb-0">Communication Details -->
+<h4 class="pb-0">Owner Details
+<!-- <hr style="border-color: #E26616;"> -->
+</h4>
+</div>
+
+<% @franchisee.franchisee_owners.map do |individual_owner| %>
+<hr style="border-color: #E26616;">
+<div class="pl-4 row">
+     <div class="col-md">
+      <div class="form-group row">
+      <div class="col-md">
+      <label for="example-text-input" class="col-form-label">First Name</label></div>
+      <div class="col-md">
+        <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= individual_owner.salutation %><%= individual_owner.first_name %></span></p>
+      </div>
+    </div>
+    </div>
+
+      <div class="col-md">
+      <div class="form-group row">
+      <div class="col-md">
+      <label for="example-text-input" class="col-form-label">Last Name</label></div>
+      <div class="col-md">
+        <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= individual_owner.last_name %></span></p>
+      </div>
+    </div>
+    </div>
+</div>
+
+<div class="pl-4 row">
+  <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">
+    DOB</label>
+  </div>
+  <div class="col-md">
+  <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= individual_owner.dob.to_date.strftime("%d-%m-%Y") if individual_owner.dob %></span></p>
+  </div>
+  </div>
+  </div>
+
+  <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">Age</label></div>
+  <div class="col-md">
+    <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= individual_owner.age %></span></p>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="pl-4 row">
+  <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">
+    Occupation</label>
+  </div>
+  <div class="col-md">
+  <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= individual_owner.occupation %></span></p>
+  </div>
+  </div>
+  </div>
+
+  <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">Experience in Years</label></div>
+  <div class="col-md">
+    <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= individual_owner.experience %></span></p>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="pl-4 row">
+  <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">
+    Email ID</label>
+  </div>
+  <div class="col-md">
+  <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= individual_owner.email_id %></span></p>
+  </div>
+  </div>
+  </div>
+
+  <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">
+    Contact Number</label>
+  </div>
+  <div class="col-md">
+  <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= individual_owner.contact_no %></span></p>
+  </div>
+  </div>
+  </div>
+</div>
+
+
+<div class="pl-4 row">
+  <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">
+    ID Proof</label>
+  </div>
+  <div class="col-md">
+  <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= individual_owner.id_proof %></span></p>
+  </div>
+  </div>
+  </div>
+
+  <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">
+    ID Proof Number</label>
+  </div>
+  <div class="col-md">
+  <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= individual_owner.id_proof_number %></span></p>
+  </div>
+  </div>
+  </div>
+</div>
+
+
+<div class="pl-4 row">
+  <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">
+    State</label>
+  </div>
+  <div class="col-md">
+  <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= individual_owner.state %></span></p>
+  </div>
+  </div>
+  </div>
+
+  <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">Country</label></div>
+  <div class="col-md">
+    <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= individual_owner.country %></span></p>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="pl-4 row">
+     <div class="col-md">
+      <div class="form-group row">
+      <div class="col-md">
+      <label for="example-text-input" class="col-form-label">Address</label></div>
+      <div class="col-md">
+        <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= individual_owner.address %></span></p>
+      </div>
+    </div>
+    </div>
+</div>
+
+
+<%end%>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="card">
+<div class="col-md-12 pt-3">
+<h4 class="pb-0">Student Royalty
+<hr style="border-color: #E26616;">
+</h4>
+</div>
+
+<div class="col-md-12 pt-3">
+
+   <table class="table table-bordered" style="margin-top: 10px;">
+    <thead>
+      <tr>
+        <th class="col-form-label">BrainCarve</th>
+        <th class="col-form-label">National Franchisee(NF)</th>
+        <th class="col-form-label">Master Franchisee(MF)</th>
+        <th class="col-form-label">District Franchisee(DF)</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td><p class="reg-date"><span><%= @franchisee.company_royalty.student_royalty if @franchisee.company_royalty %></span></p></td>
+      
+        <td><p class="reg-date"><span><%= @franchisee.franchisee_royalty.student_nf_royalty if @franchisee.franchisee_royalty %></span></p></td>
+        <td><p class="reg-date"><span><%= @franchisee.franchisee_royalty.student_mf_royalty if @franchisee.franchisee_royalty %></span></p></td>
+        <td><p class="reg-date"><span><%= @franchisee.franchisee_royalty.student_df_royalty if @franchisee.franchisee_royalty %></span></p></td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+</div>
+
+
+
+<%if false%>
+<!-- 
+  <!% @franchisee.franchisee_owners.map do |individual_owner| %> -->
+<div class="card">
+
+<div class="col-md-12 pt-3">
+<!-- <h4 class="pb-0">Communication Details -->
+<h4 class="pb-0">Franchisee Royalty
+<hr style="border-color: #E26616;">
+</h4>
+</div>
+
+<div class="pl-4 row">
+ <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">BrainCarve (%)</label></div>
+  <div class="col-md">
+    <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= @franchisee.company_royalty.student_royalty %></span></p>
+  </div>
+</div>
+</div>
+
+  <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">National Franchisee(NF) (%)</label></div>
+  <div class="col-md">
+    <p class="reg-date"><span><strong style="color: #000;">:</strong> <%#= individual_owner.last_name %></span></p>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="pl-4 row">
+  <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">
+    District Franchisee(DF)(%)</label>
+  </div>
+  <div class="col-md">
+  <p class="reg-date"><span><strong style="color: #000;">:</strong> <%#= individual_owner.dob.to_date.strftime("%d-%m-%Y") if individual_owner.dob %></span></p>
+  </div>
+  </div>
+  </div>
+
+  <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">Unit Franchisee(UF)(%)</label></div>
+  <div class="col-md">
+    <p class="reg-date"><span><strong style="color: #000;">:</strong> <%#= individual_owner.age %></span></p>
+  </div>
+</div>
+</div>
+</div>
+
+
+</div>
+<%end%>
+
+<!--    <!%end%>
+ -->
+
+<div class="card">
+<div class="col-md-12 pt-3">
+<h4 class="pb-0">Agreement Details
+<hr style="border-color: #E26616;">
+</h4>
+</div>
+<div class="pl-4 row">
+  <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">
+    Agreement Date</label>
+  </div>
+  <div class="col-md">
+  <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= @franchisee.franchisee_agreement.agreement_date.present? ? @franchisee.franchisee_agreement.agreement_date.to_date.strftime("%d-%m-%Y") : nil %></span></p>
+  </div>
+  </div>
+  </div>
+
+   <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">
+    Renewal Date</label>
+  </div>
+  <div class="col-md">
+  <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= @franchisee.franchisee_agreement.renewal_date.present? ? @franchisee.franchisee_agreement.renewal_date.to_date.strftime("%d-%m-%Y") : nil %></span></p>
+  </div>
+  </div>
+  </div>
+</div>
+
+<div class="pl-4 row">
+  <div class="col-md">
+    <div class="form-group row">
+    <div class="col-md">
+    <label for="example-text-input" class="col-form-label">Duration</label></div>
+    <div class="col-md">
+      <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= "#{@franchisee.franchisee_agreement.duration_in_month.to_i} months" %></span></p>
+    </div>
+    </div>
+  </div>
+
+    <div class="col-md">
+    <div class="form-group row">
+    <div class="col-md">
+    <label for="example-text-input" class="col-form-label">
+      Number of Installments</label>
+    </div>
+    <div class="col-md">
+    <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= @franchisee.franchisee_agreement.no_of_installment %></span></p>
+    </div>
+    </div>
+    </div>  
+</div>
+
+<div class="pl-4 row">
+<div class="col-md">
+    <div class="form-group row">
+    <div class="col-md">
+    <label for="example-text-input" class="col-form-label">
+      Installment amount</label>
+    </div>
+    <div class="col-md">
+    <p class="reg-date"><span><strong style="color: #000;">:</strong> 
+        <% @franchisee.installment_details.map do |ii| %>
+            <%= ii.installment_amount.round %>
+        <%end%>
+    </span></p>
+    </div>
+    </div>
+    </div>  
+    <div class="col-md">
+    <div class="form-group row">
+    <div class="col-md">
+    <label for="example-text-input" class="col-form-label">
+      Installment Date</label>
+    </div>
+    <div class="col-md">
+    <p class="reg-date"><span><strong style="color: #000;">:</strong> 
+      <% @franchisee.installment_details.map do |ii| %>
+          <%= ii.installment_date.to_date.strftime("%d-%m-%Y") if ii.installment_date %>
+      <%end%>
+    </span></p>
+    </div>
+    </div>
+    </div>  
+
+</div>
+
+<div class="col-md-12 pt-3">
+
+   <table class="table table-bordered" style="margin-top: 10px;">
+    <thead>
+      <tr>
+        <th class="col-form-label">Amount</th>
+        <th class="col-form-label">GST(%)</th>
+        <th class="col-form-label">Total</th>
+        <th class="col-form-label">Advance</th>
+        <th class="col-form-label">Balance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><p class="reg-date"><span><%= @franchisee.franchisee_agreement.amount %></span></p></td>
+        <td><p class="reg-date"><span><%= @franchisee.franchisee_agreement.gst %></span></p></td>
+        <td><p class="reg-date"><span><%= @franchisee.franchisee_agreement.total_amount_gst %></span></p></td>
+        <td><p class="reg-date"><span><%= @franchisee.franchisee_agreement.advance_amount_gst %></span></p></td>
+        <td><p class="reg-date"><span><%= @franchisee.franchisee_agreement.balance_amount_gst %></span></p></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">Total Amount with GST</label></div>
+  <div class="col-md">
+    <p class="reg-date"><span><strong style="color: #000;">:</strong> <%#= @franchisee.franchisee_agreement.total_amount_gst %></span></p>
+  </div>
+</div>
+</div>
+  <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">
+    Advance Amount with GST</label>
+  </div>
+  <div class="col-md">
+  <p class="reg-date"><span><strong style="color: #000;">:</strong> <%#= @franchisee.franchisee_agreement.advance_amount_gst %></span></p>
+  </div>
+  </div>
+  </div>
+
+  <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">Balance Amount with GST</label></div>
+  <div class="col-md">
+    <p class="reg-date"><span><strong style="color: #000;">:</strong> <%#= @franchisee.franchisee_agreement.balance_amount_gst %></span></p>
+  </div>
+</div>
+</div> -->
+</div>
+
+<div class="pl-4 row">
+  
+  <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">Center Address</label></div>
+  <div class="col-md">
+    <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= @franchisee.franchisee_agreement.center_address %></span></p>
+  </div>
+</div>
+</div>
+ <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">
+    City</label>
+  </div>
+  <div class="col-md">
+  <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= @franchisee.franchisee_agreement.city %></span></p>
+  </div>
+  </div>
+  </div>
+</div>
+
+<div class="pl-4 row">
+  <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">State</label></div>
+  <div class="col-md">
+    <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= @franchisee.franchisee_agreement.state %></span></p>
+  </div>
+</div>
+</div>
+<div class="col-md">
+  <div class="form-group row">
+  <div class="col-md">
+  <label for="example-text-input" class="col-form-label">
+    Pincode</label>
+  </div>
+  <div class="col-md">
+  <p class="reg-date"><span><strong style="color: #000;">:</strong> <%= @franchisee.franchisee_agreement.pincode %></span></p>
+  </div>
+  </div>
+  </div>
+</div>
+                  
+<div class="pl-4 row">
+  <div class="col-md">
+  <div class="form-group row">
+  <div class="col-md-3">
+  <label for="example-text-input" class="col-form-label">
+    Document Upload</label>
+  </div>
+  <div class="col-md-6">
+  <% if @franchisee.franchisee_document.present? %>
+    <p class="reg-date"><span><strong style="color: #000;">:</strong> <%=image_tag @franchisee.franchisee_document.image_url ,:style=>"width:150px; height:150px"%></span></p>
+  <%else%>
+    <p class="reg-date"><span style="width:150px; height:150px;"><strong style="color: #000;">:</strong>No documents uploaded</span></p>
+  <%end%>
+  </div>
+  </div>
+  </div>
+</div>
+
+</section>
+
+
+
+
+
+<style type="text/css">
+  .btn-orange{
+    background-color: #FC9C3F;
+    color: white;
+  }
+</style>

@@ -1,0 +1,234 @@
+<div class="card">
+  <div class="card-header">
+    <h3>Income & Expense
+     
+
+      <%= text_field_tag :date ,"", class: "form-control date_range col-md-3 pull-right",id: "date", placeholder: "Date Range" %>
+    </h3>
+  </div>
+
+
+<div class="card-body">
+  <div id="data">
+    <table id="franchisee_table" class="table table-striped display" cellspacing="0" width="100%">
+  <thead>
+   <tr>
+     <th>Date</th>
+      <th>Franchisee Type</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+  </tbody>
+</table>
+
+ </div> 
+</div>
+   
+
+
+
+</div> 
+<script type="text/javascript">
+// $(document).ready(function() {
+//   alert("hi");
+//   $("#franchisee_table").dataTable({
+//     // columnDefs: [
+//     // {orderable: false, targets: -1},
+//     // {orderable: false, targets: -2},
+//     // {orderable: false, targets: -3},
+//     // ]
+//   });
+// });
+</script>
+
+<script>
+
+
+ $('.date_range').flatpickr({
+   mode: "range",
+   //dateFormat: "d-m-Y"
+ });
+
+</script>
+
+<script type="text/javascript">
+$('.date_range').on('change', function(){
+ var date_range = $(".date_range").val();
+ 
+  $.get( "/reports/dynamic_income?date_range="+date_range);
+
+});
+</script>
+
+<style type="text/css">
+.btn-orange{
+color: #fff;
+}
+.crud{
+    color: green;
+  }
+  .actn{
+/*display: none;*/
+width: 58px;
+/*position: fixed;*/
+background-color: #e26616;
+right: 0px;
+/*top: 303px;*/
+z-index: 10;
+border-radius: 8px;
+height: 104px;
+padding: 12px 5px;
+}
+</style>
+
+
+<style type="text/css">
+
+.po-content{
+
+  display: none;
+
+}
+
+.popover-body ul{
+
+  list-style:none !important;
+
+  padding-left:0px;
+
+}
+
+.popover-body ul li{
+
+  padding-top: 10px;
+
+}
+
+/*.popover-body ul li .btn{
+
+  width: 25px;
+
+}
+*/
+.popover-body ul li .btn:hover{
+
+ background-color: #de681d;
+
+border-color: #de681d;
+
+}
+
+</style>
+
+
+
+<!-- actions bar -->
+
+<script type="text/javascript">
+  $(document).ready(function() {
+var table = $('#franchisee_table').DataTable({
+   "scrollY":  '50vh',
+    "crollCollapse": true,
+    "scrollX": true
+});
+    $('#franchisee_table tbody').on('click', 'tr', function () {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+            var id = $(this).attr('id'); 
+            $(".side-pop").show();
+            $("#show_installment").attr("href","/installment_details/"+id);
+            //$("#show_installment").attr("href","/installment_details/new?id="+id);
+            $("#show").attr("href","/franchisees/"+id);
+            $("#destroy").attr("href","/franchisees/"+id);
+           $("#edit").attr("href","/franchisees/"+id+"/edit");
+    } ); 
+});
+
+  $('.confirmation').on('click', function () {
+        return confirm('Are you sure?');
+    });
+</script>
+
+<style type="text/css">
+  .side-pop{ 
+    height:auto; 
+    padding:2px; 
+    background-color:#E67A3F;
+    border:1px solid #E67A3F; 
+    position:fixed; 
+    top:50%; 
+    right:0; 
+    -webkit-transition: all 0.5s ease;
+    transition:all 0.5s ease; 
+    border-radius:4px 0 0 4px; 
+    margin-top:-100px;
+  }
+.side-pop ul{ 
+  width:auto; 
+  height:auto; 
+  margin:0; 
+  padding:0; 
+}
+.side-pop ul li{ 
+  float:none; 
+  width:30px; 
+  height:20px; 
+  margin:0; padding:0; 
+  list-style:none; 
+  text-align:center; 
+  margin-bottom:10px; 
+  font-size:20px; 
+}
+.side-pop ul li a{ 
+  color:#fff; 
+  display:block; 
+  text-decoration:none; 
+  text-align:center;
+  -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease; 
+    -ms-transition: all 0.2s ease; 
+    -o-transition: all 0.2s ease; 
+    transition: all 0.2s ease; 
+  }
+.side-pop ul li a strong{
+  font-weight:900;
+}  
+.side-pop ul li a:hover{ 
+  color:#f0ebf0;
+  -webkit-transform:scale(1.25); 
+    -moz-transform:scale(1.25); 
+    -ms-transform:scale(1.25); 
+    -o-transform:scale(1.25);
+     transform:scale(1.25);}
+.side-show{
+  right:0px;
+}
+.side-pop .close{ 
+  width:auto; 
+  font-size:15px; 
+  color:#BE2134; 
+  margin-top:5px; 
+  text-align:center;
+}
+</style>
+
+
+<style type="text/css">
+  .dot{
+  height: 12px;
+  width: 12px;
+  background-color: #C70039;
+  border-radius: 50%;
+  display: inline-block;
+}
+</style>
+
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>

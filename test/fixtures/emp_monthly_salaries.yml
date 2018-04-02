@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  employee: one
+  salary_for: 2017-12-29
+  no_of_leave: 1
+  net_salary: 9.99
+
+two:
+  employee: two
+  salary_for: 2017-12-29
+  no_of_leave: 1
+  net_salary: 9.99

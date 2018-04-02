@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  franchisee: one
+  amount: 1.5
+  royalty_type: false
+
+two:
+  franchisee: two
+  amount: 1.5
+  royalty_type: false

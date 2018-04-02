@@ -1,0 +1,17 @@
+<%= form_with(model: announcement_for, local: true) do |form| %>
+ 
+
+  <div class="field">
+    <%= form.label :announcement_id %>
+    <%= form.text_field :announcement_id, id: :announcement_for_announcement_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :franchisee_id %>
+    <%= form.text_field :franchisee_id, id: :announcement_for_franchisee_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

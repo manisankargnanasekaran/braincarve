@@ -1,0 +1,250 @@
+<%= form_with(model: invoice, local: true, class: "form") do |form| %>
+
+  <div class="form-body new-purchase">
+
+      <div class="row" style="margin-bottom: 40px;">
+
+          <div class="col-md-2">
+
+              <label for="purchased_by">Invoice Date</label>
+                  <%= form.text_field :invoice_date, id: :invoice_date, value: Date.today, class: "form-control", required: :true %>
+
+          </div>
+
+          <div class="col-md-4">
+
+              <label for="ordered_by">Franchisee</label>
+                   <input type="text" id="franchisee" class="form-control border-primary " placeholder="Franchisee" name="franchisee" value="<%= @order.franchisee.franchisee_type if @order.franchisee %> - <%= @order.franchisee.location if @order.franchisee %>" readonly="true">
+
+          </div>
+
+      </div>
+
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <td><label for="userinput1">Item Name</label></td>
+          <td><label for="userinput1">Cost Per Unit</label></td>
+          <td><label for="userinput1">Qty</label></td>
+          <td><label for="userinput1">Available Qty</label></td>
+          <td><label for="userinput1">Scale</label></td>
+
+<td>
+
+<label for="userinput1">GST</label>
+
+</td>
+
+<td>
+
+<label for="userinput1">Amount</label>
+
+</td>
+
+</tr>
+</thead>
+
+<tbody class="input_fields_wrap">
+
+   <% pp = 0 %>
+
+   <% @grand_total = [] %>
+
+            <% @order_items.map do |item| %>
+
+            <% pp = pp + 1%>
+
+            <tr id="row_<%= pp%>">
+
+              <td>
+
+                <div class="form-group">
+
+                  <input type="text" id="item_<%= pp%>" class="form-control spare_items" name="invoice_items[][item]" value="<%= item.inventory_item.book %>" readonly="true" >
+
+                </div>
+
+              </td>
+
+              <td>
+
+              <input type="number" id="cost_per_unit_<%= pp%>" onblur="amount_calculation(<%= pp %>)" class="form-control border-primary calculates number" name="invoice_items[][cost_per_unit]" value="<%= item.inventory_item.cost_per_item %>" required="true" step="any" />
+
+              </td>
+
+              <td>
+
+              <input type="number" id="quantity_<%= pp%>" onblur="amount_calculation(<%= pp %>)" class="form-control border-primary calculates" name="invoice_items[][quantity]" value="<%= item.request_qty %>" required="true">
+
+              </td>
+
+
+              <td>
+
+                <span id="available_<%= pp%>">
+                  <%= CompanyInventoryStock.find(item.inventory_item_id).available_qty if CompanyInventoryStock.find(item.inventory_item_id) %>
+                </span>
+
+              </td>
+
+
+              <td>
+
+              <span id="unit_<%= pp%>">
+                <%= item.inventory_item.unit %>
+              </span>
+
+              </td>
+
+              
+
+              <td>
+
+              <input type="text" id="gst_<%= pp%>" class="form-control border-primary" value="<%= item.inventory_item.gst_percentage %>" name="invoice_items[][gst]" readonly="true" >
+
+              </td>
+
+              <td>
+
+              <% amount = ((item.inventory_item.gst_percentage / 100) * (item.request_qty.to_i * item.inventory_item.cost_per_item)) + (item.request_qty.to_i * item.inventory_item.cost_per_item) %>
+
+              <% @grand_total << amount %>
+
+              <input type="text" id="total_cost_<%= pp%>" class="form-control border-primary sub_totals" value="<%= amount %>" name="invoice_items[][total_cost]" readonly="true" >
+
+              </td>
+            </tr>
+
+        <% end %>
+
+
+
+          </tbody>
+      </table>
+              <hr>
+
+              <div class="row">
+
+                <div class="col-md-10">
+                </div>
+
+                <div class="col-md-2">
+
+                  <div class="form-group">
+
+                    <label for="grand_total">Total</label>
+
+                    <input type="text" id="grand_total" class="form-control border-primary " value="<%= @grand_total.sum %>" name="total_cost" readonly="true">
+
+                    <% @grand_total.clear %>
+
+                  </div>
+
+                </div>
+
+
+              </div>
+
+              <hr style="border-color: #e5e5e5;">
+
+               <%= form.hidden_field :order_request_id, value: params[:id] %>
+
+              <div class="form-actions pull-right">
+
+                <%= form.submit "Send Invoice", class: "btn btn-primary"%>
+
+              </div> 
+<% end %>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+  $('#invoice_date').flatpickr();
+});
+</script>
+
+<script type="text/javascript">
+
+   function amount_calculation(pp){
+
+        var id = pp
+        
+        var qty = $("#quantity_"+id).val();
+
+        var cost_per_unit = $("#cost_per_unit_"+id).val();
+
+        var gst = $("#gst_"+id).val();
+
+        var sub_tot = parseFloat(qty) * parseFloat(cost_per_unit)
+
+        sub_tot = sub_tot + (sub_tot * parseFloat(gst) / 100)
+
+        $("#total_cost_"+id).val(sub_tot);
+
+        var grand_total = 0;
+
+        $(".sub_totals").each(function(){
+
+          grand_total += parseFloat(this.value);
+
+        });
+
+        $('#grand_total').val(grand_total);
+
+    };
+</script>
+
+
+
+<style type="text/css">
+  .row {
+    margin-right: -14px;
+    margin-left: -14px;
+}
+table{
+  border-collapse: collapse;
+}
+.table-responsive {
+    display: block;
+    width: 100%;
+    min-height: 0%;
+    overflow-x: auto;
+}
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+}
+.new-purchase table thead label{
+  font-size: 14px;
+
+}
+.new-purchase .border-primary {
+    border-color: #ddd !important;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+  <%# if invoice.errors.any? %>
+    <div id="error_explanation">
+      <h2><%#= pluralize(invoice.errors.count, "error") %> prohibited this invoice from being saved:</h2>
+
+      <ul>
+      <%# invoice.errors.full_messages.each do |message| %>
+        <li><%#= message %></li>
+      <%# end %>
+      </ul>
+    </div>
+  <%# end %>
+ -->

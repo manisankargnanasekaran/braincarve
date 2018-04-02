@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Franchisee Personals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Franchisee</th>
+      <th>First name</th>
+      <th>Middle name</th>
+      <th>Last name</th>
+      <th>Dob</th>
+      <th>Age</th>
+      <th>Occupation</th>
+      <th>Experience</th>
+      <th>No of owners</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @franchisee_personals.each do |franchisee_personal| %>
+      <tr>
+        <td><%= franchisee_personal.franchisee %></td>
+        <td><%= franchisee_personal.first_name %></td>
+        <td><%= franchisee_personal.middle_name %></td>
+        <td><%= franchisee_personal.last_name %></td>
+        <td><%= franchisee_personal.dob %></td>
+        <td><%= franchisee_personal.age %></td>
+        <td><%= franchisee_personal.occupation %></td>
+        <td><%= franchisee_personal.experience %></td>
+        <td><%= franchisee_personal.no_of_owners %></td>
+        <td><%= link_to 'Show', franchisee_personal %></td>
+        <td><%= link_to 'Edit', edit_franchisee_personal_path(franchisee_personal) %></td>
+        <td><%= link_to 'Destroy', franchisee_personal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Franchisee Personal', new_franchisee_personal_path %>

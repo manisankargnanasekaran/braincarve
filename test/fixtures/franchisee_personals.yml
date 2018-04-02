@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  franchisee: one
+  first_name: MyString
+  middle_name: MyString
+  last_name: MyString
+  dob: 2017-12-02
+  age: 1
+  occupation: MyString
+  experience: MyString
+  no_of_owners: 1
+
+two:
+  franchisee: two
+  first_name: MyString
+  middle_name: MyString
+  last_name: MyString
+  dob: 2017-12-02
+  age: 1
+  occupation: MyString
+  experience: MyString
+  no_of_owners: 1

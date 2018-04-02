@@ -1,0 +1,17 @@
+
+
+<div class="box-content">
+  <div class="card">    
+    <div class="card-header">
+      <h4>New Expense 
+        <%= link_to "<i class='fa fa-arrow-left'> Back</i>".html_safe, expenses_path , class: "pull-right btn btn-sm btn-info" %>
+      </h4>
+    </div>
+	<div class="card-body">
+	  <div class="table-block table-responsive">
+		<%= render 'form', expense: @expense %>
+
+	  </div>
+	</div>
+  </div>
+</div>

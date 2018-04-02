@@ -1,0 +1,351 @@
+<%if Superadmin? %>
+ <nav id="sidebar">
+ <div class="sidebar-header">
+ <%= image_tag "logo.png" , class: "img-responsive", alt: "Logo" %> 
+ </div>
+      <div class="list-group panel">
+          <a href="<%= franchisees_dashboard_path %>" class="list-group-item collapsed" data-parent="#sidebar"><i class="fa fa-dashboard" aria-hidden="true" title='Dashboard'></i>
+            <span class="hidden-sm-down">Dashboard</span></a>
+          <a href="<%= franchisees_path %>" class="list-group-item collapsed" data-parent="#sidebar"><i class="fa fa-user" aria-hidden="true"  title='Franchisee'></i>
+            <span class="hidden-sm-down">Franchisee</span></a>
+         <!--  <a href="#" class="list-group-item collapsed" data-parent="#sidebar"><i class="fa fa-briefcase" aria-hidden="true"  title='Inventory'></i>
+            <span class="hidden-sm-down">Inventory</span></a> -->
+
+       <a href="#menu4" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-briefcase" title='Inventory'></i>   <span class="hidden-sm-down">Inventory</span> <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+        <div class="collapse" id="menu4">
+          <a href="<%= purchases_path %>" class="list-group-item" data-parent="#menu4">Purchase Details</a>
+          <a href="<%= company_inventory_stocks_path %>" class="list-group-item" data-parent="#menu4">Stock Details</a>
+          <a href="<%= invoices_path %>" class="list-group-item" data-parent="#menu4">Inventory Orders</a>
+        </div>
+
+
+      <a href="#menu3" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-users" title='HR Management'></i>   <span class="hidden-sm-down">HRM</span> <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+        <div class="collapse" id="menu3">
+          <a href="<%= employees_path %>" class="list-group-item" data-parent="#menu3">Employees</a>
+          <a href="<%= employee_attendances_monthly_leave_path %>" class="list-group-item" data-parent="#menu3">Leave</a>
+          <a href="<%= emp_monthly_salaries_path %>" class="list-group-item" data-parent="#menu3">Salary</a>
+        </div>
+
+
+        <a href="#menu7" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-empire" title='Masters'></i>   <span class="hidden-sm-down">Royalty</span> <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+        <div class="collapse" id="menu7">
+
+            
+            <a href="<%= royalty_details_royalty_path %>" class="list-group-item" data-parent="#menu7">Royalty Amounts</a>
+             <!-- <a href="<%#= royalty_details_company_path %>" class="list-group-item" data-parent="#menu7">Company</a> -->
+
+              <a href="<%= royalty_pay_to_company_path %>" class="list-group-item" data-parent="#menu7">Payments</a>
+
+             <a href="<%= royalty_details_current_month_company_royalty_path %>" class="list-group-item" data-parent="#menu7">Monthly Report</a>
+             
+        </div>
+
+
+
+        <a href="#menu2" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-table" title='Masters'></i>   <span class="hidden-sm-down">Masters</span> <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+        <div class="collapse" id="menu2">
+          <a href="<%= inventory_items_path %>" class="list-group-item" data-parent="#menu2">Inventory Items</a>
+           <a href="<%= vendors_path %>" class="list-group-item" data-parent="#menu2">Vendors</a>
+        </div>
+
+
+         <a href="#menu8" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-bullhorn" title='Others'></i>   <span class="hidden-sm-down">Others</span> <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+        <div class="collapse" id="menu8">
+              <a href="<%= announcements_path %>" class="list-group-item" data-parent="#menu8">Announcements</a>
+              <a href="<%= expenses_path %>" class="list-group-item" data-parent="#menu8">Expenses</a>
+              <a href="<%=franchisee_tree_path%>" class="list-group-item" data-parent="#menu8">Tree</a>
+              <a href="<%=upgrade_level_path%>" class="list-group-item" data-parent="#menu8">Upgrade Level</a> 
+        </div>
+
+
+       <!--  <a href='<%#=upgrade_level_path%>' class="list-group-item collapsed" data-parent="#sidebar"><i class="fa fa-plus" aria-hidden="true" title='Upgrade Level'></i>
+          <span class="hidden-sm-down">Upgrade Level</span></a>
+ -->
+
+
+        <!--   <a href='<%#=franchisee_tree_path%>' class="list-group-item collapsed" data-parent="#sidebar"><i class="fa fa-pagelines" aria-hidden="true" title='Tree'></i>
+          <span class="hidden-sm-down">Tree</span></a>
+ -->
+
+        <!-- <a href="#" class="list-group-item collapsed" data-parent="#sidebar"><i class="fa fa-file-text-o" aria-hidden="true" title='Reports'></i>
+          <span class="hidden-sm-down">Reports</span></a> -->
+
+          <a href="#menu10" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-fa fa-file-text-o" title='Masters'></i>   <span class="hidden-sm-down">Reports</span> <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+        <div class="collapse" id="menu10">
+          <a href="<%= reports_income_path %>" class="list-group-item" data-parent="#menu10">Income - Expense</a>
+          <a href="<%= reports_renewal_report_path %>" class="list-group-item" data-parent="#menu10">Franchisee Renewal</a>
+        </div>
+
+
+
+      <!--     <a href="<%#=expenses_path%>" class="list-group-item collapsed" data-parent="#sidebar"><i class="fa fa-money" aria-hidden="true" title='Reports'></i>
+          <span class="hidden-sm-down"></span></a> -->
+
+<!-- 
+        <a href="<%#= announcements_path %>" class="list-group-item collapsed" data-parent="#sidebar"><i class="fa fa-bullhorn" aria-hidden="true"  title='Announcement'></i>
+            <span class="hidden-sm-down">Announcement</span></a> -->
+      </div>
+
+      <footer class="sub-footer sticky-bottom">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-12" style="text-align: center!important">
+              <!-- <p style="color: black;">Crafted by <a href=""http://thoughtbees.com/"">thoughtbees</a></p> -->
+              <span class="footer-para" > Crafted by <a href="http://thoughtbees.com/" target="_blank" class="thoughtbees" style="text-decoration: underline;">thoughtbees</a></span>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    </nav>
+<%end%>
+
+
+
+<%if Admin? %>
+ <nav id="sidebar">
+ <div class="sidebar-header">
+ <%=  image_tag "logo.png",  class: "img-responsive",  alt: "Logo" %> 
+ </div>
+      <div class="list-group panel">
+          <a href="<%=   franchisee_dashboard_path %>" class="list-group-item collapsed" data-parent="#sidebar"><i class="fa fa-dashboard" aria-hidden="true" title='Dashboard'></i>
+            <span class="hidden-sm-down">Dashboard</span></a>
+         <!--  <a href="<%#= franchisees_path %>" class="list-group-item collapsed" data-parent="#sidebar"><i class="fa fa-user" aria-hidden="true"  title='Franchisee'></i>
+            <span class="hidden-sm-down">Franchisee</span></a> -->
+          <!-- <a href="#" class="list-group-item collapsed" data-parent="#sidebar"><i class="fa fa-briefcase" aria-hidden="true"  title='Inventory'></i>
+            <span class="hidden-sm-down">Inventory</span></a> -->
+          <a href="<%= students_path %>" class="list-group-item collapsed" data-parent="#sidebar"><i class="fa fa-child" aria-hidden="true"  title='Student'></i>
+            <span class="hidden-sm-down">Student</span></a>
+
+
+
+          <a href="#menu4" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-briefcase" title='Inventory'></i>   <span class="hidden-sm-down">Inventory</span> <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+
+
+
+        <div class="collapse" id="menu4">
+          <a href="<%= franchisee_inventory_stocks_path %>" class="list-group-item" data-parent="#menu4">Stock Details</a>
+          <a href="<%= order_requests_path %>" class="list-group-item" data-parent="#menu4">My Orders</a>
+        </div>
+
+
+         <a href="#menu5" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-empire"  title='Masters'></i>   <span class="hidden-sm-down">Royalty</span> <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+        <div class="collapse" id="menu5">  
+          <!-- <a href="#" class="list-group-item" data-parent="#menu2">Inventory Items</a> -->
+         <!--  <a href="<%#= royalty_details_franchisee_royalty_path %>" class="list-group-item" data-parent="#menu2">Student Royalty</a> -->
+
+        <% if current_user.franchisee.franchisee_type != "Unit Franchisee(UF)" %>
+            <a href="<%= royalty_details_current_month_royalty_path %>" class="list-group-item" data-parent="#menu5">Student's</a>
+        <% end %>
+
+        <% if current_user.franchisee.franchisee_type != "Unit Franchisee(UF)" %>
+            <a href="<%= installment_details_due_royalty_amount_path %>" class="list-group-item" data-parent="#menu5">Franchisee's</a>
+        <% end %>
+          
+          <a href="<%= our_pay_status_path %>" class="list-group-item" data-parent="#menu7">My Payments</a>
+
+          <% if current_user.franchisee.franchisee_type != "Unit Franchisee(UF)" %>
+              <a href="<%= pay_status_path %>" class="list-group-item" data-parent="#menu7">Child Payments</a>
+          <% end %>
+
+        </div>
+
+
+        
+        <a href="#menu2" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-table"  title='Masters'></i>   <span class="hidden-sm-down">Masters</span> <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+        <div class="collapse" id="menu2">  
+          <!-- <a href="#" class="list-group-item" data-parent="#menu2">Inventory Items</a> -->
+          <a href="<%= batches_path %>" class="list-group-item" data-parent="#menu2">Batch</a>
+          
+        </div>
+
+        
+        <!-- <a href="#" class="list-group-item collapsed" data-parent="#sidebar"><i class="fa fa-money" title='Accounts'></i> <span class="hidden-sm-down">Accounts</span></a> -->
+         <a href="#menu7" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-file-text-o" title='Reports'></i>   <span class="hidden-sm-down">Reports</span> <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+            <div class="collapse" id="menu7">
+              <a href="<%= student_reports_path %>" class="list-group-item" data-parent="#menu7">Students</a>
+              <a href="<%= students_report_path %>" class="list-group-item" data-parent="#menu7">Overall</a>
+            </div>
+      </div>
+
+
+      <footer class="sub-footer sticky-bottom">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-12" style="text-align: center!important">
+              <!-- <p style="color: black;">Crafted by <a href=""http://thoughtbees.com/"">thoughtbees</a></p> -->
+              <span class="footer-para" > Crafted by <a href="http://thoughtbees.com/" target="_blank" class="thoughtbees" style="text-decoration: underline;">thoughtbees</a></span>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    </nav>
+
+<%end%>
+
+
+
+
+
+<style type="text/css">
+    footer.sub-footer {
+    width: 100%;
+    bottom: 0;
+    padding: 8px 0;
+    position: absolute;
+    font-size: 12px;
+}
+.footer-para{
+    color: black;
+}
+
+.thoughtbees{
+    color: #008ae6;
+    font-family: "Montserrat", Arial, sans-serif;
+}
+.thoughtbees:hover, .thoughtbees:active, .thoughtbees:focus{
+    color:#008ae6 !important;
+}
+</style>
+
+
+
+
+
+
+
+<script type="text/javascript">// nav-toggle
+
+    $('#sidebarCollapse').on('click', function (e) {
+        $('.page').toggleClass('active');
+    });
+
+      $('#sidebarCollapse').on('click', function() {
+        $('#sidebar').toggleClass('active');
+      });
+
+
+//collapse
+      $(document).ready(function () {
+        $('.collapse_tbl[aria-controls="collapseExample1"]').click(function (){
+            $('.collapse_tbl[aria-controls="collapseExample1"] i').toggleClass("fa-plus-circle fa-minus-circle");
+        });        
+        $('.collapse_tbl[aria-controls="collapseExample2"]').click(function (){
+            $('.collapse_tbl[aria-controls="collapseExample2"] i').toggleClass("fa-minus-circle fa-plus-circle");
+        });
+      });
+
+//Scroll
+
+      $(document).ready(function () {
+        $('.notification_scroll').slimScroll({});
+      });
+
+
+//Notifications
+
+      $(document).ready(function () {
+        $('#noti_Button').click(function (){
+            $('#notifications2').hide();
+
+            // CHECK IF NOTIFICATION COUNTER IS HIDDEN.
+            if ($('#noti_Counter2').is(':hidden')) {
+                // CHANGE BACKGROUND COLOR OF THE BUTTON.
+                $('#noti_Button2').css('color', '#2e60ad');
+            }          
+        });
+        $('#noti_Button2').click(function (){
+            $('#notifications').hide();
+
+            // CHECK IF NOTIFICATION COUNTER IS HIDDEN.
+            if ($('#noti_Counter').is(':hidden')) {
+                // CHANGE BACKGROUND COLOR OF THE BUTTON.
+                $('#noti_Button').css('color', '#2e60ad');
+            }          
+        });        
+      });
+
+    $(document).ready(function () {
+
+        // ANIMATEDLY DISPLAY THE NOTIFICATION COUNTER.
+        $('#noti_Counter')
+            .css({ opacity: 0 })
+            .text('3')              // ADD DYNAMIC VALUE (YOU CAN EXTRACT DATA FROM DATABASE OR XML).
+            .css({ top: '-10px' })
+            .animate({ top: '-2px', opacity: 1 }, 500);
+
+        $('#noti_Button').click(function () {
+
+            // TOGGLE (SHOW OR HIDE) NOTIFICATION WINDOW.
+            $('#notifications').fadeToggle('fast', 'linear', function () {
+                if ($('#notifications').is(':hidden')) {
+                    $('#noti_Button').css('color', '#2e60ad');
+                }
+                else $('#noti_Button').css('color', '#fdc006');        // CHANGE BACKGROUND COLOR OF THE BUTTON.
+            });
+
+            $('#noti_Counter').fadeOut('slow');                 // HIDE THE COUNTER.
+
+            return false;
+        });
+
+        // HIDE NOTIFICATIONS WHEN CLICKED ANYWHERE ON THE PAGE.
+        $(document).click(function () {
+            $('#notifications').hide();
+
+            // CHECK IF NOTIFICATION COUNTER IS HIDDEN.
+            if ($('#noti_Counter').is(':hidden')) {
+                // CHANGE BACKGROUND COLOR OF THE BUTTON.
+                $('#noti_Button').css('color', '#2e60ad');
+            }
+        });
+
+        $('#notifications').click(function () {
+            return false;       // DO NOTHING WHEN CONTAINER IS CLICKED.
+        });
+    });
+
+// Notifications2
+
+    $(document).ready(function () {
+
+        // ANIMATEDLY DISPLAY THE NOTIFICATION COUNTER.
+        $('#noti_Counter2')
+            .css({ opacity: 0 })
+            .text('99+')              // ADD DYNAMIC VALUE (YOU CAN EXTRACT DATA FROM DATABASE OR XML).
+            .css({ top: '-10px' })
+            .animate({ top: '-2px', opacity: 1 }, 500);
+
+        $('#noti_Button2').click(function () {
+
+            // TOGGLE (SHOW OR HIDE) NOTIFICATION WINDOW.
+            $('#notifications2').fadeToggle('fast', 'linear', function () {
+                if ($('#notifications2').is(':hidden')) {
+                    $('#noti_Button2').css('color', '#2e60ad');
+                }
+                else $('#noti_Button2').css('color', '#fdc006');        // CHANGE BACKGROUND COLOR OF THE BUTTON.
+            });
+
+            $('#noti_Counter2').fadeOut('slow');                 // HIDE THE COUNTER.
+
+            return false;
+        });
+
+        // HIDE NOTIFICATIONS WHEN CLICKED ANYWHERE ON THE PAGE.
+        $(document).click(function () {
+            $('#notifications2,#notifications').hide();
+
+            // CHECK IF NOTIFICATION COUNTER IS HIDDEN.
+            if ($('#noti_Counter2,#noti_Counter').is(':hidden')) {
+                // CHANGE BACKGROUND COLOR OF THE BUTTON.
+                $('#noti_Button2,#noti_Button').css('color', '#2e60ad');
+            }
+        });
+
+        $('#notifications2,#notifications').click(function () {
+            return false;       // DO NOTHING WHEN CONTAINER IS CLICKED.
+        });
+    });
+  </script>
+  

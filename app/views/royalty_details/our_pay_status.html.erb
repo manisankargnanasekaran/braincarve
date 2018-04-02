@@ -1,0 +1,242 @@
+
+<input type="text" name="current_franchisee_type" class="current_user_type" value="<%= current_user.franchisee.franchisee_type %>" style="display: none;">
+
+<ul class="nav nav-tabs active_tab_color" role="tablist">
+
+  <% if current_user.franchisee.franchisee_type != "National Franchisee(NF)" %>
+      <li class="nav-item">
+        <a class="nav-link active" href="#first" role="tab" data-toggle="tab" id="first_hdng"><h6 style="font-style: italic;">Student Royalty  To Franchisees</h6></a>
+      </li>
+  <% end %>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#second" role="tab" data-toggle="tab" id="second_hdng"><h6 style="font-style: italic;">Student Royalty To Company</h6></a>
+      </li>
+
+  <% if current_user.franchisee.franchisee_type != "National Franchisee(NF)" %>
+      <li class="nav-item">
+        <a class="nav-link" href="#third" role="tab" data-toggle="tab"><h6 style="font-style: italic;">Franchisee Royalty To Franchisees</h6></a>
+      </li>
+  <% end %>
+
+       <li class="nav-item">
+        <a class="nav-link" href="#fourth" role="tab" data-toggle="tab"><h6 style="font-style: italic;">Franchisee Royalty To Company</h6></a>
+      </li>
+
+
+       <li class="nav-item">
+        <a class="nav-link" href="#fifth" role="tab" data-toggle="tab"><h6 style="font-style: italic;">Installments</h6></a>
+      </li>
+
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+
+    <%# if current_user.franchisee.franchisee_type != "National Franchisee(NF)" %>
+
+        <div role="tabpanel" class="tab-pane fade show in active" id="first">
+
+
+            <div class="card">
+                  <div class="card-header-1"></div>
+                <div class="card-body">
+                    <table id="to_franchisees_table" class="table table-striped display" cellspacing="0" width="100%">
+                          <thead>
+                            <tr>
+                              <th>Period</th>
+                              <th>To Franchisee</th>
+                              <th>Franchisee Type</th>
+                              <th>Amount</th>
+                              <th>Royalty</th>
+                              <th>Payment Status</th>
+
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                           <% @royalty_details.each do |royalty_detail| %>
+                         
+                              <tr>
+                                <td><%=royalty_detail.created_at.strftime("%b-%Y")%></td>
+                            
+                                <td><%= Franchisee.find(royalty_detail.to_franchisee).location %></td>
+                                 <td><%=Franchisee.find(royalty_detail.to_franchisee).franchisee_type %></td>
+
+                                 <td><%= royalty_detail.amount %></td>
+                                 
+
+                                  <td>
+                                      <% if royalty_detail.royalty_type == true %>
+                                          <%=Student%>
+                                      <% else %>
+                                           <%=Franchisee%>
+                                      <% end %>
+                                    </td>
+
+                                    <td>
+                                      <% if royalty_detail.paid_status == true %>
+                                          <i class="btn-sm btn-blue fa fa-money" aria-hidden="true"> Paid</i>
+                                      <% else %>
+                                          <i class="btn-sm btn-red fa fa-money" aria-hidden="true"> Unpaid</i>
+                                      <% end %>
+                                    </td>
+                              </tr>
+                            <% end %>
+                          </tbody>
+                    </table>
+                </div> 
+            </div>
+
+        </div>
+
+
+          <div role="tabpanel" class="tab-pane fade" id="second">
+                
+                   <%= render partial: "royalty_details/our_company_pay" %>
+          </div>
+
+
+
+
+    <% if current_user.franchisee.franchisee_type != "National Franchisee(NF)" %>  
+           <div role="tabpanel" class="tab-pane fade" id="third">
+                
+                   <%= render partial: "royalty_details/our_company_franchisee_pay" %>
+          </div>
+    <% end %>
+
+
+      <div role="tabpanel" class="tab-pane fade" id="fourth">
+            
+               <%= render partial: "royalty_details/our_student_franchisee_pay" %>
+      </div>
+
+      <div role="tabpanel" class="tab-pane fade" id="fifth">
+            
+               <%= render partial: "installment_details/franchisee_installment_show" %>
+      </div>
+
+</div>
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#to_franchisees_table").dataTable({
+    columnDefs: [
+    {orderable: false, targets: -1},
+    {orderable: false, targets: -2},
+    {orderable: false, targets: -3},
+    ]
+  });
+});
+</script>
+
+<style type="text/css">
+.btn-red{
+background-color: #ea3346;
+color: #fff;
+border-radius: 1px;
+}
+.btn-blue{
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 1px;
+}
+
+.btn-green{
+  background-color: #059126;
+  color: #fff;
+  border-radius: 1px;
+}
+.active_tab_color .nav-link.active{
+background-color: #e67a3f;
+color: #fff;
+}
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link{
+border-color: #e67a3f!important;
+}
+</style>
+
+<style type="text/css">
+.btn-orange{
+color: #fff;
+}
+.crud{
+    color: green;
+  }
+  .actn{
+/*display: none;*/
+width: 58px;
+/*position: fixed;*/
+background-color: #e26616;
+right: 0px;
+/*top: 303px;*/
+z-index: 10;
+border-radius: 8px;
+height: 104px;
+padding: 12px 5px;
+}
+.nav .nav-item .nav-link h6{
+ font-size: 11px;
+}
+</style>
+
+
+<!-- actions bar -->
+
+
+<script>
+$(document).ready(function(){
+   if ($('.current_user_type').val() == "National Franchisee(NF)"){
+      $('#first').removeClass('active');
+      $('#first').removeClass('show');
+      $('#first').removeClass('in');
+      $('#first_hdng').removeClass('active');
+      $('#first').hide();
+      $('#second_hdng').addClass('active');
+      $('#second').addClass('active');
+      $('#second').addClass('show');
+      $('#second').addClass('in');
+   }
+   else{
+      $('#first').addClass('active');
+      $('#first').addClass('show');
+      $('#first').addClass('in');
+      $('#first_hdng').addClass('active');
+      $('#first').show();
+      $('#second_hdng').removeClass('active');
+      $('#second').removeClass('active');
+      $('#second').removeClass('show');
+      $('#second').removeClass('in');
+   } 
+});
+</script> 
+
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+var table = $('#franchisee_table').DataTable({
+   "scrollY":  '50vh',
+    "crollCollapse": true,
+    "scrollX": true
+});
+    $('#franchisee_table tbody').on('click', 'tr', function () {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+            var id = $(this).attr('id'); 
+            $(".side-pop").show();
+            $("#show").attr("href","/franchisees/"+id);
+            $("#destroy").attr("href","/franchisees/"+id);
+           $("#edit").attr("href","/franchisees/"+id+"/edit");
+    } ); 
+});
+
+  $('.confirmation').on('click', function () {
+        return confirm('Are you sure?');
+    });
+</script>
+

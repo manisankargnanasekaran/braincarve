@@ -1,0 +1,101 @@
+<div id="invoice_payment_detail-modal" class="modal-dialog-lg modal fade"></div>
+<div id="invoice_detail-modal" class="modal-dialog-lg modal fade"></div>
+
+<div class="card">
+<div class="card-header">
+  <h3>My Orders
+    <%#= link_to "<i class='btn btn-info btn-sm'> New</i>".html_safe, new_order_request_path, class: "pull-right" %>
+    <%= link_to "<i class='fa fa-plus'></i>".html_safe, new_order_request_path, class: " head-title pull-right" %>
+  </h3>
+</div>
+<div class="card-body">
+<table id="order_request_table" class="table table-striped display" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>Order Date</th>
+      <th>Item</th>
+      <th>Quantity</th>
+      <th>Total Amount</th>
+      <th>Invoiced Amount</th>
+      <th>&nbsp;</th>
+     <!--  <th>&nbsp;</th>
+      <th>&nbsp;</th> -->
+    </tr>
+  </thead>
+
+  <tbody>
+      <% @order_requests.each do |order_request| %>
+      <tr>
+        <td><%= order_request.order_date.to_date.strftime("%d-%m-%Y") if order_request.order_date %></td>
+        <td>
+          <% order_request.order_request_items.map do |item| %>
+                <ul>
+                  <%= item.inventory_item.book if item.inventory_item %>
+                </ul>
+          <%end%>
+        </td>
+          <td>
+           <% order_request.order_request_items.map do |item| %>
+                <ul>        
+                  <%= item.request_qty %> <%= item.inventory_item.unit if item.inventory_item %>                 
+                </ul>
+          <% end %>    
+        </td>
+        <td>
+          <% @actual_amount = [] %>
+
+            <% order_request.order_request_items.map do |order_item| %>
+
+              <% @amount_with_gst = ((order_item.inventory_item.gst_percentage / 100) * order_item.inventory_item.cost_per_item) + order_item.inventory_item.cost_per_item %>
+
+              <% @actual_amount << order_item.request_qty * @amount_with_gst %>
+
+            <%end%>
+            <%= @actual_amount.sum.round if @actual_amount %>
+            <% @actual_amount.clear %>
+        </td>
+        <td><%= order_request.invoice.total_amount.round if order_request.invoice %></td>
+        <td>
+          <% if order_request.invoice.present? %>
+            <% if order_request.invoice.paid_status == true %>
+                <%= link_to '<i class="btn-sm btn-blue fa fa-money" aria-hidden="true"> Paid</i>'.html_safe, invoices_invoice_payment_detail_path(id: order_request.invoice.id), remote: true %>
+            <% elsif order_request.invoice.paid_status == false %>
+              <%= link_to '<i class="btn-sm btn-red" aria-hidden="true">Invoice</i>'.html_safe, order_requests_invoice_detail_path(id: order_request.invoice.id), remote: true %>
+            <% end %>
+          <% else %>
+              <%#= link_to "<i class='btn btn-sm btn-orange fa fa-eye' title='View Order Detail'></i>".html_safe, order_request %><strong>Under Process</strong>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<style type="text/css">
+.btn-orange{
+background-color: #E26616;
+color: #fff;
+}
+.btn-red{
+background-color: #ea3346;
+color: #fff;
+font-size: 12px;
+}
+.btn-blue{
+  background-color: #007bff;
+  color: #fff;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#order_request_table").dataTable({
+    columnDefs: [
+    {orderable: false, targets: -1},
+    {orderable: false, targets: -2},
+    {orderable: false, targets: -3},
+    ]
+  });
+});
+</script>
+
+

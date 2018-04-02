@@ -1,0 +1,13 @@
+<div class="card">
+	<div class="card-header">
+		<h3>Editing Franchisee
+		<%= link_to "<i class='fa fa-reply'></i>".html_safe, franchisees_path, class: " head-title pull-right", data: { confirm: 'Do you want to go to previous page?' } %></h3>
+	</div>
+	<div class="card-body"><%= render 'form', franchisee: @franchisee %></div>
+</div>
+<style type="text/css">
+.btn-orange{
+background-color: #E26616;
+color: #fff;
+}
+</style>

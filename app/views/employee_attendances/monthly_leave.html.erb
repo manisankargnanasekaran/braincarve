@@ -1,0 +1,176 @@
+<div class="card">
+  <div class="card-header">
+    <h3>Leave Report
+    <div class="col-md-2 pull-right"">
+        <%= select_tag "year_to_select", options_from_collection_for_select(year_list, :to_s, :to_s, selected: Date.current.year), { class: "form-control", id: 'year_to_select'} %>
+      </div>
+    <div class="col-md-2 pull-right"> 
+        <%= select_tag "month_to_select", options_from_collection_for_select(month_list, :first, :last), { class: "form-control", id: 'month_to_select'} %>
+      </div>
+    </h3>
+  </div>
+  <div class="card-body">
+
+<div id="dynamic_leave_data">
+    <table id="attendance_table" class="table table-striped display" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th>Employee Name</th>
+          <th>Number of Leaves Taken</th>
+          <th>Leave period</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @employee_absent.each do |k, v| %>      
+          <tr>
+            <td><%= Employee.find(k.to_i).prefix %> <%= Employee.find(k.to_i).first_name %> <%= Employee.find(k.to_i).last_name %>
+            </td>
+            <td>
+                <ul><%=  v.count %></ul> 
+            </td>
+
+             <td>  
+
+              <div class="po-markup">  
+                <a class="detail-btn  po-link" href="#"  data-trigger="focus"><i class="fa fa-chevron-right" aria-hidden="true"></i></a> 
+            <div class="po-content hidden">
+                <div class="po-body">   
+                   <% v.each do |employee_attendance| %>
+                <ul><%= employee_attendance.leave_date.to_date.strftime("%d-%m-%Y") if employee_attendance.leave_date  %></ul>
+              <%end%>
+                </div>
+            </div>  
+        </div>
+             
+              <%# v.each do |employee_attendance| %>
+                <ul><%#= employee_attendance.leave_date.to_date.strftime("%d-%m-%Y") if employee_attendance.leave_date  %></ul>
+              <%#end%>
+            </td>
+
+          </tr>    
+        <% end %>
+      </tbody>
+    </table>
+</div>
+
+
+</div>
+</div>
+<style type="text/css">
+.btn-orange{
+background-color: #E26616;
+color: #fff;
+}
+
+
+.po-content{
+
+  display: none;
+
+}
+
+.popover-body ul{
+
+  list-style:none !important;
+
+  padding-left:0px;
+
+}
+
+.popover-body ul li{
+
+  padding-top: 10px;
+
+}
+
+/*.popover-body ul li .btn{
+
+  width: 25px;
+
+}
+*/
+.popover-body ul li .btn:hover{
+
+ background-color: #de681d;
+
+border-color: #de681d;
+
+}
+
+</style>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#attendance_table").dataTable({
+    columnDefs: [
+    {orderable: false, targets: -1},
+    {orderable: false, targets: -2},
+    {orderable: false, targets: -3},
+    ]
+  });
+});
+$('#select').selectize({
+  create: true,
+});
+
+$('#month_to_select').on('change', function () {
+  var month_input =($(this).val());
+  var year_input = ($("#year_to_select").val());
+      $.ajax({
+        type: "GET",
+         url: "/employee_attendances/get_month_year_leave?month_selected="+ month_input+"&&year_selected="+year_input,
+      })
+  });
+$('#year_to_select').on('change', function () {
+  var month_input = ($("#month_to_select").val());
+  var year_input = ($(this).val());
+      $.ajax({
+        type: "GET",
+         url: "/employee_attendances/get_month_year_leave?month_selected="+ month_input+"&&year_selected="+year_input,
+      })
+  });
+</script>
+
+
+<script>
+
+$(document).ready(function(){
+
+    $('[data-toggle="popover"]').popover(); 
+
+
+});
+
+$(document).ready(function() {
+
+            $('.po-markup > .po-link').popover({
+
+            trigger: 'active',
+
+            html: true,  // must have if HTML is contained in popover
+
+            // get the title and conent
+
+            title: function() {
+
+                return $(this).parent().find('.po-title').html();
+
+            },
+
+            content: function() {
+
+                return $(this).parent().find('.po-body').html();
+
+            },
+
+            container: 'body',
+
+            placement: 'right'
+
+            });
+
+        }); 
+
+</script>
+

@@ -1,0 +1,57 @@
+<%= form_with(model: franchisee_contact, local: true) do |form| %>
+  <% if franchisee_contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(franchisee_contact.errors.count, "error") %> prohibited this franchisee_contact from being saved:</h2>
+
+      <ul>
+      <% franchisee_contact.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :franchisee_id %>
+    <%= form.text_field :franchisee_id, id: :franchisee_contact_franchisee_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address, id: :franchisee_contact_address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :city %>
+    <%= form.text_field :city, id: :franchisee_contact_city %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.text_field :state, id: :franchisee_contact_state %>
+  </div>
+
+  <div class="field">
+    <%= form.label :country %>
+    <%= form.text_field :country, id: :franchisee_contact_country %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email_id %>
+    <%= form.text_field :email_id, id: :franchisee_contact_email_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contact_no %>
+    <%= form.text_field :contact_no, id: :franchisee_contact_contact_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :land_line %>
+    <%= form.text_field :land_line, id: :franchisee_contact_land_line %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,44 @@
+version: '3'
+services:
+  db:
+    # container_name: braincarve_db
+    image: postgres
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=braincarve
+      - POSTGRES_PASSWORD=bc$Tb7(*&
+      - POSTGRES_DB=braincarve_development
+  
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile-nginx
+    links:
+      - app
+    volumes:
+      - ./config/nginx.conf:/tmp/default.nginx
+      - /var/log/braincarve-nginx:/var/www/braincarve/log
+      - ./public:/var/www/braincarve/public
+    ports:
+      - "3005:80"
+  app:
+    # container_name: braincarve_web
+    build: .
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    command:  sh entrypoint.sh
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_USER=braincarve
+      - POSTGRES_PASSWORD=bc$Tb7(*&
+    volumes:
+      - .:/braincarve
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db

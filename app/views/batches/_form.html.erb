@@ -1,0 +1,56 @@
+<%= form_for(batch, validate: true) do |form| %>
+  <div class="row">
+  <div class="form-group col-md-4">
+    <%= form.label :batch_no, "Batch No" %>
+      <% if form.object.batch_no.present? %>  
+          <%= form.text_field :batch_no, class: "form-control", :value=>form.object.batch_no, :readonly=>true %>
+      <% else %>
+          <%= form.text_field :batch_no, class: "form-control", :value=>@batch_number, :readonly=>true %>
+      <% end %>
+  </div>
+
+  <div class="form-group col-md-4">
+    <%= form.label :day %>
+    <%= form.select :day, days.map{|k|[k ,k]}, {prompt: true}, class: "form-control" %>
+  </div>
+
+   <div class="form-group col-md-4">
+    <%= form.label :batch_time, "Batch Time" %>
+    <%= form.text_field :batch_time, class: "form-control batch_time", id: :timepicker %>
+  </div>
+</div>
+    <div class="row">
+   <div class="form-group col-md-4">
+    <%= form.label :batch_duration, "Duration :" %>&nbsp;
+    <%#= form.text_field :batch_duration, class: "form-control" %>
+    <%= form.select :duration_in_hours, '1'..'4' %>Hour&nbsp;
+    <%= form.select :duration_in_minutes, '00'..'59' %>Minutes&nbsp;
+  </div>
+  </div>
+  <%= form.hidden_field :created_by_id, value: current_user.id%>
+<br>
+  <div class="actions submit_n_cancel">
+   <%= link_to "Cancel", batches_path, class: "btn btn-info btn-sm" %>&nbsp; | &nbsp;<%= form.submit "Update", class: "btn btn-info btn-sm" %>
+  </div>
+<% end %>
+
+
+<script>
+$('#select').selectize({
+  create: true,
+});
+
+/*$(document).ready(function() {
+  $('.batch_time').timepicker();
+});*/
+
+
+$(document).ready(function() {
+  $('#timepicker').flatpickr({
+    noCalendar: true,
+    enableTime: true,
+    dateFormat: "h:i K"
+  });
+});
+
+</script>

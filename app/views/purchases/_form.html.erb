@@ -1,0 +1,384 @@
+<%= form_with(model: purchase, local: true, class: "form") do |form| %>
+
+  <div class="form-body new-purchase">
+    <table class="table table-responsive">
+<!-- <h4 class="form-section"><i class="icon-eye6"></i> Purchase form</h4> -->
+      <thead>
+        <tr>
+          <td><label for="userinput1">Item Name</label></td>
+          <td><label for="userinput1">Cost Per Unit</label></td>
+          <td><label for="userinput1">Qty</label></td>
+          <td><label for="userinput1">Scale</label></td>
+
+<td>
+
+<label for="userinput1">GST</label>
+
+</td>
+
+<td>
+
+<label for="userinput1">Total</label>
+
+</td>
+
+</tr>
+</thead>
+
+<!-- <script type="text/javascript">  
+
+$('#item_name').select2({
+
+allowClear: true,
+
+escapeMarkup: function (markup) { return markup; },
+
+placeholder: "Item Name",
+
+language: {
+
+noResults: function () {
+
+
+
+}
+
+}
+
+});
+
+</script> -->
+
+<tbody class="input_fields_wrap">
+            <tr class="purchase_rows" id="row_1">
+
+              <td>
+
+                <div class="form-group">
+
+                  <%= select_tag "inventory[][item_id]" ,options_from_collection_for_select(InventoryItem.all, "id", "book"), id: "item_1", class: "form-control spare_items", required: :true, prompt: "Select Item" %>
+
+                </div>
+
+              </td>
+
+              <td>
+
+              <input type="number" id="cost_per_unit_1" class="form-control border-primary calculates number" placeholder="Cost Per Unit" name="inventory[][cost_per_unit]" disabled="true" value=0 required="true" step="any" />
+
+              </td>
+
+              <td>
+
+              <input type="number" id="quantity_1" class="form-control border-primary calculates" placeholder="Quantity" name="inventory[][quantity]" disabled="true " value=0 required="true">
+
+              </td>
+
+              <td>
+
+              <span id="unit_1"></span>
+
+              </td>
+
+              
+
+              <td>
+
+              <input type="text" id="gst_1" class="form-control border-primary" placeholder="Gst" name="inventory[][gst]" readonly="true" >
+
+              </td>
+
+              <td>
+
+              <input type="text" id="total_cost_1" class="form-control border-primary sub_totals" placeholder="Total" name="inventory[][total_cost]" readonly="true" value=0>
+
+              </td>
+            </tr>
+
+            <%pp = 1%>
+
+            <% 9.times do |kk| %>
+
+            <%pp = pp + 1%>
+
+            <tr id="row_<%= pp%>" style="display: none;">
+
+              <td>
+
+                <div class="form-group">
+
+                  <%= select_tag "inventory[][item_id]" ,options_from_collection_for_select(InventoryItem.all, "id", "book"), id: "item_"+pp.to_s, class: "form-control spare_items", disabled: true, prompt: "Select Item" %>
+
+                </div>
+
+              </td>
+
+              <td>
+
+              <input type="number" id="cost_per_unit_<%= pp%>" class="form-control border-primary calculates" placeholder="Cost Per Unit" name="inventory[][cost_per_unit]" disabled="true" value=0 step="any">
+
+              </td>
+              <td>
+
+              <input type="number" id="quantity_<%= pp%>" class="form-control border-primary calculates" placeholder="Quantity" name="inventory[][quantity]" disabled="true" value=0>
+
+              </td>
+              <td>
+
+              <span id="unit_<%= pp%>"></span>
+
+              </td>
+
+              
+
+              <td>
+
+              <input type="text" id="gst_<%= pp%>" class="form-control border-primary" placeholder="Gst" name="inventory[][gst]" readonly="true" disabled="true">
+
+              </td>
+
+              <td>
+
+              <input type="text" id="total_cost_<%= pp%>" class="form-control border-primary" placeholder="Total" name="inventory[][total_cost]" readonly="true" disabled="true" value=0>
+
+              </td>
+
+            </tr>
+
+            <%end%>
+
+          </tbody>
+      </table>
+              <hr>
+
+              <div class="row">
+
+                <div class="col-md-2">
+
+                  <label for="purchased_by">Purchase Date</label>
+                   <%= form.text_field :purchase_date, id: :purchase_date, value: Date.today, class: "form-control", required: :true %>
+
+                </div>
+
+                <div class="col-md-2">
+
+                  <label for="bill_no">Bill No</label>
+                   <%= form.text_field :bill_no, id: :purchase_bill_no, class: "form-control", required: :true  %>
+
+                </div>
+
+                <div class="col-md-6">
+
+                  <label for="purchased_by">Vendor</label>
+
+                  <%#= form.text_field "vendor_name", id: :purchase_log_vendor_name, class:"form-control" ,required: :true%>
+                   <%= form.collection_select :vendor_id, Vendor.all, :id, :vendor_name, {prompt: " - Select Vendor - "}, {class: "form-control", id: :purchase_log_vendor_name, required: :true} %>
+
+                </div>
+
+                <div class="col-md-2">
+
+                  <div class="form-group">
+
+                    <label for="grand_total">Grand Total</label>
+
+                    <input type="text" id="grand_total" class="form-control border-primary " placeholder="Total Cost" name="total_cost" readonly="true">
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <hr style="border-color: #e5e5e5;">
+
+              <div class="form-actions pull-right purchase-btn">
+
+                <button type="button" id="add_btn" class="btn btn-success">
+
+                  <i class="fa fa-plus" aria-hidden="true"></i> Add Item
+
+                </button>
+
+                
+
+                <%= form.submit "Save", class: "btn btn-primary"%>
+
+              </div>
+
+  
+
+<% end %>
+
+<!--select2 Script -->
+
+    <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+  -->   <!-- End select2 Script -->
+<!-- 
+<script type="text/javascript">
+
+$('#purchased_by').select2({
+
+  allowClear: true,
+
+  escapeMarkup: function (markup) { return markup; },
+
+  placeholder: "Purchased_By",
+
+  language: {
+
+    noResults: function () {
+
+      
+
+    }
+
+  }
+
+});
+
+$('.spare_items').select2({
+
+  allowClear: true,
+
+  placeholder: "Spare",
+
+  escapeMarkup: function (markup) { return markup; }
+
+});
+
+</script> -->
+
+
+<!-- <input onkeypress='return event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46'>
+ -->
+
+<script type="text/javascript">
+  $(document).ready(function() {
+  $('#purchase_date').flatpickr();
+});
+</script>
+
+
+
+  <script type="text/javascript">
+ //  function isNumber(evt) {
+ //    evt = (evt) ? evt : window.event;
+ //    var charCode = (evt.which) ? evt.which : evt.keyCode;
+ //    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+ //        return false;
+ //    }
+ //    return true;
+ // }
+
+      $(document.body).on("click","#add_btn",function(){
+
+        var cls_count = $(".purchase_rows").length
+
+        var id = cls_count + 1
+
+        //alert(id);
+
+        $("#row_"+id).addClass("purchase_rows");
+
+        $("#total_cost_"+id).addClass("sub_totals");
+
+        $(".spare_items").prop("disabled",false);
+
+        $("#row_"+id).slideDown('show');
+
+      });
+
+
+      </script>
+
+      <script type="text/javascript">
+
+        $(document.body).on("change",".spare_items",function(){
+
+          var item_id = $(this).val();
+
+          var id = $(this).attr("id");
+
+          id  = id.split("_")[1]
+
+          $("#row_"+id+" :input").prop("disabled",false);
+
+          //$("#cost_per_unit_"+id).val(0.0);
+
+          $("#quantity_"+id).val(0);
+
+          $("#total_cost_"+id).val(0);
+
+          $.get( "/purchases/item_check?item_id="+item_id,function sss(data) {
+
+            $("#gst_"+id).val(data.inventory_item.gst_percentage);
+
+            $("#unit_"+id).html(data.inventory_item.unit);
+
+            $("#cost_per_unit_"+id).val(data.inventory_item.cost_per_item);
+
+          });
+
+      });
+
+          $(document.body).on("blur",".calculates",function(){
+
+            var id = $(this).attr("id");
+
+            id  = id.split("_")[1]
+
+            var qty = $("#quantity_"+id).val();
+
+            var cost_per_unit = $("#cost_per_unit_"+id).val();
+
+            var gst = $("#gst_"+id).val();
+
+            var sub_tot = parseFloat(qty) * parseFloat(cost_per_unit)
+
+            sub_tot = sub_tot + (sub_tot * parseFloat(gst) / 100)
+
+            $("#total_cost_"+id).val(sub_tot);
+
+            var grand_total = 0;
+
+            $(".sub_totals").each(function(){
+
+              grand_total += parseFloat(this.value);
+
+            });
+
+            $('#grand_total').val(grand_total);
+
+          });
+
+      </script>
+
+<style type="text/css">
+  .row {
+    margin-right: -14px;
+    margin-left: -14px;
+}
+table{
+  border-collapse: collapse;
+}
+.table-responsive {
+    display: block;
+    width: 100%;
+    min-height: 0%;
+    overflow-x: auto;
+}
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+}
+.new-purchase table thead label{
+  font-size: 14px;
+
+}
+.new-purchase .border-primary {
+    border-color: #ddd !important;
+}
+</style>

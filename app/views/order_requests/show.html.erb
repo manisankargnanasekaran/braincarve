@@ -1,0 +1,65 @@
+<div class="card">
+<div class="card-header">
+  <h3>View Order
+    <%#= link_to "<i class='btn btn-info btn-sm'> Back</i>".html_safe, invoices_path, class: "pull-right" %>
+    <%= link_to "<i class='fa fa-reply'></i>".html_safe, invoices_path, class: "head-title pull-right" %></h3>
+  </h3>
+</div>
+<div class="card-body">
+	<div class="row" style="margin-bottom: 20px;">
+	  <div class="col-md-6">Invoice date : <strong><%= @order_request.invoice.invoice_date.to_date.strftime("%d-%m-%Y") if @order_request.invoice.invoice_date %></strong></div>
+	  <div class="col-md-6">Order Date : <strong><%= @order_request.order_date.to_date.strftime("%d-%m-%Y") if @order_request.order_date %></strong></div>
+	</div>
+
+
+	<div class="row" style="margin-bottom: 20px;">
+	  <div class="col-md-6">Paid Status :
+	  <strong>
+	    <% if @order_request.invoice.paid_status == true %>
+	        Paid
+	    <% else %>
+	        Unpaid
+	    <% end %>
+	    </strong>
+	</div>
+	<div class="col-md-6">
+		Total Number of Items : <strong><%= @order_request.invoice.invoice_items.count %></strong>
+	</div>
+	</div>
+
+
+<table class="table table-bordered">
+	<thead>
+		<th>Item Name</th>
+		<th>Quantity</th>
+		<th>Cost Per Item</th>
+		<th>GST</th>
+		<th>Amount</th>
+	</thead>
+	<tbody>
+		<% @order_request.invoice.invoice_items.map do |item| %>
+		<tr>
+			<td><%= item.inventory_item.book %></td>
+			<td><%= item.invoice_qty %></td>
+			<td><%= item.cost_per_item.round if item.cost_per_item %></td>
+			<td><%= item.inventory_item.gst_percentage %></td>
+			<td><%= item.amount.round if item.amount %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<div class="row">
+	 <div class="col-md-9"></div>
+	 <div class="col-md-3">Total : <strong><%= @order_request.invoice.invoice_items.pluck(:amount).sum.round if @order_request.invoice.invoice_items.pluck(:amount) %></strong></div>
+</div>
+
+
+</div>
+
+
+<style type="text/css">
+  .card-body{
+    padding: 30px;
+  }
+</style>

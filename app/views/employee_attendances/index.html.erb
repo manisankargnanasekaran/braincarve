@@ -1,0 +1,96 @@
+<!-- for rendering the leave form remote page -->
+<div id="leave-modal" class="modal-dialog-lg modal fade"></div>
+
+<!-- List of leaves taken by the specific Employee -->
+
+<div class="card">
+<div class="card-header">
+  <h3>Employee Leave
+   <!--  <span class="pull-right"> -->
+      <%= link_to "<i class='fa fa-reply'></i>".html_safe, employees_path, class: "head-title pull-right"%> &nbsp;
+      <%= link_to '<i class="fa fa-plus" aria-hidden="true"></i>'.html_safe, employee_attendances_leave_path(id: params[:id]), remote: true, class: "head-title pull-right mr-2" %>
+  <!--   </span> -->
+  </h3>
+</div>
+<div class="card-body">
+
+<!-- For displaying image of the Employee  -->
+
+  <div class="card">
+    <div class="row emp-leave-details">  
+        <!-- <div class="col-md-4">
+            <%# if Employee.find(params[:id]).profile_image.present? %>
+              <div style="text-align: center; padding: 30px;"><%#= image_tag Employee.find(params[:id]).profile_image.image_url %></div>
+          <%#else%>
+              <p class="reg-date"><span style="width:150px; height:150px;"><strong style="color: #000;">:</strong>No Profile Pic Available</span></p>
+          <%#end%>
+        </div> -->
+          <div class="col-md-6">
+            <div style="text-align: center; padding: 10px;"><p><i><%= Employee.find(params[:id]).prefix %> <%= Employee.find(params[:id]).first_name %> <%= Employee.find(params[:id]).last_name %></i></p>
+            <p>Employee Id : <%= Employee.find(params[:id]).employee_identity %></p></div>
+            <!-- <div style="text-align: left; padding: 10px;"><p>Employee Id : <%#= Employee.find(params[:id]).employee_identity %></p></div> -->
+          </div> 
+        <div class="col-md-6 ">
+          <div class="current_leave_count" style="padding: 10px; text-align: center;">
+            <div><p><%= Date.today.strftime("%B")%></p></div>
+            <div><p>Leave : <%= @employee_attendances.count %></p></div>
+            <!-- <div><p></p></div> -->
+          </div>
+        </div>
+    </div>
+  </div>
+
+<table id="attendance_table" class="table table-striped display" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>Leave Date</th>
+      <th>Reason</th>
+       <th>Apply Date</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @employee_attendances.each do |employee_attendance| %>
+      <tr>
+        <td><%= employee_attendance.leave_date.to_date.strftime("%d-%m-%Y") if employee_attendance.leave_date  %></td>
+        <td><%= employee_attendance.reason %></td>
+         <td><%= employee_attendance.apply_date.to_date.strftime("%d-%m-%Y") if employee_attendance.apply_date  %></td>
+        <td><%= link_to "<i class='btn btn-sm btn-orange fa fa-ban' title='Cancel Leave'></i>".html_safe, employee_attendance, method: :delete, data: { confirm: 'Are you sure to cancel leave?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<style type="text/css">
+.btn-orange{
+background-color: #E26616;
+color: #fff;
+}
+.leave-btn{
+  padding: 0.25rem 0.5rem;
+font-size: 0.875rem;
+line-height: 1.5;
+border-radius: 0.2rem;
+margin-top: 0.2rem;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#attendance_table").dataTable({
+    columnDefs: [
+    {orderable: false, targets: -1},
+    {orderable: false, targets: -2},
+    {orderable: false, targets: -3},
+    ]
+  });
+});
+</script>
+
+<!-- <style>
+ .current_leave_count{
+   border: 2px solid green;
+  border-radius: 50px 20px;
+ }
+</style>
+ -->

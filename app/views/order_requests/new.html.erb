@@ -1,0 +1,10 @@
+<div class="card">
+<div class="card-header">
+    <h4>New Order
+    <%#= link_to "<i class='btn btn-info btn-sm'> Back</i>".html_safe, order_requests_path, class: "pull-right" %>
+    <%= link_to "<i class='fa fa-reply'></i>".html_safe, order_requests_path, class: " head-title pull-right", data: { confirm: 'Do you want to go to previous page?' } %>
+    </h4>
+</div>
+<div class="card-body"><%= render 'form', order_request: @order_request %></div>
+</div>
+

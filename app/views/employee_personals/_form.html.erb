@@ -1,0 +1,47 @@
+<%= form_with(model: employee_personal, local: true) do |form| %>
+  <% if employee_personal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(employee_personal.errors.count, "error") %> prohibited this employee_personal from being saved:</h2>
+
+      <ul>
+      <% employee_personal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :employee_id %>
+    <%= form.text_field :employee_id, id: :employee_personal_employee_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :gender %>
+    <%= form.text_field :gender, id: :employee_personal_gender %>
+  </div>
+
+  <div class="field">
+    <%= form.label :marrital_status %>
+    <%= form.check_box :marrital_status, id: :employee_personal_marrital_status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :nationality %>
+    <%= form.text_field :nationality, id: :employee_personal_nationality %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_of_birth %>
+    <%= form.date_select :date_of_birth, id: :employee_personal_date_of_birth %>
+  </div>
+
+  <div class="field">
+    <%= form.label :blood_group %>
+    <%= form.text_field :blood_group, id: :employee_personal_blood_group %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

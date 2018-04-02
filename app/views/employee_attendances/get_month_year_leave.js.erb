@@ -1,0 +1,5 @@
+// $('#dynamic_leave_data').val('<% @dynamic_employee_leave %>');
+$("#dynamic_leave_data").html("<%= escape_javascript(render 'employee_attendances/get_month_year_leave') %>")
+
+
+// $('#attendance_table').hide();

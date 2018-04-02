@@ -1,0 +1,196 @@
+<ul class="nav nav-tabs active_tab_color" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" href="#profile" role="tab" data-toggle="tab"><h6 style="font-style: italic;">Monthly Report</h6></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#buzz" role="tab" data-toggle="tab"><h6 style="font-style: italic;">Overall</h6></a>
+  </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+      <div role="tabpanel" class="tab-pane fade show in active" id="profile">
+    
+            <div class="card">
+              <div class="card-header-1" style="margin-top: 10px;">
+               <!--  <h3>Royalty -->
+                <div class="col-md-2 pull-right">
+                    <%= select_tag "year_to_select", options_from_collection_for_select(year_list, :to_s, :to_s, selected: Date.current.year), { class: "form-control", id: 'year_to_select'} %>
+                  </div>
+                <div class="col-md-2 pull-right"> 
+                    <%= select_tag "month_to_select", options_from_collection_for_select(month_list, :first, :last), { class: "form-control", id: 'month_to_select'} %>
+                  </div>
+              <!--   </h3> -->
+              </div>
+              <div class="card-body">
+
+                    <div id="dynamic_royalty_data">
+                        <table id="monthly_royalty_table" class="table table-striped display" cellspacing="0" width="100%">
+                          <thead>
+                            <tr>
+                              <th> From Franchisee </th>
+                              <th> Franchisee Type </th>
+                              <th> Amount </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% @royalty_details.each do |k, v| %>  
+                          
+                              <tr>
+                                <td><%= Franchisee.find(k).location %></td>
+                                <td><%= Franchisee.find(k).franchisee_type %></td>
+
+                                <td>
+                      
+                                    <%= v.pluck(:amount).sum %>
+                                   
+                                </td>
+
+                              </tr>    
+                            <% end %>
+                          </tbody>
+                        </table>
+                    </div>
+
+
+            </div>
+          </div>
+
+      </div>
+
+      <div role="tabpanel" class="tab-pane fade" id="buzz">
+          <%= render partial: "royalty_details/franchisee_royalty" %>
+      </div>
+
+</div>
+
+
+
+
+
+
+<style type="text/css">
+.btn-orange{
+background-color: #E26616;
+color: #fff;
+}
+
+.active_tab_color .nav-link.active{
+background-color: #e67a3f;
+color: #fff;
+}
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link{
+border-color: #e67a3f!important;
+}
+
+
+
+.po-content{
+
+  display: none;
+
+}
+
+.popover-body ul{
+
+  list-style:none !important;
+
+  padding-left:0px;
+
+}
+
+.popover-body ul li{
+
+  padding-top: 10px;
+
+}
+
+/*.popover-body ul li .btn{
+
+  width: 25px;
+
+}
+*/
+.popover-body ul li .btn:hover{
+
+ background-color: #de681d;
+
+border-color: #de681d;
+
+}
+
+</style>
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#monthly_royalty_table").dataTable({
+    columnDefs: [
+    {orderable: false, targets: -1},
+    {orderable: false, targets: -2},
+    {orderable: false, targets: -3},
+    ]
+  });
+});
+$('#select').selectize({
+  create: true,
+});
+
+$('#month_to_select').on('change', function () {
+  var month_input =($(this).val());
+  var year_input = ($("#year_to_select").val());
+      $.ajax({
+        type: "GET",
+         url: "/royalty_details/get_month_year_franchisee_child_royalty?month_selected="+ month_input+"&&year_selected="+year_input,
+      })
+  });
+$('#year_to_select').on('change', function () {
+  var month_input = ($("#month_to_select").val());
+  var year_input = ($(this).val());
+      $.ajax({
+        type: "GET",
+         url: "/royalty_details/get_month_year_franchisee_child_royalty?month_selected="+ month_input+"&&year_selected="+year_input,
+      })
+  });
+</script>
+
+
+<script>
+
+$(document).ready(function(){
+
+    $('[data-toggle="popover"]').popover(); 
+
+
+});
+
+$(document).ready(function() {
+
+            $('.po-markup > .po-link').popover({
+
+            trigger: 'active',
+
+            html: true,  // must have if HTML is contained in popover
+
+            // get the title and conent
+
+            title: function() {
+
+                return $(this).parent().find('.po-title').html();
+
+            },
+
+            content: function() {
+
+                return $(this).parent().find('.po-body').html();
+
+            },
+
+            container: 'body',
+
+            placement: 'right'
+
+            });
+
+        }); 
+
+</script>
+

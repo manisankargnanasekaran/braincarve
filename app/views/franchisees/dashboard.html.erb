@@ -1,0 +1,557 @@
+<!-- <center><h1 style="padding-top: 300px; font-family: roboto">COMING SOON</h1></center> -->
+
+<style type="text/css">
+        
+  .pink {
+    color: #E91E63 !important; }
+
+  .teal {
+    color: #009688 !important; }
+
+  .deep-orange {
+    color: #FF5722 !important;}
+
+ .time {
+    width: 200px;
+   }
+
+
+</style>
+
+
+
+<div class="row">
+
+ <div class="col-xl-6 col-lg-6 col-xs-6">
+   <div class="card">
+      <div class="card-body">
+        <p style="font-weight: bold; color: grey;">Installments</p>
+       
+  <div id="table-scroll">
+ <table class="table table-bordered">
+   <thead>
+     <tr>
+      <th>Due Date</th>
+       <th>Franchisee</th>
+       
+       <th>Amount</th>
+     </tr>
+   </thead>
+   <tbody>
+    <% @installment.map do |installment| %>
+     <tr>
+        <td class = "time" ><%= installment.installment_date.strftime("%d-%m-%Y") if installment.installment_date %></td>
+        <td><%= Franchisee.find(installment.franchisee_id).location %></td>
+        <td><%= installment.installment_amount.round %></td>
+     </tr>
+    <%end%>
+   </tbody>
+ </table>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="col-xl-6 col-lg-6 col-xs-6">
+   <div class="card">
+      <div class="card-body">
+        <p style="font-weight: bold; color: grey;">Renewals</p>
+       
+<div id="table-scroll">
+ <table class="table table-bordered">
+   <thead>
+     <tr>
+        <th>Renewal Date</th>
+        <th>Franchisee</th>
+     </tr>
+   </thead>
+   <tbody>
+    <% @renewals.map do |renewal| %>
+     <tr>
+          <td class = "time" ><%= renewal.latest_renewal.to_date.strftime("%d-%m-%Y") if renewal.latest_renewal %></td>
+          <td><%= renewal.location %></td>
+     </tr>
+    <%end%>
+   </tbody>
+ </table>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+  <div class="col-xl-3 col-lg-6 col-xs-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-block">
+          <div class="media">
+            <div class="media-body text-xs-left">
+              <h3 class="pink"><%=Franchisee.where(franchisee_type: "National Franchisee(NF)").count %></h3>
+               <span>National Franchisee</span>
+            </div>
+            <div class="media-right media-middle">
+              <i class="fa fa-pencil-square-o  pink font-large-2 float-xs-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-6 col-xs-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-block">
+          <div class="media">
+            <div class="media-body text-xs-left">
+              <h3 class="pink"><%= Franchisee.where(franchisee_type: "Master Franchisee(MF)").count %></h3>
+               <span>Master Franchisee</span>
+            </div>
+            <div class="media-right media-middle">
+              <i class="fa fa-pencil-square-o  pink font-large-2 float-xs-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-6 col-xs-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-block">
+          <div class="media">
+            <div class="media-body text-xs-left">
+              <h3 class="pink"><%=Franchisee.where(franchisee_type: "District Franchisee(DF)").count %></h3>
+               <span> District Franchisee</span>
+            </div>
+            <div class="media-right media-middle">
+              <i class="fa fa-pencil-square-o  pink font-large-2 float-xs-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-3 col-lg-6 col-xs-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-block">
+          <div class="media">
+            <div class="media-body text-xs-left">
+              <h3 class="pink"><%= Franchisee.where(franchisee_type: "Unit Franchisee(UF)").count %></h3>
+               <span>Unit Franchisee</span>
+            </div>
+            <div class="media-right media-middle">
+              <i class="fa fa-pencil-square-o  pink font-large-2 float-xs-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="inpgs col-xl-3 col-lg-6 col-xs-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-block">
+          <div class="media">
+            <div class="media-body text-xs-left">
+              <h3 class="teal"><%= Student.where(student_active: true).count %></h3>
+              <span>Total Students </span>
+              
+            </div>
+	          <div class="media-right media-middle">
+	            <i class="fa fa-graduation-cap teal font-large-2 float-xs-right"></i>
+	          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <div class="inpgs col-xl-3 col-lg-6 col-xs-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-block">
+          <div class="media">
+            <div class="media-body text-xs-left">
+              <h3 class="deep-orange"><%= CompanyRoyaltyDetail.where(created_at: 1.month.ago.beginning_of_month..1.month.ago.end_of_month,  paid_status: false).pluck(:amount).sum.round%></h3>
+              <span> Pending Student Royalty For <%=1.month.ago.beginning_of_month.strftime("%b")%></span>
+              <br/>
+            </div>
+	          <div class="media-right media-middle">
+	            <i class="fa fa-cog  teal font-large-2 float-xs-right"></i>
+	          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="inpgs col-xl-3 col-lg-6 col-xs-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-block">
+          <div class="media">
+            <div class="media-body text-xs-left">
+              <h3 class="deep-orange"><%= CompanyRoyaltyDetail.where(created_at: 1.month.ago.beginning_of_month..1.month.ago.end_of_month,  paid_status: true).pluck(:amount).sum.round%></h3>
+              <span> Received Student Royalty For <%=1.month.ago.beginning_of_month.strftime("%b")%></span>
+              <br/>
+            </div>
+            <div class="media-right media-middle">
+              <i class="fa fa-cog  teal font-large-2 float-xs-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="inpgs col-xl-3 col-lg-6 col-xs-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-block">
+          <div class="media">
+            <div class="media-body text-xs-left">
+              <h3 class="deep-orange"><%= CompanyRoyaltyDetail.where(created_at: 1.month.ago.beginning_of_month..1.month.ago.end_of_month).pluck(:amount).sum.round %></h3>
+              <span>Total Student Royalty For <%=1.month.ago.beginning_of_month.strftime("%b")%></span>
+              <br/>
+            </div>
+            <div class="media-right media-middle">
+              <i class="fa fa-cog  teal font-large-2 float-xs-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <div class="inpgs col-xl-3 col-lg-3 col-xs-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-block">
+          <div class="media">
+            <div class="media-body text-xs-left">
+     
+              
+               
+
+                
+
+              <h3 class="deep-orange"><%= max_royalty = 
+
+              CompanyRoyaltyDetail.where(created_at: 1.month.ago.beginning_of_month..1.month.ago.end_of_month).present? ? CompanyRoyaltyDetail.where(created_at: 1.month.ago.beginning_of_month..1.month.ago.end_of_month).pluck(:amount).max.round : 0 %></h3>
+              <span>Top Franchisee of the Month </span>
+              <h3 class="deep-orange"> <% max_franchisee = 
+              CompanyRoyaltyDetail.where(created_at: 1.month.ago.beginning_of_month..1.month.ago.end_of_month).present? ? CompanyRoyaltyDetail.where(created_at: 1.month.ago.beginning_of_month..1.month.ago.end_of_month).pluck(:amount, :franchisee_id).max : "No Franchisee" %>
+              <%unless max_franchisee == "No Franchisee"%>
+                <%= Franchisee.find(max_franchisee[1]).location%>
+                <%else%>
+                <%="No Franchisee"%>
+              <%end%>
+                
+              </h3>
+            </div>
+	          <div class="media-right media-middle">
+	            <i class="fa fa-check  teal font-large-2 float-xs-right"></i>
+	          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="inpgs col-xl-3 col-lg-6 col-xs-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-block">
+          <div class="media">
+            <div class="media-body text-xs-left">
+              
+              <h3 class="deep-orange"><%= CompanyRoyaltyDetail.where(created_at: 1.month.ago.beginning_of_month..1.month.ago.end_of_month).pluck(:amount).sum.round %></h3>
+              <span>Pending Franchisee Royalty For <%=1.month.ago.beginning_of_month.strftime("%b")%></span>
+              <br/>
+            </div>
+            <div class="media-right media-middle">
+              <i class="fa fa-cog  teal font-large-2 float-xs-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="inpgs col-xl-3 col-lg-6 col-xs-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-block">
+          <div class="media">
+            <div class="media-body text-xs-left">
+              <h3 class="deep-orange"><%= CompanyRoyaltyDetail.where(created_at: 1.month.ago.beginning_of_month..1.month.ago.end_of_month).pluck(:amount).sum.round %></h3>
+              <span>Received Franchisee Royalty For <%=1.month.ago.beginning_of_month.strftime("%b")%></span>
+              <br/>
+            </div>
+            <div class="media-right media-middle">
+              <i class="fa fa-cog  teal font-large-2 float-xs-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="inpgs col-xl-3 col-lg-6 col-xs-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-block">
+          <div class="media">
+            <div class="media-body text-xs-left">
+              <h3 class="deep-orange"><%= CompanyRoyaltyDetail.where(created_at: 1.month.ago.beginning_of_month..1.month.ago.end_of_month).pluck(:amount).sum.round %></h3>
+              <span>Total Franchisee Royalty For <%=1.month.ago.beginning_of_month.strftime("%b")%></span>
+              <br/>
+            </div>
+            <div class="media-right media-middle">
+              <i class="fa fa-cog  teal font-large-2 float-xs-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="col-xl-6 col-lg-6 col-xs-12">
+  
+      
+<div class="card">
+      <div class="announce_body">
+         <p style="font-weight: bold; color: grey;">Announcements</p>
+       
+ <table class="table table-bordered">
+   <thead>
+     <tr>
+       
+       <th>Date</th>
+       <th>Message</th>
+       <th>Franchisee/Count</th>
+     </tr>
+   </thead>
+   <tbody>
+    <% @announcement.map do |announcement| %>
+     <tr>
+      
+        <td><%=Announcement.find(announcement).created_at.to_date.strftime("%d-%m-%Y")%></td>
+       <td><%=Announcement.find(announcement).message%></td>
+
+
+        <% if Announcement.find(announcement).is_for_all == true %>
+
+        <td>ALL</td>
+
+        <%else%>
+
+         <%if Announcement.find(announcement).announcement_for.count == 1 %>
+         
+      <td><%=Franchisee.find(Announcement.find(announcement).announcement_for.first.franchisee_id).location%></td>
+          <%else%>
+
+          <td><%=Announcement.find(announcement).announcement_for.count%></td>
+
+          <%end%>
+        <%end%>
+
+
+       <td><%Announcement.find(announcement).announcement_for.count%></td>
+     </tr>
+    <%end%>
+   </tbody>
+ </table>
+</div>
+</div>
+
+
+</div>
+
+   <%= javascript_include_tag 'highcharts', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'highchart_exporting', 'data-turbolinks-track': 'reload' %>
+
+
+<div class="col-xl-6 col-lg-6 col-xs-12">
+
+<div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<script type="text/javascript">
+
+<% last_12_months = Student.where(student_active: true).where(created_at: 12.month.ago.beginning_of_day..Time.now.end_of_day).group("DATE_TRUNC('month',created_at)").count.sort.map(&:first).map{|pp| pp.strftime("%b")}
+last_12_months_count = Student.where(student_active: true).where(created_at: 12.month.ago.beginning_of_day..Time.now.end_of_day).group("DATE_TRUNC('month',created_at)").count.sort.map(&:last) %>
+
+
+<% @xaxis = last_12_months %>
+<% datas = last_12_months_count %>
+
+
+Highcharts.chart('container1', {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: 'Student Enrollment Count'
+    },
+    subtitle: {
+        text: ''
+    },
+    xAxis: {
+        categories: <%= raw @xaxis%>
+    },
+    yAxis: {
+        title: {
+            text: 'Student Count (numbers)'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: true
+        }
+    },
+    series: [{
+        name: 'Student Count',
+        data: <%= raw datas %>
+    
+    }]
+});
+</script>
+</div>
+</div>
+<div class= "row">
+<div class="col-xl-12 col-lg-12 col-xs-12">
+
+<!--  a.map{|ii| ii+ b[a.index(ii)]}
+ -->
+
+<% last_6_months = (Date.today - 5.month..Date.today).map{|ii| ii.strftime("%b-%Y")}.uniq
+
+expense_amount = last_6_months.map{|mon| Expense.where(date: mon.to_date.beginning_of_day..mon.to_date.end_of_month.end_of_day).pluck(:amount).compact.sum}
+
+expense_payment = last_6_months.map{|mon| Payment.where(payment_date: mon.to_date.beginning_of_day..mon.to_date.end_of_month.end_of_day).pluck(:amount_paid).compact.sum}
+
+
+income_royalty = last_6_months.map{|mon| CompanyRoyaltyDetail.where(created_at: mon.to_date.beginning_of_day..mon.to_date.end_of_month.end_of_day).pluck(:amount).compact.sum.to_d}
+
+income_invoice_amount = last_6_months.map{|mon| InvoicePayment.where(payment_date: mon.to_date.beginning_of_day..mon.to_date.end_of_month.end_of_day).pluck(:amount_paid).compact.sum.to_d}
+
+expense = expense_amount.map{|i| i + expense_payment[expense_amount.index(i)]}
+
+income = income_invoice_amount.map{|j| j + income_royalty[income_invoice_amount.index(j)]}
+
+ %>
+
+
+
+
+<div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+
+<script type="text/javascript">
+Highcharts.chart('container2', {
+    chart: {
+        type: 'area'
+    },
+    title: {
+        text: 'Expenses and Incomes '
+    },
+    subtitle: {
+        text: '' 
+    },
+    xAxis: {
+
+       categories:<%= raw last_6_months %>,
+        allowDecimals: false,
+        labels: {
+            formatter: function () {
+                return this.value; // clean, unformatted number for year
+            }
+        }
+    },
+    yAxis: {
+        title: {
+            text: 'Amounts in Thousands'
+        },
+        labels: {
+            formatter: function () {
+                return this.value / 1000 + 'k';
+            }
+        }
+    },
+    tooltip: {
+        pointFormat: '{series.name}  <b>{point.y:,.0f}</b><br/>'
+    },
+    plotOptions: {
+        area: {
+            
+            marker: {
+                enabled: false,
+                symbol: 'circle',
+                radius: 2,
+                states: {
+                    hover: {
+                        enabled: true
+                    }
+                }
+            }
+        }
+    },
+    series: [{
+        name: 'Expenses',
+        data: <%= raw expense %>
+    }, {
+        name: 'Incomes',
+        data: <%= raw income %>
+    }]
+});
+</script>
+</div>
+</div>
+
+<!-- 
+<!%last_6_months = Expense.where(date: 5.month.ago.beginning_of_day..Time.now.end_of_day).group("DATE_TRUNC('month',date)").count.sort.map(&:first).map{|pp| pp.strftime("%b-%Y")}
+expense_amount = last_6_months.map{|mon| Expense.where(date: mon.to_date.beginning_of_day..mon.to_date.end_of_month.end_of_day).pluck(:amount).compact.sum}
+
+ income_royalty = last_6_months.map{|mon| CompanyRoyaltyDetail.where(created_at: mon.to_date.beginning_of_day..mon.to_date.end_of_month.end_of_day).pluck(:amount).compact.sum}
+result_period = 5.month.ago.beginning_of_month.to_date..Date.today.end_of_month.to_date
+
+%>
+ -->
+<style>
+
+
+#table-scroll {
+  height:100px;
+  overflow:auto;  
+  margin-top:20px;
+}
+
+
+
+#announce_table-scroll {
+  height:400px;
+  overflow:auto;  
+  margin-top:20px;
+}
+
+
+.announce_body
+{
+  height:200px;
+  overflow:auto;  
+}
+
+.table td.fit, 
+.table th.fit {
+    white-space: nowrap;
+    width: 1%;
+}
+
+</style>

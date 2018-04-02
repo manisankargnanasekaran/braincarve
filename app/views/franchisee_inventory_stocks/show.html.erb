@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Franchisee:</strong>
+  <%= @franchisee_inventory_stock.franchisee %>
+</p>
+
+<p>
+  <strong>Inventory item:</strong>
+  <%= @franchisee_inventory_stock.inventory_item %>
+</p>
+
+<p>
+  <strong>Available qty:</strong>
+  <%= @franchisee_inventory_stock.available_qty %>
+</p>
+
+<%= link_to 'Edit', edit_franchisee_inventory_stock_path(@franchisee_inventory_stock) %> |
+<%= link_to 'Back', franchisee_inventory_stocks_path %>

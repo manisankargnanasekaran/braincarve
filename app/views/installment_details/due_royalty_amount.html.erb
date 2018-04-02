@@ -1,0 +1,47 @@
+<div class="card">
+  <div class="card-header">
+    <h3>Franchisee Royalty Detail</h3>
+  </div>
+<div class="card-body">
+    <table id="due_royalty_amount_table" class="table table-striped display" cellspacing="0" width="100%">
+  <thead>
+     <tr>
+      <th>From</th>
+      <th>Franchisee Type</th>
+      <th>Due Details</th> 
+    </tr>
+  </thead>
+
+  <tbody>
+      <% @franchisee_royalty_details.each do |k, v| %>  
+          <tr>
+              <% @franchisee = Franchisee.find(k) %>
+              <td><%= @franchisee.location if @franchisee %></td>
+              <td><%= @franchisee.franchisee_type if @franchisee %></td> 
+              <td>
+                  <% v.map do |due_royalty| %>
+                      <ul>
+                        <% royalty_percentage = FranchiseeRoyalty.get_royalty_percentage(k, due_royalty, current_user) %>
+                        <%= due_royalty.installment_date.to_date.strftime("%d-%m-%Y") if due_royalty.installment_date %>&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;<%= (due_royalty.installment_amount * (royalty_percentage.to_f/100)).round if due_royalty.installment_amount * (royalty_percentage.to_f/100) %>                          
+                      </ul>
+                  <%end%>
+              </td>
+          </tr>
+      <% end %>
+  </tbody>
+</table>
+
+</div> 
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#due_royalty_amount_table").dataTable({
+    columnDefs: [
+    {orderable: false, targets: -1},
+    {orderable: false, targets: -2},
+    {orderable: false, targets: -3},
+    ]
+  });
+});
+</script>

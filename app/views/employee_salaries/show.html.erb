@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Employee:</strong>
+  <%= @employee_salary.employee %>
+</p>
+
+<p>
+  <strong>Salary amount:</strong>
+  <%= @employee_salary.salary_amount %>
+</p>
+
+<p>
+  <strong>Account holder name:</strong>
+  <%= @employee_salary.account_holder_name %>
+</p>
+
+<p>
+  <strong>Account number:</strong>
+  <%= @employee_salary.account_number %>
+</p>
+
+<p>
+  <strong>Ifsc code:</strong>
+  <%= @employee_salary.ifsc_code %>
+</p>
+
+<p>
+  <strong>Bank name:</strong>
+  <%= @employee_salary.bank_name %>
+</p>
+
+<p>
+  <strong>Account type:</strong>
+  <%= @employee_salary.account_type %>
+</p>
+
+<%= link_to 'Edit', edit_employee_salary_path(@employee_salary) %> |
+<%= link_to 'Back', employee_salaries_path %>

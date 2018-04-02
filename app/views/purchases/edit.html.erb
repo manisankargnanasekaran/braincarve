@@ -1,0 +1,7 @@
+<div class="card">
+<div class="card-header">
+    <h4>Editing Purchase
+    <%= link_to "<i class='btn btn-info btn-sm'> Back</i>".html_safe, purchases_path, class: "pull-right" %></h4>
+</div>
+<div class="card-body"><%= render 'form', purchase: @purchase %></div>
+</div>

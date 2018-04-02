@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Order Request Items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Order request</th>
+      <th>Inventory item</th>
+      <th>Request qty</th>
+      <th>Cost per item</th>
+      <th>Amount</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @order_request_items.each do |order_request_item| %>
+      <tr>
+        <td><%= order_request_item.order_request %></td>
+        <td><%= order_request_item.inventory_item %></td>
+        <td><%= order_request_item.request_qty %></td>
+        <td><%= order_request_item.cost_per_item %></td>
+        <td><%= order_request_item.amount %></td>
+        <td><%= link_to 'Show', order_request_item %></td>
+        <td><%= link_to 'Edit', edit_order_request_item_path(order_request_item) %></td>
+        <td><%= link_to 'Destroy', order_request_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Order Request Item', new_order_request_item_path %>

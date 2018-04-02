@@ -1,0 +1,100 @@
+<%= form_for @student_fee_pay, :validate => true do |form| %>
+
+
+ <%= form.hidden_field :franchisee_id, value: current_user.franchisee.id %>
+
+<div class="row">
+  <div class="form-group col-md-4">
+    Student Name:
+   <strong style="font-size: 18px;"><%= @student_detail.student.student_name if @student_detail%></strong> 
+  </div>  
+  <div class="form-group col-md-4">
+    Level:
+    <strong style="font-size: 18px;"><%= @student_detail.student.level %></strong>
+  </div>
+</div>
+
+<hr style="border-color: #E26616;">
+  <%#= form.number_field :number_of_classes, id: :student_fee_pay_number_of_classes,class: "form-control", value: 4,:required=> true %>
+
+  <%= form.hidden_field :number_of_classes, id: "count" %>
+ 
+  <%= form.hidden_field :level, value: Student.find(params[:id]).level %>
+
+<div class="row">
+ 
+  
+</div>
+
+<div class="row">
+
+   <div class="form-group col-md-4">
+    <%= form.label :payer_name, class: "control-label" %>
+    <%= form.text_field :payer_name, id: :student_fee_pay_payer_name,class: "form-control",:required=> true %>
+  </div>
+
+  <div class="form-group col-md-4">
+    <%= form.label :payment_mode, class: "control-label" %>
+    
+     <%= form.select :payment_mode, payment_mode.map{|k|[k ,k]}, {prompt: true}, class: "form-control payment_mode" %>
+  </div>
+
+
+  <div class="form-group col-md-4">
+    <%= form.label :reference_number, class: "control-label" %>
+    <%= form.text_field :reference_number, id: :student_fee_pay_reference_number,class: "form-control" %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group col-md-4">
+    <%= form.label :amount , class: "control-label"%>
+    <%= form.text_field :amount, id: :student_fee_pay_amount, class: "form-control", value: @franchisee.student_fee %>
+  </div>
+
+  <div class="form-group col-md-4">
+    <%= form.label :fee_type, class: "control-label" %>
+     <%= form.select :fee_type, fee_type.map{|k|[k ,k]}, {prompt: true}, class: "form-control fee_type" %>
+  </div>
+
+   <div class="form-group col-md-4">
+   <%= form.label :Date, class: "control-label" %>
+    <%= form.text_field :dated, class: "form-control date_range", id: "date", :required=> true%>
+  </div>
+
+</div>
+
+<%= form.hidden_field :student_detail_id, value: params[:id] %>
+  <div class="actions pull-right">
+    <%= form.submit "Pay", class: "btn btn-info btn-sm"  %>
+
+  </div>
+   <br />
+
+<% end %>
+</div>
+</div>
+
+
+<script>
+$(document).ready(function() {
+  $('#date').flatpickr({
+    dateFormat: "d-m-Y",
+    maxDate: 'today',
+  });
+});
+</script>
+<script type="text/javascript">
+$('.fee_type').on("change",function(){
+  var type= $('.fee_type').val()
+    if (type == "Kit Fee"){
+     $('#count').val(0)
+
+    }
+    else
+    {
+      $('#count').val(4)
+   
+    }
+  });
+</script>

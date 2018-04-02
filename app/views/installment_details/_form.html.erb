@@ -1,0 +1,172 @@
+<%= form_for @installment_detail, :validate=>true, id: "container" do |ins_detail| %>
+
+           <% if installment_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(installment_detail.errors.count, "error") %> prohibited this installment_detail from being saved:</h2>
+
+      <ul>
+      <% installment_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+            <div class="row">
+                <div class="col-md-4">
+                  <%= ins_detail.label :installment_detail, "Total" %>
+                  <%= text_field_tag "total_amount", "", class: 'form-control', id: :total_amount, value: @franchisee.franchisee_agreement.total_amount_gst %>
+                </div>
+
+        <% if ins_detail.object.actual_balance.present? %>
+            <div class="col-md-4">
+                  <%= ins_detail.label :actual_balance, "Balance" %>
+                  <%= ins_detail.text_field :actual_balance, class: "form-control", id: :balance_amount, value: ins_detail.object.actual_balance, readonly: true %>
+                </div>
+
+        <% elsif @franchisee.installment_details.present? %>
+                <div class="col-md-4">
+                  <%= ins_detail.label :actual_balance, "Balance" %>
+                  <%= ins_detail.text_field :actual_balance, class: "form-control", id: :balance_amount, value: @franchisee.installment_details.pluck(:due_balance).min, readonly: true %>
+                </div>
+        <% else %>
+                <div class="col-md-4">
+                  <%= ins_detail.label :actual_balance, "Balance" %>
+                  <%= ins_detail.text_field :actual_balance, class: "form-control", id: :balance_amount, value: @franchisee.franchisee_agreement.balance_amount_gst, readonly: true %>
+                </div>
+        <% end %>
+                
+            </div>
+
+
+            <div class="form-group row installment_detail_1">
+
+                <div class="col-md-4">
+                  <%= ins_detail.label :installment_detail, "Due Date" %>
+                  <%= ins_detail.text_field :installment_date, class: "form-control", id: :installment_date %>
+                </div>
+
+            </div>
+
+            <div class="row">
+              
+              <div class="col-md-4">
+                  <%= ins_detail.label :installment_detail, "Due Amount" %>
+                  <%= ins_detail.text_field :installment_amount, class: "form-control", id: :installment_amount %>
+                </div>
+            
+                <div class="col-md-3">
+                  <%= ins_detail.label :due_balance, "Due Balance" %>
+                  <%= ins_detail.text_field :due_balance, class: "form-control due_balance_amount", id: :due_balance, readonly: true %>
+                </div>
+
+            </div>
+
+            <%= ins_detail.hidden_field :franchisee_id, value: @franchisee.id %>
+
+            <%= ins_detail.hidden_field :paid_status, value: false %>
+
+            <div class="actions">
+                <%= ins_detail.submit "Submit", class: "btn btn-info btn-sm leave_btn pull-right", :onclick => "return validateForm();" %>
+            </div>
+  <%end%>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#installment_date').flatpickr();
+  })
+</script>
+
+
+<style type="text/css">
+  .btn-orange {
+    background-color: #E26616;
+    color: #fff;
+}
+</style>
+
+<script type="text/javascript">
+  $('#installment_amount').on('change keyup paste', function(){
+      var due_amount = $('#installment_amount').val();
+      var original_balance = $('#balance_amount').val();
+      var due_balance_amount = parseFloat(original_balance) - parseFloat(due_amount);
+      $('#due_balance').val(due_balance_amount);
+  });
+
+  function validateForm(){
+    var balance = $('#balance_amount').val();
+    var amount = $('#installment_amount').val();
+  if (parseFloat(balance)  >= parseFloat(amount)) {
+        return true;
+    }
+    else {
+        sweetAlert("Due Amount should be lesser than Balance");
+        return false;
+    }
+  }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%if false%>
+
+<%= nested_form_for @franchisee, :validate=>true do |form| %>
+
+
+<div id="InstallmentDetailsForm">
+  <%= form.fields_for :installment_details, :validate=>true, id: "container" do |installment_detail| %>
+            <div class="form-group row installment_detail_1">
+                <div class="col-md-4">
+                  <%= installment_detail.label :installment_detail, "Installment Amount" %> <b>*</b>
+                  <%= installment_detail.text_field :installment_amount, class: "form-control mandatory ins_amount", id: :installment_amount %>
+                </div>
+                <div class="col-md-4">
+                  <%= installment_detail.label :installment_detail, "Installment Date" %> <b>*</b>
+                  <%= installment_detail.text_field :installment_date, class: "form-control mandatory edit_date", id: :installment_date %>
+                </div>
+                <div class="col-md-3">
+                  <%= installment_detail.label :due_balance, "Balance" %>
+                  <%= installment_detail.text_field :due_balance, class: "form-control due_balance_amount", id: :due_balance %>
+                </div>
+                <div class="col-md-1 installment_remove_button">
+                  <%= installment_detail.label :remove,  "Remove", class: "remove_label" %>
+                   <%= installment_detail.link_to_remove "<i class='fa fa-times'></i>".html_safe, class: "btn btn-sm btn-danger form-control installment_remove_button"%> 
+                </div>
+    </div>
+
+    <div class="actions">
+    <%= form.submit %>
+  </div>
+  <%end%>
+</div>
+
+
+<%end%>
+
+<%end%>

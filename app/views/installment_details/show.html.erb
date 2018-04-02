@@ -1,0 +1,189 @@
+<div id="new-modal" class="modal-dialog-lg modal fade"></div>
+<div id="edit-modal" class="modal-dialog-lg modal fade"></div>
+
+<div class="card">
+<div class="card-header">
+  <h3>Installment Details<br>
+
+   	<%= link_to "<i class='fa fa-reply'></i>".html_safe, franchisees_path, class: " head-title pull-right" %>
+  	<% if @due_fully_paid != true %>
+  		<%= link_to "<i class='fa fa-plus'></i>".html_safe, new_installment_detail_path(@franchisee), class: "head-title pull-right", remote: true %>
+  	<%end%>
+  	<span><%= @franchisee.location %> - <%= @franchisee.franchisee_type %></span>
+  </h3>
+</div>
+
+<div class="card-body">
+
+	<!-- <div style="margin-bottom: 30px;font-style: italic;">
+		<h5><%#= @franchisee.location %> - <%= @franchisee.franchisee_type %></h5>
+	</div> -->
+	
+<% if @installment_detail.present? %>
+
+	<div class="row">
+		<div class="col-md-4">
+			<label>Total</label>
+			<input type="text" name="total_amount" class="form-group" value="<%= @franchisee.franchisee_agreement.total_amount_gst %>" readonly="true">
+		</div>
+	 	<div class="col-md-4">
+	 		<label>Advance</label>
+			<input type="text" name="total_amount" class="form-group" value="<%= @franchisee.franchisee_agreement.advance_amount_gst %>" readonly="true">
+		</div>
+	</div>
+
+<br>
+
+	<table class="table table-borderless">
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Amount</th>
+				<th>Payment Mode</th>
+				<th>Reference Number</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @installment_detail.where(paid_status: true).map do |detail| %>
+				<tr>
+					<td><%= detail.installment_date %></td>
+					<td><%= detail.installment_amount %></td>
+					<td><%= detail.payment_mode %></td>
+					<td><%= detail.reference_no.present? ? detail.reference_no : "-"  %></td>	
+				</tr>
+			<%end%>
+		</tbody>
+	</table>
+
+<br>
+
+
+<div class="row">
+	 	<div class="col-md-4">
+	 		<label>Balance</label>
+			<input type="text" name="total_amount" class="form-group" value="<%= @franchisee.franchisee_agreement.balance_amount_gst %>" readonly="true">
+		</div>
+	</div>
+<br>
+<hr style="border-color: #E26616;">
+	<table id="due_table" class="table table-striped display" cellspacing="0" width="100%">
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Amount</th>
+				<th>&nbsp;</th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+
+				<% @installment_detail.where(paid_status: false, is_advance: false).map do |detail| %>
+					<tr>
+						<td><%= detail.installment_date %></td>
+						<td><%= detail.installment_amount %></td>
+						<td>
+							<% if detail.paid_status != true %>
+								<%= link_to "<i class='btn btn-sm btn-green fa fa-pencil' title='Edit Installment'></i>".html_safe, edit_installment_detail_path(detail), remote: true %>
+							<%end%>	
+						</td>
+						<td>
+							<% if detail.paid_status != true %>
+								<%= link_to "<i class='btn btn-sm btn-green fa fa-trash' title='Delete Installment'></i>".html_safe, detail, method: :delete, data: { confirm: 'Are you sure?' } %>
+							<%end%>	
+						</td>
+					</tr>
+				<%end%>
+
+		</tbody>
+	</table>
+
+<%else%>
+      	<tr>
+       		<div class="search_result"><p><i class="fa fa-search" aria-hidden="true"> No Installments</i></p></div>
+       	</tr>
+
+<%end%>
+
+</div>
+
+
+</div>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#due_table").dataTable({
+    columnDefs: [
+    {orderable: false, targets: -1},
+    {orderable: false, targets: -2},
+    {orderable: false, targets: -3},
+    ]
+  });
+});
+</script>
+
+<style type="text/css">
+	.card-body{
+		padding: 30px;
+	}
+	.borderless td, .borderless th {
+    border: none;
+}
+</style>
+
+<style type="text/css">
+  .search_result{
+    margin-top: 100px;
+    margin-bottom: 100px;
+    text-decoration: underline;
+    text-align: center;
+    font-size: 20px;
+    font-family: "roboto";
+  }
+</style>
+
+
+<style type="text/css">
+.btn-red{
+background-color: #ea3346;
+color: #fff;
+}
+.btn-blue{
+  background-color: #007bff;
+  color: #fff;
+}
+.btn-orange {
+    background-color: #E26616;
+    color: #fff;
+}
+.btn-green{
+  background-color: #059126;
+  color: #fff;
+}
+</style>
+
+<!--
+<div class="row">
+	  <div class="col-md-2">Date</div>
+	  <div class="col-md-1"><strong>:</strong></div>
+	  <div class="col-md-3"><strong></strong></div>
+	</div>
+
+	<div class="row">
+	  <div class="col-md-2">Amount</div>
+	  <div class="col-md-1"><strong>:</strong></div>
+	  <div class="col-md-3"><strong></strong></div>
+	</div>
+
+	<div class="row">
+	  <div class="col-md-2">Payment Mode</div>
+	  <div class="col-md-1"><strong>:</strong></div>
+	  <div class="col-md-3"><strong></strong></div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-2">Reference Number</div>
+		<div class="col-md-1"><strong>:</strong></div>
+		<div class="col-md-3"><strong></strong></div>
+	</div>
+-->

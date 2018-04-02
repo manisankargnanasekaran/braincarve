@@ -1,0 +1,32 @@
+<%= form_with(model: company_royalty, local: true) do |form| %>
+  <% if company_royalty.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(company_royalty.errors.count, "error") %> prohibited this company_royalty from being saved:</h2>
+
+      <ul>
+      <% company_royalty.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :franchisee_id %>
+    <%= form.text_field :franchisee_id, id: :company_royalty_franchisee_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :student_royalty %>
+    <%= form.text_field :student_royalty, id: :company_royalty_student_royalty %>
+  </div>
+
+  <div class="field">
+    <%= form.label :franchisee_royalty %>
+    <%= form.text_field :franchisee_royalty, id: :company_royalty_franchisee_royalty %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

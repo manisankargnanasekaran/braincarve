@@ -1,0 +1,151 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+ <div class="modal-header">Agreement Renewal<button type="button" class="close" data-dismiss="modal">&times;</button></div>
+<div class="modal-body">
+<div class="table">
+
+
+
+<%= form_for @agreement_renewal, :validate=>true do |form| %>
+
+
+<div class="row">
+    <div class="col-md-4">    
+        <label>Franchisee</label>
+    </div>
+    <div class="col-md-4">
+        <input type="text" name="franchisee_name" value="<%= Franchisee.find(params[:id]).location %> - <%= Franchisee.find(params[:id]).franchisee_type %>" readonly="true" class="form-control">
+    </div>
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col-md-4">
+      <%= form.label :renewed_date, "Renew Date" %>
+    </div>
+    <div class="col-md-4">
+        <%= form.text_field :renewed_date, id: :renewed_date, class: "form-control" %>
+    </div>
+</div>
+
+<br>
+      <%= form.fields_for :franchisee_document, :validate=>true do |document| %>
+          <div class="row">
+              <div class="col-md-4">
+                  <%= document.label :image_url, "Upload" %>
+              </div>
+              <div class="col-md-4">
+                  <%= document.file_field :image_url, id: :agreement_image, class: "form-control" %>
+              </div>
+          </div>
+      <%end%>
+
+
+
+  <%= form.hidden_field :franchisee_id, value: params[:id] %>
+<br>
+  <div class="actions submit_n_cancel">
+    <%= form.submit "Renew", class: "btn btn-info btn-sm leave_btn", :onclick => "return validateForm();" %>
+  </div>
+<% end %>
+
+
+</div>
+</div>
+</div>
+</div>
+
+<style type="text/css">
+  .modal-header{
+    background-color: #646873;
+  }
+  .center{
+    align-content: center;  }
+</style>
+ 
+
+<script>
+
+$(document).ready(function() {
+  $('#renewed_date').flatpickr();
+});
+
+function validateForm(){
+  if ($('#renewed_date').val().length   >   0) {
+        confirm("Cant Be Edited Later. Be Sure of the Renewal date. Are u sure?");
+        return true;
+    }
+    else {
+        sweetAlert("Renew Date is Required");
+        return false;
+    }
+}
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%if false%>
+<%= form_with(model: agreement_renewal, local: true) do |form| %>
+  <% if agreement_renewal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(agreement_renewal.errors.count, "error") %> prohibited this agreement_renewal from being saved:</h2>
+
+      <ul>
+      <% agreement_renewal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :franchisee_id %>
+    <%= form.text_field :franchisee_id, id: :agreement_renewal_franchisee_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :renewed_date %>
+    <%= form.date_select :renewed_date, id: :agreement_renewal_renewed_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :franchisee_document_id %>
+    <%= form.text_field :franchisee_document_id, id: :agreement_renewal_franchisee_document_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+<%end%>

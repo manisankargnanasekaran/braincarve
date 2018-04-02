@@ -1,0 +1,47 @@
+<%= form_with(model: purchase_item, local: true) do |form| %>
+  <% if purchase_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(purchase_item.errors.count, "error") %> prohibited this purchase_item from being saved:</h2>
+
+      <ul>
+      <% purchase_item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :purchase_id %>
+    <%= form.text_field :purchase_id, id: :purchase_item_purchase_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :inventory_item_id %>
+    <%= form.text_field :inventory_item_id, id: :purchase_item_inventory_item_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cost_per_item %>
+    <%= form.text_field :cost_per_item, id: :purchase_item_cost_per_item %>
+  </div>
+
+  <div class="field">
+    <%= form.label :quantity %>
+    <%= form.number_field :quantity, id: :purchase_item_quantity %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount_without_gst %>
+    <%= form.text_field :amount_without_gst, id: :purchase_item_amount_without_gst %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount_with_gst %>
+    <%= form.text_field :amount_with_gst, id: :purchase_item_amount_with_gst %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

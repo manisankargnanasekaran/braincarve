@@ -1,0 +1,52 @@
+<%= form_with(model: employee_salary, local: true) do |form| %>
+  <% if employee_salary.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(employee_salary.errors.count, "error") %> prohibited this employee_salary from being saved:</h2>
+
+      <ul>
+      <% employee_salary.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :employee_id %>
+    <%= form.text_field :employee_id, id: :employee_salary_employee_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :salary_amount %>
+    <%= form.text_field :salary_amount, id: :employee_salary_salary_amount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :account_holder_name %>
+    <%= form.text_field :account_holder_name, id: :employee_salary_account_holder_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :account_number %>
+    <%= form.text_field :account_number, id: :employee_salary_account_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ifsc_code %>
+    <%= form.text_field :ifsc_code, id: :employee_salary_ifsc_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bank_name %>
+    <%= form.text_field :bank_name, id: :employee_salary_bank_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :account_type %>
+    <%= form.text_field :account_type, id: :employee_salary_account_type %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  franchisee: one
+  student_royalty: 1.5
+  franchisee_royalty: 1.5
+
+two:
+  franchisee: two
+  student_royalty: 1.5
+  franchisee_royalty: 1.5

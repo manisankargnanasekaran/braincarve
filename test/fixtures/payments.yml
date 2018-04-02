@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  purchase: one
+  payment_mode: MyString
+  reference_no: MyString
+  amount_paid: 9.99
+
+two:
+  purchase: two
+  payment_mode: MyString
+  reference_no: MyString
+  amount_paid: 9.99

@@ -1,0 +1,68 @@
+<%= form_with(model: user, local: true) do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name, id: :user_first_name, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name, id: :user_last_name, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mobile_number %>
+    <%= form.text_field :mobile_number, id: :user_mobile_number, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email_id %>
+    <%= form.text_field :email_id, id: :user_email_id, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password %>
+    <%= form.password_field :password, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password_confirmation %>
+    <%= form.password_field :password_confirmation, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :gender %>
+    <%= form.check_box :gender, id: :user_gender %>
+    
+  </div>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address, id: :user_address, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :dob %>
+    <%= form.text_field :dob, id: :user_dob, class: "daterange", class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+<select class="chosen-select" data-placeholder="Select Your Options" id="select">
+    <option value="1">Option 1</option>
+    <option value="2" selected>Option 2</option>
+    <option value="3" disabled>Option 3</option>
+  </select>

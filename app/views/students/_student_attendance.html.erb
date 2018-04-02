@@ -1,0 +1,138 @@
+<div class="modal-dialog modal-lg" id ="table-scroll">
+	<div class="modal-content">
+   <div class="modal-header">Student Attendance
+    <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
+ 	</div>
+ <div class ="float-right">
+  <b>Student Name : </b><%= @student.student_name.titleize%> <b> Level : </b><%= @student.level.titleize%>
+  </div>
+<%= form_for @attendance, url: student_attendance_path, method: :post do |form| %>
+	<div class="modal-body">
+
+    <div class="form-group">
+    Date
+    <%= form.text_field :date,  class: "form-control date_range", id: "attend_date", :require=>true %>
+	</div>
+  <!-- <div class="form-group">
+    Particulars
+    <%#= text_field_tag "particular", "", class: "form-control",  :require=>true %>
+  </div><div class="form-group">
+    Student Rating
+    <%#= text_field_tag "student_rating", "", class: "form-control", :require=>true %>
+  </div><div class="form-group">
+    Comments
+    <%#= text_field_tag "comment", "", class: "form-control", :require=>true %>
+  </div> -->
+
+
+
+<table class="table">
+<thead>
+  <tr>
+  <th>Particulars</th>
+  <th>Excellent</th>
+  <th> Consistent</th>
+  <th>Satisfactory</th>
+  <th>Effort Required</th>
+  <th>Comments</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% t = 0%>
+ <%= form.fields_for :student_ratings, :validate=>true, id: "container" do |student_rate| %>
+
+<%#pariculars.each_with_index do |particular, index|%>
+  <tr>
+  <%#=hidden_field_tag  "rate#{index}[][particular]", particular%>
+  <td><%=pariculars[t] %></td>
+  <%=student_rate.hidden_field :particular, value: pariculars[t] %>
+ <td><%=student_rate.radio_button :student_rating, @student_rating[0]%></td>
+ <td><%=student_rate.radio_button :student_rating, @student_rating[1] %></td>
+ <td><%=student_rate.radio_button :student_rating, @student_rating[2] %></td> 
+ <td><%=student_rate.radio_button :student_rating, @student_rating[3] %></td>
+  <td><%=student_rate.text_field :comment, id: :student_rating_comment  %></td>
+<%t+=1%>
+
+ <!--  <td> <input type="radio" name="rate<%#=index%>[][student_rating]" value= "Excellent">
+  </td>
+  <td> <input type="radio" name="rate<%#=index%>[][student_rating]" value= "Consistent">
+  </td>
+  <td> <input type="radio" name="rate<%#=index%>[][student_rating]" value= "Satisfactory">
+  </td>
+  <td> <input type="radio" name="rate<%#=index%>[][student_rating]" value= "Effort_Required">
+  </td>
+<td> <input type="text" name="rate<%#=index%>[][comment]"></td> -->
+  </tr>
+  <%end%>
+</table>
+
+  <%= form.hidden_field :student_id, value: params[:id] %>
+  <%= form.hidden_field :level, value: Student.find(params[:id]).level %>
+
+  
+	<%= form.submit "Save", class: "btn btn-sm btn-info pull-right", id: "butt", disabled: true%>
+  <br />
+  <br />
+	</div>
+<%end%>
+
+
+
+<table class= "table table-bordered">
+<thead>
+  <tr>
+  <th> Class Attended </th>
+  <th> Date </th>
+  <th>Concentration</th>
+  <th>Concept</th>
+  <th>Participation</th>
+  <th>Completion Of Task </th>
+  <th> Action </th>
+  </tr>
+</thead>
+<tbody>
+<% sl = 0 %>
+<% @attendances.each do |attendance| %>
+  <tr>
+  
+    <td> <%= sl += 1 %></td>
+    <td> <%= attendance.date %></td>
+    <% attendance.student_ratings.map do |student_rating|%>
+      <td><span title = "<%= student_rating.comment %>"> <%= student_rating.student_rating  %></span></td>
+    <%end%>
+      
+    
+   
+    <td><%= link_to "<i class='fa fa-trash btn btn-sm btn-orange' title='Delete Attendance'></i>".html_safe, attendance_destroy_path(id: attendance), data: { confirm: 'Are you sure?' } %></td> 
+  </tr>
+  <% end %>
+</tbody>
+</table>
+</div>
+</div>
+<br>
+
+
+
+<script>
+$(".date_range").change(function() {
+  date = $(this).val();
+  if (date!=""){
+    $("#butt").attr('disabled', false)
+  }
+});
+$(document).ready(function() {
+  $('#attend_date').flatpickr({
+    maxDate: 'today',
+    dateFormat: "d-m-Y"
+  });
+});
+</script>
+
+<style>
+#table-scroll {
+  height:700px;
+  overflow:auto;  
+  margin-top:20px;
+}
+</style>

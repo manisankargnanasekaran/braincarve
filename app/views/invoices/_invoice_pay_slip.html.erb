@@ -1,0 +1,97 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+ <div class="modal-header">Payment Form<button type="button" class="close" data-dismiss="modal">&times;</button></div>
+<div class="modal-body">
+<div class="table">
+
+<% @item_details = Invoice.find(params[:id]).invoice_items %>
+
+<table class="table table-bordered">
+  <thead>
+    <th>Item Name</th>
+    <th>Quantity</th>
+    <th>Cost Per Item</th>
+    <th>GST</th>
+    <th>Amount</th>
+  </thead>
+  <tbody>
+    <% @item_details.map do |item| %>
+      <tr>
+        <td><%= item.inventory_item.book %></td>
+        <td><%= item.invoice_qty %></td>
+        <td><%= item.cost_per_item.round if item.cost_per_item %></td>
+        <td><%= item.inventory_item.gst_percentage %></td>
+        <td><%= item.amount.round if item.amount %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= form_for(:invoice_payment, :url => {:controller => 'invoice_payments', :action => 'create'}) do |form| %>
+
+<div class="row">
+  <div class="col-md">
+    <%= form.label :payment_date, "Date" %>
+      <%= form.text_field :payment_date, id: :payment_date, class: "form-control", value: Date.today %>
+  </div>
+
+  <div class="col-md">
+    <%= form.label :amount_paid, "Amount" %>
+    <%= form.text_field :amount_paid, class: "form-control", id: :purchase_amount_paid, value: Invoice.find(params[:id]).total_amount.round, readonly: true %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md">
+    <%= form.label :payment_mode, "Payment Mode" %>
+      <%#= form.text_field :payment_mode, id: :payment_mode, class: "form-control" %>
+      <%= form.select :payment_mode, payment_mode_list.map{|k|[k ,k]}, {prompt: true}, class: "form-control", id: :payment_mode %>
+  </div>
+
+   <div class="col-md">
+    <%= form.label :reference_no, "Reference Number" %>
+    <%= form.text_field :reference_no, class: "form-control", id: :payment_reference_no %>
+  </div>
+</div>
+
+  <%= form.hidden_field :invoice_id, value: params[:id] %>
+<br>
+  <div class="actions submit_n_cancel">
+    <%= form.submit "Pay", class: "btn btn-info btn-sm leave_btn", :onclick => "return validateForm();" %>
+  </div>
+<% end %>
+
+
+</div>
+</div>
+</div>
+</div>
+
+<style type="text/css">
+  .modal-header{
+    background-color: #646873;
+  }
+  .center{
+    align-content: center;  }
+</style>
+ 
+
+<script>
+
+$(document).ready(function() {
+  $('#payment_date').flatpickr({
+    maxDate: 'today',
+  });
+});
+
+function validateForm(){
+  if ($('#payment_mode').val().length   >   0) {
+        return true;
+    }
+    else {
+        sweetAlert("Payment Mode is Required");
+        return false;
+    }
+}
+
+</script>

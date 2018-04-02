@@ -1,0 +1,8 @@
+$('#parent').show();
+<% if @franchisee == "National Franchisee(NF)" || params[:franchisee_type_id]=="National Franchisee(NF)"%>
+$('#franchisee_parent').html("<%= escape_javascript options_from_collection_for_select(braincarve, :to_s, :to_s) %>");
+<% else %>
+$('#franchisee_parent').html("<%= escape_javascript options_from_collection_for_select(@franchisees_selection, :location, :location) %>");
+<% end %>
+
+//$('.franchisee_parent').html("<%#= escape_javascript options_from_collection_for_select(@franchisees, :id, :location, {prompt: 'Please Select', class: 'form-control select'}) %>");

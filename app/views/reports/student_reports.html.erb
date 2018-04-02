@@ -1,0 +1,58 @@
+<div class="card">
+	<div class="card-header">
+	  Students Report
+	</div>
+	<div class="card-body">
+		<div class="card-title">
+			
+	
+	 
+		<table id="student_report" class="table table-striped display" cellspacing="0" width="100%">
+		 <thead>
+		   <tr>
+		    <th>Name</th>
+		    <th>Joining Date </th>
+		    <th>Age</th>
+		    <th>Contact Number</th>
+		    <th> Level</th>
+		    <th> Action </th>
+		    
+		   </tr>
+		 </thead>
+		 <tbody>
+		<% @students.each do |student| %>
+		      <tr>
+			      <td class="std-name"><%= student.student_name %></td> 
+			      <td class="reg-date"><%= student.registration_date.to_date.strftime("%d-%m-%Y") if student.registration_date%></td>      
+			      <td class="std-class"><%= student.age %></td>      
+			      <td class="cont-no"><%= student.contact_no %></td>
+			      <td class="sch-name"><%= student.level %></td> 
+			      <td><%= link_to "<i class='fa fa-eye btn btn-sm btn-orange' title='View Student'></i>".html_safe, student_report_show_path(student_id: student.id) %></td> 
+			     </tr>
+			    <% end %>
+		   
+		  </tbody>
+		</table>
+
+</div>
+</div>
+</div>
+
+	<script type="text/javascript">
+    
+//     $('.customer_select').change(function(){
+//   var id = $(this).val();
+//   $.get( "/student_report_show?student_id="+id );
+  
+// });
+
+   
+// $('.select').selectize({
+// 	sortField: 'text'
+// 	});
+
+
+  $(document).ready(function() {
+  $("#student_report").dataTable();
+});
+</script>

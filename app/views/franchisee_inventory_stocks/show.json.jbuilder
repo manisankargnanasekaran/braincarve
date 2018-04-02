@@ -1,0 +1,1 @@
+json.partial! "franchisee_inventory_stocks/franchisee_inventory_stock", franchisee_inventory_stock: @franchisee_inventory_stock

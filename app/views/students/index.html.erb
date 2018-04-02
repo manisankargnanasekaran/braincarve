@@ -1,0 +1,641 @@
+<!-- <div class="card">
+  <div class="card-header">
+    <h3>Student
+      <%#= link_to "<i class='btn btn-info btn-sm'> New</i>".html_safe, new_student_path, class: "pull-right" %>
+    </h3>
+  </div> -->
+<!-- <div class="card-body">
+
+<div class="table-responsive">
+    <table id="example" class="table table-striped display" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th class="reg-date">Registration</th>
+      <th  class="std-name">Name</th>
+      <th class="std-class">Age</th>
+      <th class="cont-no">Contact Number</th>
+      <th class="sch-name">Level</th> -->
+      <!-- <th class="sch-lctn">School location</th>      -->
+      <!-- <th class="show" style=""></th>
+      <th class="edit" style=""></th>
+      <th class="delete" style=""></th>
+    </tr>
+    </tr>
+  </thead>
+
+  <tbody> -->
+    <%# @students.each do |student| %>
+      <!-- <tr>
+        <td class="reg-date"><%#= student.registration_date.to_date.strftime("%d-%m-%Y") if student.registration_date%></td>
+        <td class="std-name"><%#= student.student_name %></td>       
+        <td class="std-class"><%#= student.age %></td>      
+        <td class="cont-no"><%#= student.contact_no %></td>
+        <td class="sch-name"><%#= student.level %></td> -->
+        <!-- <td class="sch-lctn"><%#= student.school_location %></td> -->
+        <!-- <td><%#= link_to "<i class='fa fa-eye btn btn-sm btn-orange' title='View Student'></i>".html_safe, student %></td> 
+        <td><%#= link_to "<i class='fa fa-pencil btn btn-sm btn-orange' title='Edit Student'></i>".html_safe, edit_student_path(student) %></td>
+        <td><%#= link_to "<i class='fa fa-trash btn btn-sm btn-orange' title='Delete Student'></i>".html_safe, student, method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+      </tr> -->
+    <%# end %>
+ <!--  </tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+<script type="text/javascript">
+      $(document).ready(function() {
+  $("#example").dataTable();
+});
+</script>
+<style type="text/css">
+.btn-orange{
+background-color: #E26616;
+color: #fff;
+}
+  .crud{
+    color: green;
+  }
+</style>
+ -->
+
+
+
+ <!-- employee cards  -->
+<div id="attendance" class="modal-dialogs modal fade"></div>
+
+<div class="card">
+  <div class="card-header">
+    <h3>Students
+      <%= link_to "<i class='fa fa-plus'></i>".html_safe, new_student_path, class: " head-title pull-right" %>
+      <%= link_to "<i class='fa fa-ban'></i>".html_safe, students_deactivated_student_list_path, class: " head-title pull-right" %>
+    </h3>
+  </div>
+
+  <div class="card-body">
+<div class="container">
+  <div class="row">
+
+   <% @students.each do |student| %>
+    <div class="col-lg-4 col-sm-6">
+      <div class="card hovercard">
+        <div class="row empl-detail">
+         
+          <div class="info">
+            <div class="title">
+              <p> <%= student.student_name.titleize %> </p>
+              <p class="phno">Level: <%= student.level %></p>
+        
+<!-- 
+              @ride_with_out_filter = @ride.map{|i| i.level == student.level ? i : nil}.compact
+ -->
+
+              <p> Attend Class: <%= attented_classes = student.attendance.map{|i| i.level == student.level ? i : nil}.compact.count %>
+          <!--    <!% paid_classes = student.student_detail.student_fee_pays.pluck(:number_of_classes).compact.sum %>
+ -->
+
+            <% paid_classes = student.student_detail.student_fee_pays.where(fee_type: "Class Fee").map{|i| i.level == student.level ? i : nil}.compact.pluck(:number_of_classes).sum %>
+             
+             <% if attented_classes < paid_classes %>
+             <span class='badge badge-pill badge-lg badge-success'>Paid
+             </span> 
+<span class="pull-right"><%= link_to "<i class='btn btn-sm btn-blue fa fa-send'></i>".html_safe, student_fee_pay_path(id: student.id), title: "Send Fee Receipt" %></span>
+             <% else%>
+            
+               <span class='badge badge-pill badge-lg badge-danger'>Unpaid</span></p>
+              <% end %>
+              <% if attented_classes == 12 %>
+                  <span class='badge badge-pill badge-lg badge-success'>Next Level</span> 
+             <%end%>
+            </div>
+           <!--  <div class="desc"><%#= student.employee_identity %></div>
+            <div class="desc">Leave for <%#= Date.today.strftime("%B")%> : <span><%#= employee.employee_attendances.where(:leave_date => Date.current.beginning_of_month..Date.current.end_of_month).count %></span></div> -->          
+          </div>       
+          <div class="po-markup">  
+            <a class="detail-btn float-right po-link" href="#"  data-trigger="focus"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a> 
+            <div class="po-content hidden">
+              <div class="po-body">   
+                <ul>
+                  <li><%= link_to "<i class='btn btn-sm btn-orange fa fa-eye'></i>".html_safe, student, title: "View" %></li>
+                  <li><%= link_to "<i class='btn btn-sm btn-orange fa fa-pencil'></i>".html_safe, edit_student_path(student), title: "Edit" %></li>
+
+                 <% if attented_classes < paid_classes %>
+                  <li><%= link_to "<i class='btn btn-sm btn-orange fa fa-plus'></i>".html_safe, student_attendance_path(id: student.id), title: "Add Attendance", remote: true %></li>
+                  <%else%>
+                  <li><%= link_to "<i class='btn btn-sm btn-orange fa fa-plus'></i>".html_safe, title: "Fee Paid First" %></li>
+                  <%end%>
+
+                  <li><%= link_to "<i class='btn btn-sm btn-orange fa fa-money'></i>".html_safe, new_student_fee_pay_path(id: student.id), title: "Fee Pay" %>
+                  </li>
+
+                  <li><%= link_to "<i class='btn btn-sm btn-orange fa fa-ban'></i>".html_safe, students_deactivate_student_path(id: student.id), title: "Deactivate", data: { confirm: 'Are you sure to deactivate?' } %></li>
+
+                     <!--   -->
+
+                </ul>
+              </div>
+            </div>  
+          </div>
+        </div>
+      </div>
+    </div>  
+  <% end %>   
+
+  </div>
+</div>
+
+</div>
+</div>
+
+
+<style type="text/css">
+
+.btn-blue{
+  background-color: #007bff;
+  color: #fff;
+}
+
+  .card.hovercard{
+
+    margin: 10px 0 10px 0;
+
+    background-color: #efefef;
+
+    border-top-width: 0;
+
+    border-bottom-width: 2px;
+
+    -webkit-border-radius: 3px;
+
+    -moz-border-radius: 3px;
+
+    border-radius: 3px;
+
+    -webkit-box-shadow: none;
+
+    -moz-box-shadow: none;
+
+    box-shadow: none;
+
+    -webkit-box-sizing: border-box;
+
+    -moz-box-sizing: border-box;
+
+    box-sizing: border-box;
+
+}
+
+.card .card-heading {
+
+    padding: 0 20px;
+
+    margin: 0;
+
+}
+
+.card .card-heading.simple {
+
+    font-size: 20px;
+
+    font-weight: 300;
+
+    color: #777;
+
+    border-bottom: 1px solid #e5e5e5;
+
+}
+
+.card .card-heading.image img {
+
+    display: inline-block;
+
+    width: 46px;
+
+    height: 46px;
+
+    margin-right: 15px;
+
+    vertical-align: top;
+
+    border: 0;
+
+    -webkit-border-radius: 50%;
+
+    -moz-border-radius: 50%;
+
+    border-radius: 50%;
+
+}
+
+.card .card-heading.image .card-heading-header {
+
+    display: inline-block;
+
+    vertical-align: top;
+
+}
+
+.card .card-heading.image .card-heading-header h3 {
+
+    margin: 0;
+
+    font-size: 14px;
+
+    line-height: 16px;
+
+    color: #262626;
+
+}
+
+.card .card-heading.image .card-heading-header span {
+
+    font-size: 12px;
+
+    color: #999999;
+
+}
+
+.card .card-body {
+
+    padding: 0 20px;
+
+    margin-top: 20px;
+
+}
+
+.card .card-media {
+
+    padding: 0 20px;
+
+    margin: 0 -14px;
+
+}
+
+.card .card-media img {
+
+    max-width: 100%;
+
+    max-height: 100%;
+
+}
+
+.card .card-actions {
+
+    min-height: 30px;
+
+    padding: 0 20px 20px 20px;
+
+    margin: 20px 0 0 0;
+
+}
+
+.card .card-comments {
+
+    padding: 20px;
+
+    margin: 0;
+
+    background-color: #f8f8f8;
+
+}
+
+.card .card-comments .comments-collapse-toggle {
+
+    padding: 0;
+
+    margin: 0 20px 12px 20px;
+
+}
+
+.card .card-comments .comments-collapse-toggle a,
+
+.card .card-comments .comments-collapse-toggle span {
+
+    padding-right: 5px;
+
+    overflow: hidden;
+
+    font-size: 12px;
+
+    color: #999;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+}
+
+.card-comments .media-heading {
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+}
+
+.card.people {
+
+    position: relative;
+
+    display: inline-block;
+
+    width: 170px;
+
+    height: 300px;
+
+    padding-top: 0;
+
+    margin-left: 20px;
+
+    overflow: hidden;
+
+    vertical-align: top;
+
+}
+
+.card.people:first-child {
+
+    margin-left: 0;
+
+}
+
+.card.people .card-top {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    display: inline-block;
+
+    width: 170px;
+
+    height: 150px;
+
+    background-color: #ffffff;
+
+}
+
+.card.people .card-top.green {
+
+    background-color: #53a93f;
+
+}
+
+.card.people .card-top.blue {
+
+    background-color: #427fed;
+
+}
+
+.card.people .card-info {
+
+    position: absolute;
+
+    top: 150px;
+
+    display: inline-block;
+
+    width: 100%;
+
+    height: 101px;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    -webkit-box-sizing: border-box;
+
+    -moz-box-sizing: border-box;
+
+    box-sizing: border-box;
+
+}
+
+.card.people .card-info .title {
+
+    display: block;
+
+    margin: 8px 14px 0 14px;
+
+    overflow: hidden;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    line-height: 18px;
+
+    color: #404040;
+
+}
+
+.card.people .card-info .desc {
+
+    display: block;
+
+    margin: 8px 14px 0 14px;
+
+    overflow: hidden;
+
+    font-size: 12px;
+
+    line-height: 16px;
+
+    color: #0c0c0c;
+
+    text-overflow: ellipsis;
+
+}
+.card.hovercard .avatar img {
+
+   width: 60px;
+
+    height: 67px;
+
+    max-width: 100px;
+
+    max-height: 100px;
+
+    -webkit-border-radius: 25%;
+
+    -moz-border-radius: 50%;
+
+    border-radius: 30%;
+
+    border: 5px solid rgba(255,255,255,0.5);
+
+    overflow: hidden;
+
+}
+
+.card.hovercard .info {
+
+   padding: 5px;
+
+}
+
+.card.hovercard .info .title {
+
+    margin-bottom: 4px;
+
+    font-size: 24px;
+
+    line-height: 1;
+
+    color: #262626;
+
+    vertical-align: middle;
+
+}
+
+.card.hovercard .info .desc {
+
+    overflow: hidden;
+
+    font-size: 12px;
+
+    line-height: 20px;
+
+    color: #3a3a3a;
+
+    text-overflow: ellipsis;
+
+}
+
+.empl-detail{
+
+  margin:0px;
+
+}
+
+.avatar{
+
+  margin: 5px;
+
+}
+
+.card.hovercard .info .title p{
+
+  margin-bottom: 0px !important;
+
+    font-size: 11px;
+
+    color: #e36612  ;
+
+    font-weight: 600;
+
+    width: 183px;
+
+}
+
+.detail-btn{
+
+  position: absolute;
+
+    right: 10px;
+
+    top: 5px;
+
+}
+
+.detail-btn .fa-ellipsis-v{
+
+    font-size: 22px;
+
+    color: #e36612;
+
+    padding: 5px 5px;
+
+}
+
+.card.hovercard .info .title .phno{
+
+  font-size: 13px;
+
+font-weight: 500;
+
+}
+
+.po-content{
+
+  display: none;
+
+}
+
+.popover-body ul{
+
+  list-style:none !important;
+
+  padding-left:0px;
+
+}
+
+.popover-body ul li{
+
+  padding-top: 10px;
+
+}
+
+/*.popover-body ul li .btn{
+
+  width: 25px;
+
+}
+*/
+.popover-body ul li .btn:hover{
+
+ background-color: #de681d;
+
+border-color: #de681d;
+
+}
+
+
+</style>
+
+<script>
+
+$(document).ready(function(){
+
+    $('[data-toggle="popover"]').popover();   
+
+});
+
+$(document).ready(function() {
+
+            $('.po-markup > .po-link').popover({
+
+            trigger: 'focus',
+
+            html: true,  // must have if HTML is contained in popover
+
+            // get the title and conent
+
+            title: function() {
+
+                return $(this).parent().find('.po-title').html();
+
+            },
+
+            content: function() {
+
+                return $(this).parent().find('.po-body').html();
+
+            },
+
+            container: 'body',
+
+            placement: 'left'
+
+            });
+
+        });
+
+</script>
+
+
+
+

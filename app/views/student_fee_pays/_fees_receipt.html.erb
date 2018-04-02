@@ -1,0 +1,108 @@
+
+<div class="card">
+	<div class="card-header">
+		<div class="row">
+			<div class="col-md-9">
+				<h3><b>BrainCarve Educare India Pvt. Ltd.</b></h3>
+				Head Office : 23 / 7, Ganapathy 1st Street, Avvai Nagar, Thiruvanmiyur,<br>
+				Chennai - 600041. Tamilnadu, India.<br>
+				Mobile : <b>9884400622, 9940036808</b><br>
+				E-mail : mail2braincarve@gmail.com | web : www.braincarve.co.in<br>
+			</div>
+
+			<div class=" col-md-3 pull-right">
+				
+				FEE RECEIPT<br>
+				No. :<br>
+				<p></p>
+				Date :  &nbsp;&nbsp;&nbsp;<b class="bill_date"><%= @student_fee_pay.dated.to_date.strftime("%d-%m-%Y") if @student_fee_pay.dated %></b><br>
+
+				ISO 9001 : 2008 Certified Company TM.<br>
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="card-body">
+
+		<div class="row">
+
+			<div class="col-md-3">
+				 <div class="logo" style="padding: 40px;"><%= image_tag "logo.png" %></div>
+			</div>
+
+			<div class="col-md-9">
+
+				<p style="font-size: 16px; color: grey">
+
+				Received with thanks from Mr/Mrs  &nbsp;&nbsp;&nbsp;<b class="fees_content"><%= @student_fee_pay.payer_name.capitalize %></b><br>
+				Mobile  &nbsp;&nbsp;&nbsp;<b class="fees_content"><%= @student_fee_pay.student_detail.student.contact_no if @student_fee_pay.student_detail %></b> &nbsp;&nbsp;&nbsp; Email  &nbsp;&nbsp;&nbsp;<b class="fees_content"><%= @student_fee_pay.student_detail.father_email if @student_fee_pay.student_detail %></b> <br>
+				the sum of Rupees (in words)  &nbsp;&nbsp;&nbsp;<b class="fees_content"><%= @student_fee_pay.amount %></b>&nbsp;&nbsp;&nbsp; Only<br>
+				being the amount for level &nbsp;&nbsp;&nbsp;<b class="fees_content"><%= @student_fee_pay.level %></b>&nbsp;&nbsp;&nbsp; Regn./month &nbsp;&nbsp;&nbsp;<b class="fees_content"><%= @student_fee_pay.student_detail.student.registration_date.to_date.strftime("%B") if @student_fee_pay.student_detail %></b><br>
+				for Student &nbsp;&nbsp;&nbsp;<b class="fees_content"><%= @student_fee_pay.student_detail.student.student_name if @student_fee_pay.student_detail %></b> &nbsp;&nbsp;&nbsp; std &nbsp;&nbsp;&nbsp;<b class="fees_content"><%= @student_fee_pay.student_detail.student.student_class if @student_fee_pay.student_detail %></b> <br>
+				by Cash / Cheque / D.D. No. &nbsp;&nbsp;&nbsp;<b class="fees_content"><%= @student_fee_pay.reference_number %></b>  Dated &nbsp;&nbsp;&nbsp;<b class="fees_content"><%= @student_fee_pay.dated.to_date.strftime("%d-%m-%Y") if @student_fee_pay.dated %></b> <br>
+				drawn on &nbsp;&nbsp;&nbsp;<b class="fees_content"><%= current_user.franchisee.location %></b>&nbsp;&nbsp;&nbsp; Center Location 
+
+				</p>
+
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<!-- <div class="pull-right">For BrainCarve Educare India Pvt. Ltd.</div> -->
+				<div class="amount-box"><center class="amount-paid"><i class="fa fa-rupee" style="font-size:24px"></i> &nbsp;&nbsp;&nbsp;<%= @student_fee_pay.amount %>&nbsp;&nbsp;&nbsp;</center></div>
+			</div>
+			<div class="col-md-3">For BrainCarve Educare India Pvt. Ltd.</div>
+		</div>
+
+	</div>
+
+	<div class="card-footer">
+
+		Head Office : Dear Parents, Compliment ............. ? Complaints ............. ? Tell us, We value your Feedback
+
+	</div>
+
+
+</div>
+
+
+<!-- 
+<div id="printablediv" style="width: 100%; background-color: Blue; height: 200px; display: none;">
+        <%#= render 'fees_receipt', student_fee_pay: @student_fee_pay %>
+    </div>
+ -->
+
+<style type="text/css">
+.card-header{
+	background-color: white!important;
+	color: black!important;
+}
+.amount-box{
+	width:225px;
+	height:60px;
+	border:1px solid grey;
+}
+.amount-paid{
+	margin-top: 13px;
+	color: #000;
+	font-size: 22px;
+}
+.fees_content{
+	color: #000;
+	border-bottom: 1px dotted grey;
+    text-decoration: none;
+	font-size: 16px;
+	font-style: italic;
+}
+.bill_date{
+	color: #000;
+	border-bottom: 1px dotted grey;
+    text-decoration: none;
+	font-style: italic;
+}
+</style>

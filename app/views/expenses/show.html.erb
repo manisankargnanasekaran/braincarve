@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @expense.description %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @expense.date.to_date.strftime("%d-%m-%Y") %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @expense.amount %>
+</p>
+
+<p>
+  <strong>Expense category:</strong>
+  <%= @expense.expense_category.category_name %>
+</p>
+
+<%= link_to 'Edit', edit_expense_path(@expense) %> |
+<%= link_to 'Back', expenses_path %>

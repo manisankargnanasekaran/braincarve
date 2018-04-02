@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	 <title>Franchisee Agreement</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <center><h2 style="margin-bottom: 30px;">Franchisee Agreement</h2></center>
+  <table class="table table-bordered" width="100%">
+    <thead>
+      <tr>
+        <th>Label</th>
+        <th>Detail</th>
+      </tr>
+    </thead>
+    <tbody>
+      	<tr>
+        	<td><label>Franchisee Type</label></td>
+        	<td><%= @franchisee.franchisee_type %></td>
+      	</tr>
+      	<tr>
+        	<td><label>Location</label></td>
+        	<td><%= @franchisee.location %></td>
+      	</tr>
+      	<tr>
+        	<td><label>Franchisee Parent</label></td>
+        	<td><%= @franchisee.parent %></td>
+      	</tr>
+      	<tr>
+        	<td><label>Primary Email Id</label></td>
+        	<td><%= @franchisee.user.email_id %></td>
+      	</tr>
+      	<tr>
+        	<td><label>Student Fee</label></td>
+        	<td><%= @franchisee.student_fee %></td>
+      	</tr>
+	   	<tr>
+	        <td><label>Agreement Date</label></td>
+	        <td><%= @franchisee.franchisee_agreement.agreement_date.present? ? @franchisee.franchisee_agreement.agreement_date.to_date.strftime("%d-%m-%Y") : nil %></td>
+	    </tr>
+	    <tr>
+	        <td><label>Renewal Date</label></td>
+	        <td><%= @franchisee.franchisee_agreement.renewal_date.present? ? @franchisee.franchisee_agreement.renewal_date.to_date.strftime("%d-%m-%Y") : nil %></td>
+	    </tr>
+	    <tr>
+	        <td><label>Duration</label></td>
+	        <td><%= "#{@franchisee.franchisee_agreement.duration_in_month.to_i} months" %></td>
+	    </tr>
+	    <tr>
+	        <td><label>Number of Owners</label></td>
+	        <td><%= @franchisee.no_of_owners %></td>
+      	</tr>
+    </tbody>
+  </table>
+    
+    	<% @franchisee.franchisee_owners.map do |individual_owner| %>
+    		<table class="table table-bordered" width="100%" style="margin-top: 10px;">
+			    <thead>
+			      <tr>
+			        <th class="col-form-label">Full Name</th>
+			        <th class="col-form-label">DOB/Age</th>
+			        <th class="col-form-label">Occupation/Experience in Years</th>
+			        <th class="col-form-label">Email ID</th>
+			        <th class="col-form-label">Contact Number</th>
+			        <th class="col-form-label">State</th>
+			        <th class="col-form-label">Country</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr>
+			        <td><p class="reg-date"><span><%= individual_owner.first_name %> <%= individual_owner.last_name %></span></p></td>
+			        <td><p class="reg-date"><span><%= individual_owner.dob.to_date.strftime("%d-%m-%Y") if individual_owner.dob %>/<%= individual_owner.age %></span></p></td>
+			        <td><p class="reg-date"><span><%= individual_owner.occupation %>/<%= individual_owner.experience %></span></p></td>
+			        <td><p class="reg-date"><span><%= individual_owner.email_id %></span></p></td>
+			        <td><p class="reg-date"><span><%= individual_owner.contact_no %></span></p></td>
+			        <td><p class="reg-date"><span><%= individual_owner.state %></span></p></td>
+			        <td><p class="reg-date"><span><%= individual_owner.country %></span></p></td>
+			      </tr>
+			    </tbody>
+  			</table>
+  		<%end%>
+
+
+  			<table class="table table-bordered" width="100%" style="margin-top: 10px;">
+			    <thead>
+			      <tr>
+			        <th class="col-form-label">Amount</th>
+			        <th class="col-form-label">GST(%)</th>
+			        <th class="col-form-label">Total</th>
+			        <th class="col-form-label">Advance</th>
+			        <th class="col-form-label">Balance</th>
+			        <th class="col-form-label">No of Installments</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr>
+			        <td><p class="reg-date"><span><%= @franchisee.franchisee_agreement.amount %></span></p></td>
+			        <td><p class="reg-date"><span><%= @franchisee.franchisee_agreement.gst %></span></p></td>
+			        <td><p class="reg-date"><span><%= @franchisee.franchisee_agreement.total_amount_gst %></span></p></td>
+			        <td><p class="reg-date"><span><%= @franchisee.franchisee_agreement.advance_amount_gst %></span></p></td>
+			        <td><p class="reg-date"><span><%= @franchisee.franchisee_agreement.balance_amount_gst %></span></p></td>
+			        <td><p class="reg-date"><span><%= @franchisee.franchisee_agreement.no_of_installment %></span></p></td>
+			      </tr>
+			    </tbody>
+  			</table>
+
+  			<table class="table table-bordered" width="100%" style="margin-top: 10px;">
+			    <thead>
+			      <tr>
+			        <th class="col-form-label fix">Center Address</th>
+			        <th class="col-form-label">City</th>
+			        <th class="col-form-label">State</th>
+			        <th class="col-form-label">Pincode</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr>
+			        <td><p class="reg-date"><span> <%= @franchisee.franchisee_agreement.center_address %></span></p></td>
+			        <td><p class="reg-date"><span><%= @franchisee.franchisee_agreement.city %></span></p></td>
+			        <td><p class="reg-date"><span><%= @franchisee.franchisee_agreement.state %></span></p></td>
+			        <td><p class="reg-date"><span><%= @franchisee.franchisee_agreement.pincode %></span></p></td>
+			      </tr>
+			    </tbody>
+  			</table>
+
+</div>
+
+</body>
+</html>
+
+<style type="text/css">
+	@page { 
+		size: auto; 
+		 margin: 0mm; 
+		} 
+		table thead tr th{
+			font-size: 10px;
+		}
+		table tbody tr td{
+			font-size: 10px;
+		}
+</style>

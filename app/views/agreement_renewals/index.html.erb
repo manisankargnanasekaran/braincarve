@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Agreement Renewals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Franchisee</th>
+      <th>Renewed date</th>
+      <th>Franchisee document</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @agreement_renewals.each do |agreement_renewal| %>
+      <tr>
+        <td><%= agreement_renewal.franchisee %></td>
+        <td><%= agreement_renewal.renewed_date %></td>
+        <td><%= agreement_renewal.franchisee_document %></td>
+        <td><%= link_to 'Show', agreement_renewal %></td>
+        <td><%= link_to 'Edit', edit_agreement_renewal_path(agreement_renewal) %></td>
+        <td><%= link_to 'Destroy', agreement_renewal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Agreement Renewal', new_agreement_renewal_path %>

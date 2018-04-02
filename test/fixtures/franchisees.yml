@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  franchisee_type: one
+  location: MyString
+  parent_id: 1
+
+two:
+  franchisee_type: two
+  location: MyString
+  parent_id: 1

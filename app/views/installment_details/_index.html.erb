@@ -1,0 +1,92 @@
+<div id="franchisee_pay_slip-modal" class="modal-dialog-lg modal fade"></div>
+<div id="franchisee_payment_detail-modal" class="modal-dialog-lg modal fade"></div>
+
+
+<div class="card">
+<div class="card-header-1"></div>
+<div class="card-body">
+<table id="installment_table" class="table table-striped display" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>Franchisee</th>
+      <th>Total</th>
+      <th>Advance</th>
+      <th>Installments</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @installment_details.each do |k, v| %>
+      <tr>
+        <% @franchisee = Franchisee.find(k) %>
+        <td><%= @franchisee.location %> - <%= @franchisee.franchisee_type %></td>
+
+        <td><%= @franchisee.franchisee_agreement.total_amount_gst %></td>
+        <td><%= @franchisee.franchisee_agreement.advance_amount_gst %></td>
+        
+        <td>
+              <% v.each do |installment| %>
+             
+                  <ul>   
+
+                    <%= installment.installment_date.to_date.strftime("%d-%m-%Y") if installment.installment_date %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  
+                    <%= installment.installment_amount %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  
+                  
+                  <% if installment.paid_status == true %>
+                    <%= link_to '<i class="btn-sm btn-blue fa fa-money" aria-hidden="true"> Paid</i>'.html_safe, installment_details_franchisee_payment_detail_path(id: installment.id), remote: true %>
+                  <%else%>
+                    <%= link_to '<i class="btn-sm btn-red fa fa-money" aria-hidden="true"> Unpaid</i>'.html_safe, installment_details_franchisee_pay_slip_path(id: installment.id), remote: true %>
+                  <%end%>
+               
+                </ul>
+
+              <% end %>
+        </td>
+  
+         <!--  <td></td>
+          <td></td> -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<style type="text/css">
+.btn-orange{
+background-color: #E26616;
+color: #fff;
+}
+</style>
+
+<style type="text/css">
+.btn-red{
+background-color: #ea3346;
+color: #fff;
+}
+.btn-blue{
+  background-color: #007bff;
+  color: #fff;
+}
+.btn-orange {
+    background-color: #E26616;
+    color: #fff;
+}
+.btn-green{
+  background-color: #059126;
+  color: #fff;
+}
+</style>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#installment_table").dataTable({
+    columnDefs: [
+    {orderable: false, targets: -1},
+    {orderable: false, targets: -2},
+    {orderable: false, targets: -3},
+    ]
+  });
+});
+</script>

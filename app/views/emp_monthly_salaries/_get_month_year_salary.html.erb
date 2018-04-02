@@ -1,0 +1,40 @@
+<div id="dynamic_salary_data">
+  <%if @dynamic_employee_salary.present? %>
+    <table id="dynamic_salary_table" class="table table-striped display" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th>Employee Name</th>
+          <th>Number of Leaves Taken</th>
+          <th>Payable Salary</th>
+        </tr>
+      </thead>
+      <tbody>
+          <%  @dynamic_employee_salary.last.map do |emp_salary| %>  
+            <tr>
+              <td><%= emp_salary.employee.prefix %> <%= emp_salary.employee.first_name %> <%= emp_salary.employee.last_name %></td>
+              <td><%= emp_salary.no_of_leave %></td>
+              <td><%= emp_salary.net_salary.round if emp_salary.net_salary %></td>
+            </tr>  
+          <% end %>
+      </tbody>
+    </table>
+  <%else%>
+       <tr><div class="search_result"><p><i class="fa fa-search" aria-hidden="true"> No Record Found</i></p></div></tr>
+  <%end%>
+</div>
+
+<style type="text/css">
+  .search_result{
+    margin-top: 100px;
+    margin-bottom: 100px;
+    text-decoration: underline;
+    text-align: center;
+    font-size: 20px;
+    font-family: "roboto";
+  }
+</style>
+<script type="text/javascript">
+      $(document).ready(function() {
+  $("#dynamic_salary_table").dataTable();
+});
+</script>

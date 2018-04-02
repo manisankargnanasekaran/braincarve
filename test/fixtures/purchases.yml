@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  purchase_date: 2018-01-04 12:11:18
+  vendor_name: MyString
+  paid_status: false
+  bill_no: MyString
+  total_amount: 9.99
+  balance_amount: 9.99
+
+two:
+  purchase_date: 2018-01-04 12:11:18
+  vendor_name: MyString
+  paid_status: false
+  bill_no: MyString
+  total_amount: 9.99
+  balance_amount: 9.99

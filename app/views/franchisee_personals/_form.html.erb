@@ -1,0 +1,62 @@
+<%= form_with(model: franchisee_personal, local: true) do |form| %>
+  <% if franchisee_personal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(franchisee_personal.errors.count, "error") %> prohibited this franchisee_personal from being saved:</h2>
+
+      <ul>
+      <% franchisee_personal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :franchisee_id %>
+    <%= form.text_field :franchisee_id, id: :franchisee_personal_franchisee_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name, id: :franchisee_personal_first_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :middle_name %>
+    <%= form.text_field :middle_name, id: :franchisee_personal_middle_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name, id: :franchisee_personal_last_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :dob %>
+    <%= form.date_select :dob, id: :franchisee_personal_dob %>
+  </div>
+
+  <div class="field">
+    <%= form.label :age %>
+    <%= form.number_field :age, id: :franchisee_personal_age %>
+  </div>
+
+  <div class="field">
+    <%= form.label :occupation %>
+    <%= form.text_field :occupation, id: :franchisee_personal_occupation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :experience %>
+    <%= form.text_field :experience, id: :franchisee_personal_experience %>
+  </div>
+
+  <div class="field">
+    <%= form.label :no_of_owners %>
+    <%= form.number_field :no_of_owners, id: :franchisee_personal_no_of_owners %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

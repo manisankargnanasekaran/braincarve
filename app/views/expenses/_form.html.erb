@@ -1,0 +1,59 @@
+<div id="new_expense_category" class="modal-dialog-lg modal fade"></div>
+<%= form_with(model: expense, local: true) do |form| %>
+  <div class ="row">
+  <div class ="col-md-6">
+  <div class = "form-group">
+    <label for="category_name">Category Name</label>
+    <%= form.collection_select :expense_category_id, ExpenseCategory.all, :id, :category_name, {placeholder: "Expense Category"},{class: "select form-control", id: "Email_type_name"} %>
+     </div>
+    <%= link_to "<i class='fa fa-plus'> New</i>".html_safe, expense_category_path, remote: true, class: "btn btn-sm btn-outline-success" %>
+ 
+
+    <div class="form-group">
+      <%= form.label :description, class: "control-label" %>
+      <%= form.text_field :description, id: :expense_description, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :date, class: "control-label" %>
+      <%= form.text_field :date,  class: "form-control date_range", id: "attend_date", :require=>true %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :amount, class: "control-label" %>
+      <%= form.text_field :amount, id: :expense_amount, class: "form-control" %>
+    </div>
+
+    
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+    </div>
+    </div>
+<% end %>
+
+
+ <script type="text/javascript">
+$( document ).ready(function() {
+    $('.select').select2();
+    $('.company_select').select2();
+
+
+});
+
+
+$(document).ready(function() {
+  $('#attend_date').flatpickr({
+    maxDate: 'today',
+    dateFormat: "d-m-Y"
+  });
+});
+</script>
+
+<script type="text/javascript">
+  
+  $('#myModal').on('shown.bs.modal', function () {
+  $('#myInput').focus()
+})
+</script>

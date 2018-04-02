@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Student Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <!-- <th>Student</th> -->
+      <th>Father name</th>
+      <th>Father occupation</th>
+      <th>Father email</th>
+      <th>Father contact no</th>
+      <th>Mother name</th>
+      <th>Mother occupation</th>
+      <th>Mother email</th>
+      <th>Mother contact no</th>
+      <th>Known by</th>
+      <th>Reason to enroll</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @student_details.each do |student_detail| %>
+      <tr>
+       <!--  <td><%#= student_detail.student %></td> -->
+        <td><%= student_detail.father_name %></td>
+        <td><%= student_detail.father_occupation %></td>
+        <td><%= student_detail.father_email %></td>
+        <td><%= student_detail.father_contact_no %></td>
+        <td><%= student_detail.mother_name %></td>
+        <td><%= student_detail.mother_occupation %></td>
+        <td><%= student_detail.mother_email %></td>
+        <td><%= student_detail.mother_contact_no %></td>
+        <td><%= student_detail.known_by %></td>
+        <td><%= student_detail.reason_to_enroll %></td>
+        <td><%= link_to 'Show', student_detail %></td>
+        <td><%= link_to 'Edit', edit_student_detail_path(student_detail) %></td>
+        <td><%= link_to 'Destroy', student_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Student Detail', new_student_detail_path %>

@@ -1,0 +1,296 @@
+<section class="show-profile">
+<div class="card">
+<div class="col-md-12 pt-3">
+<h4 class="pb-0"> Employee Details
+<%= link_to "<i class='btn btn-info btn-sm'> Back</i>".html_safe, employees_path, class: "pull-right" %>
+<hr style="border-color: #E26616;">
+</h4>
+</div>
+<div class="row profile">
+<div class="col-md-6">
+<div class="media">
+  <div class="media-body">
+  <div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Employee Id<span>:</span></label>
+  <div class="col-md-8">
+    <p class="reg-date"><span><%= @employee.employee_identity %></span></p>
+    <!-- .to_date.strftime("%d-%m-%Y") -->
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Full Name<span>:</span></label>
+  <div class="col-md-8">
+  <p class="dob"><span> <%= @employee.prefix %> <%= @employee.first_name %> </span></p>
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Email Id<span>:</span></label>
+  <div class="col-md-8">
+ <p class="age"><span> <%= @employee.email_id %></span></p>
+  </div>
+</div>
+ </div>
+ </div>
+</div>
+
+<div class="col-md-6">
+<form class="address-info">
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Department<span>:</span></label>
+  <div class="col-md-8">
+    <p class="con-no"><span> <%= @employee.department %></span></p>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Job Title<span>:</span></label>
+  <div class="col-md-8">
+    <p class="address"><span> <%= @employee.job_title %></span></p>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Date of Joining<span>:</span></label>
+  <div class="col-md-8">
+    <p class="address"><span><%= @employee.date_of_joining.present? ? @employee.date_of_joining.to_date.strftime("%d-%m-%Y") : nil  %></span></p>
+  </div>
+</div>
+</form>
+</div>
+</div>
+</div>
+
+
+<div class="card">
+<div class="row profile">
+
+<div class="col-md-6">
+<h4 >Salary Details</h4>
+<hr style="border-color: #E26616;">
+<div class="Acadamic-prof ml-3">
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Salary<span>:</span></label>
+  <div class="col-md-8">
+    <p class="level"><span><%= @employee.employee_salary.salary_amount %></span></p>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Account Holder Name<span>:</span></label>
+  <div class="col-md-8">
+    <p class="class"><span><%= @employee.employee_salary.account_holder_name %></span></p>
+  </div>
+</div>
+
+
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Account Number<span>:</span></label>
+  <div class="col-md-8">
+    <p class="batch"><span><%= @employee.employee_salary.account_number %></span></p>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">IFSC Code<span>:</span></label>
+  <div class="col-md-8">
+    <p class="batch"><span><%= @employee.employee_salary.ifsc_code %></span></p>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Bank Name<span>:</span></label>
+  <div class="col-md-8">
+    <p class="batch"><span><%= @employee.employee_salary.bank_name %></span></p>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Account Type<span>:</span></label>
+  <div class="col-md-8">
+    <p class="sch-name"><span> <%= @employee.employee_salary.account_type %></span></p>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="col-md-6">
+<h4>Personal Details</h4>
+<hr style="border-color: #E26616;">
+<div class="Acadamic-prof row">
+<div class="col-12">
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Gender<span>:</span></label>
+  <div class="col-md-8">
+    <p class="Father-name"><span><%= @employee.employee_personal.gender %></span></p>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Marital Status<span>:</span></label>
+  <div class="col-md-8">
+    <p class="f-mail-id"><span><%= @employee.employee_personal.marrital_status == true ? "Married" : "Unmarried" %></span></p>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Nationality<span>:</span></label>
+  <div class="col-md-8">
+    <p class="ocptn"><span><%= @employee.employee_personal.nationality %></span></p>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Date of Birth<span>:</span></label>
+  <div class="col-md-8">
+    <p class="f-con-no"><span><%= @employee.employee_personal.date_of_birth.present? ? @employee.employee_personal.date_of_birth.to_date.strftime("%d-%m-%Y") : nil %></span></p>
+  </div>
+</div>
+</div>
+<div class="col-12">
+<div class="form-group row">
+  <label for="example-text-input" class="col-md-4 col-form-label">Blood Group<span>:</span></label>
+  <div class="col-md-8">
+    <p class="Mother-name"><span><%= @employee.employee_personal.blood_group %></span></p>
+  </div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+
+<div class="card">
+<div class="row profile">
+<div class="col-md-12">
+<h4>Contact Details</h4>
+<hr style="border-color: #E26616;">
+</div>
+ <div class="row col-md-12 reference">
+  <div class="col-md-6">
+  <div class="form-group">
+  <label for="example-text-input" class="col-md-12 col-form-label">Contact Number</label>
+  <div class="col-md-12">
+    <p><%= @employee.employee_contact.contact_no %></p>
+  </div>
+</div>
+  </div>
+
+  <div class="col-md-6">
+  <div class="form-group">
+  <label for="example-text-input" class="col-md-12 col-form-label">Address</label>
+  <div class="col-md-12">
+    <p><%= @employee.employee_contact.address %></p>
+  </div>
+</div>
+  </div>
+  </div>
+
+  <div class="row col-md-12 reference">
+  <div class="col-md-6">
+  <div class="form-group">
+  <label for="example-text-input" class="col-md-12 col-form-label">Country</label>
+  <div class="col-md-12">
+    <p><%= @employee.employee_contact.country %></p>
+  </div>
+</div>
+  </div>
+
+  <div class="col-md-6">
+  <div class="form-group">
+  <label for="example-text-input" class="col-md-12 col-form-label">State</label>
+  <div class="col-md-12">
+    <p><%= @employee.employee_contact.state %></p>
+  </div>
+</div>
+  </div>
+  </div>
+
+  <div class="row col-md-12 reference">
+  <div class="col-md-6">
+  <div class="form-group">
+  <label for="example-text-input" class="col-md-12 col-form-label">City</label>
+  <div class="col-md-12">
+    <p><%= @employee.employee_contact.city %></p>
+  </div>
+</div>
+  </div>
+
+  <div class="col-md-6">
+  <div class="form-group">
+  <label for="example-text-input" class="col-md-12 col-form-label">Pincode</label>
+  <div class="col-md-12">
+    <p><%= @employee.employee_contact.pincode %></p>
+  </div>
+</div>
+  </div>
+  </div>
+
+</div>
+</div>  
+
+  <div class="pl-4 row">
+      <div class="col-md">
+          <div class="form-group row">
+              <div class="col-md-3">
+                  <label for="example-text-input" class="col-form-label">
+                    Profile Picture</label>
+              </div>
+              <div class="col-md-3">
+                  <% if @employee.profile_image.present? %>
+                      <p class="reg-date"><span><strong style="color: #000;">:</strong> <%=image_tag @employee.profile_image.image_url, :style=>"width:150px; height:150px"%></span></p>
+                  <%else%>
+                      <p class="reg-date"><span style="width:150px; height:150px;"><strong style="color: #000;">:</strong>No Profile Picture</span></p>
+                  <%end%>
+              </div>              
+          </div>
+      </div>
+</div>
+<br>
+  <div class="pl-4 row">
+      <div class="col-md">
+          <div class="form-group row">
+              <div class="col-md-3">
+                  <label for="example-text-input" class="col-form-label">
+                    Resume</label>
+              </div>
+              <div class="col-md-3">
+                  <% if @employee.resume.present? %>
+                      <iframe src="<%= @employee.resume %>"></iframe>
+                      <!-- <p class="reg-date"><span><strong style="color: #000;">:</strong> <%#=image_tag @employee.resume, :style=>"width:150px; height:150px"%></span></p> -->
+                  <%else%>
+                      <p class="reg-date"><span style="width:150px; height:150px;"><strong style="color: #000;">:</strong>No Resume Uploaded</span></p>
+                  <%end%>
+              </div>
+          </div>
+      </div>
+</div> 
+
+<br>
+
+</section>
+
+
+
+<!-- code to preview the uploaded file -->
+
+<!-- <script type="text/javascript">
+  $(function() {
+  $('#pictureInput').on('change', function(event) {
+    var files = event.target.files;
+    var image = files[0]
+    var reader = new FileReader();
+    reader.onload = function(file) {
+      var img = new Image();
+      console.log(file);
+      img.src = file.target.result;
+      $('#target').html(img);
+    }
+    reader.readAsDataURL(image);
+    console.log(files);
+  });
+});
+</script> -->
+
+
+<!-- <form>
+  <input type="file" id="pictureInput"> 
+</form>
+<div id="target">
+</div> -->

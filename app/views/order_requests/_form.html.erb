@@ -1,0 +1,115 @@
+<%= nested_form_for @order_request, :validate=>true do |form| %>
+ 
+          <div class="row">
+            <div class="col-md-2">
+                <%= form.label :order_date, "Order Date" %>
+                <%= form.text_field :order_date, id: :order_date, value: Date.today, class: "form-control" %>
+            </div>
+          </div>                        
+       
+<hr style="border-color: lightgrey;">
+
+      <%= form.fields_for :order_request_items, :validate=>true, id: "container" do |order_item| %>
+          <div id="OrderItemDetailsForm">
+            
+            <div class="form-group row"> 
+                <div class="col-md-4">
+                  <%= order_item.label :inventory_item_id, "Item Name" %>
+                  <%= order_item.collection_select(:inventory_item_id, InventoryItem.all, :id, :order_item_scale, { :prompt => 'Select Item'}, {class: "form-control", id: :inventory_item} ) %>
+                  <%#= form.collection_select :batch_id, Batch.where(:created_by_id=>session[:user_id]), :id, :batch_name, {prompt: " - Select Batch - "}, {class: "form-control mandatory"} %>
+                </div>             
+
+                <div class="col-md-4">
+                  <%= order_item.label :request_qty, "Quantity" %>
+                  <%= order_item.text_field :request_qty, id: :request_qty, class: "form-control" %>
+                </div>
+                                
+                <div class="col-md-2">
+                    <%= order_item.label :remove,  "Remove", class: "remove_label" %>
+                     <%= order_item.link_to_remove "<i class='fa fa-times'></i>".html_safe, class: "btn btn-sm btn-danger form-control remove_button"%>
+                </div>  
+            </div>
+    <hr style="border-color: lightgrey;">        
+          </div>
+      <%end%>
+           
+            <%= form.link_to_add "<i class 'fa fa-plus'></i>".html_safe, :order_request_items,:class=>"btn btn-primary fa fa-plus " ,title:"Add" , :data => { :target => "#OrderItemDetailsForm" } %>
+
+<hr style="border-color: lightgrey;">
+
+   <% if order_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(order_request.errors.count, "error") %> prohibited this order_request from being saved:</h2>
+
+      <ul>
+      <% order_request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :franchisee_id, value: current_user.franchisee.id %>
+
+  <div class="actions submit_n_cancel">
+  <%= link_to 'Cancel', order_requests_path, :class=>"btn btn-info btn-sm", data: { confirm: 'Do you want to go to previous page?' } %>&nbsp; | &nbsp; <%= form.submit "Place Order", class: "btn btn-info btn-sm"%>
+  </div>
+
+<% end %>
+
+
+
+<style type="text/css">
+.btn-orange{
+background-color: #E26616;
+color: #fff;
+}
+</style>
+
+<script type="text/javascript">
+$('.select').selectize({
+    create: true,
+    sortField: 'text'
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $(".remove_label")[0].style.display="none";
+  $(".remove_button")[0].style.display="none";
+});
+
+$(document).ready(function() {
+  $('#order_date').flatpickr();
+});
+</script> 
+
+
+<!-- for automatic calculation of age from date of birth -->
+
+<script type="text/javascript">
+
+  $(document).on('nested:fieldAdded', function(event){
+
+  $('.select').selectize({
+    create: true,
+    sortField: 'text'
+  });
+
+//Hide Remove Button for first Inventory Item details
+    if($(".remove_button").length == 1){
+      $(".remove_button")[0].style.display="none";
+      $(".remove_button")[$(".remove_button").length].style.display="block";
+    }else{
+      $(".remove_button")[0].style.display="none";
+      $(".remove_button")[$(".remove_button").length].style.display="none";
+    }
+
+});
+
+
+$('form').on('nested:fieldAdded', function(event) {
+  $(event.target).find(':input').enableClientSideValidations();
+});
+</script>

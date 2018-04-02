@@ -1,0 +1,178 @@
+
+<ul class="nav nav-tabs active_tab_color" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" href="#profile" role="tab" data-toggle="tab"><h6 style="font-style: italic;">Income</h6></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#two" role="tab" data-toggle="tab"><h6 style="font-style: italic;">Expense</h6></a>
+  </li>
+</ul>
+
+<div class="tab-content">
+ <div role="tabpanel" class="tab-pane fade show in active" id="profile">
+    <table id="to_company_bc_company_table_income" class="table table-striped display" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+     <th>Date</th>
+      <th>Royalty / Inventry</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+   <% @income.each do |income| %>
+      <tr>
+
+       
+<!--         ii.is_a?(CompanyRoyaltyDetail)
+ -->       
+  
+   
+        <%if income.is_a?(CompanyRoyaltyDetail)%>
+        <td><%= income.created_at.strftime("%d-%m-%Y")%></td>
+        <td> Royalty </td>
+        <td><%= income.amount%></td>
+        <%else%>
+        <td><%= income.payment_date.strftime("%d-%m-%Y")%></td>
+        <td> Inventry </td>
+        <td><%= income.amount_paid%></td>
+
+        <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</div>
+
+ <div role="tabpanel" class="tab-pane fade" id="two">
+            
+               <%= render partial: "reports/expense_amount" %>
+      </div>
+</div>
+ 
+ 
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#to_company_bc_company_table_income").dataTable({
+    columnDefs: [
+    {orderable: false, targets: -1},
+    {orderable: false, targets: -2},
+    {orderable: false, targets: -3},
+    ]
+  });
+});
+</script>
+
+<style type="text/css">
+.btn-orange{
+color: #fff;
+}
+.crud{
+    color: green;
+  }
+  .actn{
+/*display: none;*/
+width: 58px;
+/*position: fixed;*/
+background-color: #e26616;
+right: 0px;
+/*top: 303px;*/
+z-index: 10;
+border-radius: 8px;
+height: 104px;
+padding: 12px 5px;
+}
+</style>
+
+
+<!-- actions bar -->
+
+
+<script>
+/*$(document).ready(function(){
+   $( "#actions").hide();
+    $(".show").click(function(){
+        $("#actions").show();
+    });
+   
+});*/
+</script> 
+
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+var table = $('#franchisee_table').DataTable({
+   "scrollY":  '50vh',
+    "crollCollapse": true,
+    "scrollX": true
+});
+   
+</script>
+
+<style type="text/css">
+  .side-pop{ 
+    height:auto; 
+    padding:2px; 
+    background-color:#E67A3F;
+    border:1px solid #E67A3F; 
+    position:fixed; 
+    top:50%; 
+    right:0; 
+    -webkit-transition: all 0.5s ease;
+    transition:all 0.5s ease; 
+    border-radius:4px 0 0 4px; 
+    margin-top:-100px;
+  }
+.side-pop ul{ 
+  width:auto; 
+  height:auto; 
+  margin:0; 
+  padding:0; 
+}
+.side-pop ul li{ 
+  float:none; 
+  width:30px; 
+  height:20px; 
+  margin:0; padding:0; 
+  list-style:none; 
+  text-align:center; 
+  margin-bottom:10px; 
+  font-size:20px; 
+}
+.side-pop ul li a{ 
+  color:#fff; 
+  display:block; 
+  text-decoration:none; 
+  text-align:center;
+  -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease; 
+    -ms-transition: all 0.2s ease; 
+    -o-transition: all 0.2s ease; 
+    transition: all 0.2s ease; 
+  }
+.side-pop ul li a strong{
+  font-weight:900;
+}  
+.side-pop ul li a:hover{ 
+  color:#f0ebf0;
+  -webkit-transform:scale(1.25); 
+    -moz-transform:scale(1.25); 
+    -ms-transform:scale(1.25); 
+    -o-transform:scale(1.25);
+     transform:scale(1.25);}
+.side-show{
+  right:0px;
+}
+.side-pop .close{ 
+  width:auto; 
+  font-size:15px; 
+  color:#BE2134; 
+  margin-top:5px; 
+  text-align:center;
+}
+</style>

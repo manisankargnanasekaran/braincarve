@@ -1,0 +1,37 @@
+<%= form_with(model: emp_monthly_salary, local: true) do |form| %>
+  <% if emp_monthly_salary.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(emp_monthly_salary.errors.count, "error") %> prohibited this emp_monthly_salary from being saved:</h2>
+
+      <ul>
+      <% emp_monthly_salary.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :employee_id %>
+    <%= form.text_field :employee_id, id: :emp_monthly_salary_employee_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :salary_for %>
+    <%= form.date_select :salary_for, id: :emp_monthly_salary_salary_for %>
+  </div>
+
+  <div class="field">
+    <%= form.label :no_of_leave %>
+    <%= form.number_field :no_of_leave, id: :emp_monthly_salary_no_of_leave %>
+  </div>
+
+  <div class="field">
+    <%= form.label :net_salary %>
+    <%= form.text_field :net_salary, id: :emp_monthly_salary_net_salary %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

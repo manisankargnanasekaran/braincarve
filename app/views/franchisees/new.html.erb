@@ -1,0 +1,293 @@
+<!-- <div class="card">
+	<div class="card-header">
+		<h3>New Franchisee
+		<%#= link_to "<i class='fa fa-reply'></i>".html_safe, franchisees_path, class: " head-title pull-right", data: { confirm: 'Do you want to go to previous page?' } %></h3>
+	</div>
+	<div class="card-body"><%#= render 'form', franchisee: @franchisee %></div>
+</div>
+<style type="text/css">
+.btn-orange{
+background-color: #E26616;
+color: #fff;
+}
+</style>
+ -->
+
+
+<div class="card multi-step-form">
+  <div class="card-header">
+    <h3>New Franchisee
+    <%= link_to "<i class='fa fa-reply'></i>".html_safe, franchisees_path, class: " head-title pull-right", data: { confirm: 'Do you want to go to previous page?' } %></h3>
+  </div>
+  <div class="card-body">
+
+      <%= render 'form', franchisee: @franchisee %>
+
+  </div>
+</div>
+
+
+
+ <!-- Circles which indicates the steps of the form: -->
+ <!--  <div id="progressbar" style="text-align:center;margin-bottom:40px;">
+    <span class="step">Franchisee</span>
+    <span class="step">Onwer</span>
+    <span class="step">Agreement</span>
+    <span class="step">File upoload</span>
+  </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Script for rails validation and nested form validation -->
+
+
+<!-- <script type="text/javascript">
+
+  // $(document).ready(function() {
+    // $('#container').on('nested:after-insert', function() {
+    //     console.log($(".fields-row").length);
+
+    //     if($(".fields-row").length >= 1){
+    //       $(".remove_button")[0].style.display="block";
+    //     }else{
+    //       $(".remove_button")[0].style.display="none";
+    //     }
+    //   })
+    //   .on("nested:after-remove", function() {
+    //     if($(".fields-row").length == 1){
+    //       $(".remove_button")[0].style.display="none";
+    //     }else{
+    //       $(".remove_button")[0].style.display="block";
+    //     }
+    //   });
+// });
+
+
+  // $(".fields-row").length;
+        // if($(".fields-row").length > 0){
+        //   $(".remove_button")[0].style.display="block";
+        // } else{
+        //   $(".remove_button")[0].style.display="none";
+        // }
+
+  $(document).on('nested:fieldAdded', function(event){
+  // this field was just inserted into your form
+  var field = event.field; 
+  // it's a jQuery object already! Now you can find date input
+  var dateField = field.find('#birthdate');
+  // $(".remove_fields")[0].style.display="block";
+  // and activate datepicker on it
+  dateField.flatpickr({
+      maxDate: 'today', 
+  });
+// Age Calculation start in nested fields
+   dateField.change(function(){
+    var dob = $(this).val();
+    var age = getAge(dob);
+    // ageField.closest('#age_input').val();    
+    var ageField = field.find('#age_input');
+    ageField.val(age);
+   });
+   // Age Calculation end in nested fields
+   //Remove Button hide for first Franchisee owner start
+    if($(".remove_button").length == 1){
+      $(".remove_button")[0].style.display="none";
+      $(".remove_button")[$(".remove_button").length].style.display="block";
+    }else{
+      $(".remove_button")[0].style.display="none";
+      $(".remove_button")[$(".remove_button").length].style.display="none";
+    }
+  //Remove Button hide for first Franchisee owner end
+});
+
+ $('#birthdate').on('change', function () {
+  date = $(this).val();
+  age = getAge(date);
+  $('#age_input').val(age);
+});
+
+
+function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age;
+    }
+    return age;
+} 
+
+$('form').on('nested:fieldAdded', function(event) {
+  $(event.target).find(':input').enableClientSideValidations();
+});
+</script>
+
+ -->
+<!-- for automatic calculation of renewal date -->
+
+<!-- <script type="text/javascript">
+  $('#duration_in_month').on('change', function () {
+  agreement_date = $('#agreement_date').val();
+  duration = $(this).val();
+  renewal_date = getRenewal(agreement_date, duration);
+  $('#renewal_date_input').val(renewal_date);
+});
+  $('#agreement_date').on('change', function () {
+  agreement_date = $(this).val();
+  duration = $('#duration_in_month').val();
+  renewal_date = getRenewal(agreement_date, duration);
+  $('#renewal_date_input').val(renewal_date);
+});
+function getRenewal(agreement_date, duration) {
+    var startDate = new Date(agreement_date);
+    var endDate = startDate.setMonth(startDate.getMonth() + parseInt(duration));   
+    var output_endDate = new Date(endDate);
+    return output_endDate.toISOString().split('T')[0];
+}
+</script> -->
+
+
+
+
+<!-- for automatic calculation of Total amount, GST and Balance amount -->
+
+<!-- <script type="text/javascript">
+
+  $('#gst').on('change', function () {
+    amount = $("#amount").val();
+    gst = $(this).val();
+    advance = $("#advance_amount_gst").val();
+    total = getTotal(amount, gst);
+    $('#total_amount_gst').val(total);
+     balance = getBalance(total, advance);
+    $('#balance_amount_gst').val(balance);
+  });
+  $('#amount').on('change', function () {
+    amount = $(this).val();
+    gst = $("#gst").val();
+    advance = $("#advance_amount_gst").val();
+    total = getTotal(amount, gst);
+    $('#total_amount_gst').val(total);
+    balance = getBalance(total, advance);
+    $('#balance_amount_gst').val(balance);
+  });
+  function getTotal(amount, gst) {
+    var gstAmount = (gst / 100) * amount;
+    var total = parseFloat(amount) + parseFloat(gstAmount);
+    return total;
+  }
+
+  $('#advance_amount_gst').on('change', function () {
+    total = $("#total_amount_gst").val();
+    advance = $(this).val();
+    balance = getBalance(total, advance);
+    $('#balance_amount_gst').val(balance);
+  });
+  /*$('#total_amount_gst').on('change', function () {
+  total = $(this).val(); 
+  advance = $("#advance_amount_gst").val();
+  balance = getBalance(total, advance);
+  $('#balance_amount_gst').val(balance);
+});*/
+function getBalance(total, advance) {
+    var balance = total - advance;
+    return parseFloat(balance);
+}
+
+
+$('#franchisee_type').on('change', function () {
+  var id=($(this).val());
+  var franchisee_id = '<%= @franchisee.id%>';
+      $.ajax({
+        type: "GET",
+         url: "/franchisees/get_type?franchisee_type_id="+ id+"&&id="+franchisee_id,
+      })
+  });
+</script>
+ -->
+<!-- <script type="text/javascript">
+$('.select').selectize({
+    sortField: 'text'
+});
+$('.datepicker').datepicker();
+
+</script>
+
+<script type="text/javascript">
+    $('#no_of_owners').on('change', function () {
+        var count = $(this).val();
+        if (parseInt(count)>1) {
+          $("#ownerBlock").prop('disabled', false);
+          document.getElementById( 'ownerBlock' ).style.display = 'block';
+        } else {
+          $("#ownerBlock").prop('disabled', true);
+          document.getElementById( 'ownerBlock' ).style.display = 'none';
+        }
+      });
+</script>
+
+<script type="text/javascript">
+$('#select').selectize({
+    create: true,
+    sortField: 'text'
+});
+</script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $("#fold").change(function () {
+      var id=($(this).val());
+
+      $.ajax({
+        type: "GET",
+         url: "/franchisees/get_type?franchisee_type_id=" + id,
+      })
+    });
+  });
+</script>
+
+ -->
+<!-- <script type="text/javascript">
+$(document).ready(function() {
+  $(".remove_label")[0].style.display="none";
+  $(".remove_button")[0].style.display="none";
+  $('#birthdate').flatpickr({
+       maxDate: 'today',  
+  });
+});
+
+$(document).ready(function() {
+  $('#agreement_date').flatpickr();
+});
+
+$(document).ready(function() {
+  $('#renewal_date_input').flatpickr();
+});
+</script>
+ -->
+
+<!-- 
+<script language="javascript">
+  $(document).ready(function () {
+    populateCountries("country", "state");
+    //populateCountries("country2");
+  });
+
+</script>
+
+
+
+ -->

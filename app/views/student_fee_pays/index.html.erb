@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Student Fee Pays</h1>
+
+<table class ="table">
+  <thead>
+    <tr>
+    <th>Student Name </th>
+      <th>Amount</th>
+      <th>Reference number</th>
+      <th>Dated</th>
+     
+      <th colspan="3">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @student_fee_pays.each do |student_fee_pay| %>
+      <tr>
+        <td><%= student_fee_pay.student_detail.student.student_name %>
+        <td><%= student_fee_pay.amount %></td>
+        <td><%= student_fee_pay.reference_number %></td>
+        <td><%= student_fee_pay.dated %></td>
+        <td><%= link_to 'Show', student_fee_pay %></td>
+        <td><%= link_to 'Edit', edit_student_fee_pay_path(student_fee_pay) %></td>
+        <td><%= link_to 'Destroy', student_fee_pay, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Student Fee Pay', new_student_fee_pay_path %>

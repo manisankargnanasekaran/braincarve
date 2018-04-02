@@ -1,0 +1,74 @@
+
+
+	
+			
+	<%#= link_to "Excel", reports_report_xls_generate_path(format: "xls", data: @students.ids, date: @selected_period.map{|i| i}) %>
+	 
+		<table id="dynamic_student_report" class="table table-striped display" cellspacing="0" width="100%">
+		 <thead>
+		   <tr>
+		    <th>Name</th>
+		    <th>Grade</th>
+		    <th>Level Joind</th>
+		    <th>Current Level</th>
+		    <th>Parent Name</th>
+		    <th>Contact</th>
+		    <th>Date of Join</th>
+		    <th>Class Fee</th>
+		    <th>Royalty</th>
+		    <th>Center</th>
+		    
+		 
+		    
+		   </tr>
+		 </thead>
+		 <tbody>
+		<% @students.each do |student| %>
+		      <tr>
+		
+			      <td class="std-name"><%= student.student_name %></td> 
+			      
+			      <td class="std-name"><%= student.student_class %></td> 
+
+			      <td><%= student.level_join %></td>
+
+			      <td class="sch-name"><%= student.level %></td> 
+
+                 <td class="sch-name"><%= student.student_detail.father_name %></td> 
+			      
+			      <td class="sch-name"><%= student.contact_no %></td>
+			      
+			      <td class="reg-date"><%= student.registration_date.to_date.strftime("%d-%m-%Y") if student.registration_date%></td>
+
+        
+			      <td><%= student.student_detail.student_fee_pays.where(dated: @selected_period, fee_type: "Class Fee").pluck(:amount).sum%></td>
+			     
+			     <td><%= student.student_detail.student_fee_pays.where(dated: @selected_period, fee_type: "Class Fee").pluck(:amount).sum - student.student_detail.student_fee_pays.where(dated: @selected_period, fee_type: "Class Fee").pluck(:exclude_royalty).sum%></td>
+
+			     <td> <%= student.student_detail.student_fee_pays.where(dated: @selected_period, fee_type: "Class Fee").pluck(:exclude_royalty).sum%></td>
+
+			     
+			     </tr>
+			    <% end %>
+		   
+		  </tbody>
+		</table>
+
+<script type="text/javascript">
+    
+//     $('.customer_select').change(function(){
+//   var id = $(this).val();
+//   $.get( "/student_report_show?student_id="+id );
+  
+// });
+
+   
+// $('.select').selectize({
+// 	sortField: 'text'
+// 	});
+
+
+  $(document).ready(function() {
+  $("#dynamic_student_report").dataTable();
+});
+</script>

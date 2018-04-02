@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Company Royalty Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Franchisee</th>
+      <th>Amount</th>
+      <th>Royalty type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @company_royalty_details.each do |company_royalty_detail| %>
+      <tr>
+        <td><%= company_royalty_detail.franchisee.location %></td>
+        <td><%= company_royalty_detail.amount %></td>
+        <td><%= company_royalty_detail.royalty_type %></td>
+        <td><%= link_to 'Show', company_royalty_detail %></td>
+        <td><%= link_to 'Edit', edit_company_royalty_detail_path(company_royalty_detail) %></td>
+        <td><%= link_to 'Destroy', company_royalty_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Company Royalty Detail', new_company_royalty_detail_path %>

@@ -1,0 +1,8 @@
+<div class="card">
+	<div class="card-header">
+		Edit Student
+		<%= link_to "<i class='fa fa-reply'></i>".html_safe, students_path, class: " head-title pull-right", data: { confirm: 'Do you want to go to previous page?' } %></h3>
+	</div>
+	<div class="card-body"><%= render 'form', student: @student %></div>
+</div>
+

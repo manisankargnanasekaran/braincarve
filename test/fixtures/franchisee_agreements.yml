@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  franchisee: one
+  agreement_date: 2017-12-02
+  duration: MyString
+  renewal_date: 2017-12-02
+  location: MyString
+  no_of_centers: 1
+  advance_amount_gst: 9.99
+  balance_amount_gst: 9.99
+  no_of_installment: 1
+  center_address: MyString
+  city: MyString
+  state: MyString
+  pincode: MyString
+
+two:
+  franchisee: two
+  agreement_date: 2017-12-02
+  duration: MyString
+  renewal_date: 2017-12-02
+  location: MyString
+  no_of_centers: 1
+  advance_amount_gst: 9.99
+  balance_amount_gst: 9.99
+  no_of_installment: 1
+  center_address: MyString
+  city: MyString
+  state: MyString
+  pincode: MyString

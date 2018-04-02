@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  franchisee: one
+  salutation: MyString
+  full_name: MyString
+  contact_no: MyString
+  email_id: MyString
+  address: MyString
+
+two:
+  franchisee: two
+  salutation: MyString
+  full_name: MyString
+  contact_no: MyString
+  email_id: MyString
+  address: MyString

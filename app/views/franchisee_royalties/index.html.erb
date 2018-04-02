@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Franchisee Royalties</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Franchisee</th>
+      <th>To franchisee</th>
+      <th>Student royalty</th>
+      <th>Franchisee royalty</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @franchisee_royalties.each do |franchisee_royalty| %>
+      <tr>
+        <td><%= franchisee_royalty.franchisee %></td>
+        <td><%= franchisee_royalty.to_franchisee %></td>
+        <td><%= franchisee_royalty.student_royalty %></td>
+        <td><%= franchisee_royalty.franchisee_royalty %></td>
+        <td><%= link_to 'Show', franchisee_royalty %></td>
+        <td><%= link_to 'Edit', edit_franchisee_royalty_path(franchisee_royalty) %></td>
+        <td><%= link_to 'Destroy', franchisee_royalty, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Franchisee Royalty', new_franchisee_royalty_path %>

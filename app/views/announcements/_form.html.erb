@@ -1,0 +1,112 @@
+<%= form_for @announcement, :validate => true do |form| %>
+  
+ <!--  <div class="field">
+    <!%= form.label :announcement_date %>
+    <!%= form.text_field :announcement_date, id: :announcement_date, value: Date.today %>
+  </div> -->
+
+<%= form.hidden_field :deactivated, value: false %>
+
+
+<div class="row">
+  <div class="col-md-4">
+      <div class="form-group">
+       <%= form.label :message ,class: "control-label" %>
+        <%= form.text_area :message, id: :name,  class: "form-control"%>
+      </div>
+  
+  </div>
+     <div class="col-md-4">
+      <div class="form-group">
+       <%=form.label :is_for_all, "Send To", class: "control-label" %>
+  <div class="col-sm-6">
+
+
+    <%= form.radio_button :is_for_all, true, :checked => true, id: :sending_to_all %>All&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= form.radio_button :is_for_all, false, id: :sending_to_some %>Choose
+
+
+       <%#= form.radio_button :is_for_all, true,   default: true, class: "button1"%>
+    <%#= form.label :is_for_all, "All", :value => "true", default: true, class: "current" %>
+        <%#= form.radio_button :is_for_all, false, class: "button2" %>        
+    <%#= form.label :is_for_all, "Select form list", :value => "false", class: "advance" %>
+  </div>
+      </div>
+ </div>
+
+  
+
+
+
+
+
+ 
+  
+
+  <%= form.fields_for :announcement_for, :validate => true do |a| %>
+
+
+ <!--  <div class="field">
+    <!%= a.label :announcement_id %>
+    <!%= a.text_field :announcement_id, id: :announcement_for_announcement_id %>
+  </div>
+ -->
+<!--   <div class="field">
+    <!%= a.label :franchisee_id %>
+    <!%= a.text_field :franchisee_id, id: :announcement_for_franchisee_id %>
+  </div> -->
+
+<div class="col-md-4">
+      <div class="form-group" id="msg_receiver">
+         <%=form.label :is_for_all, "Select Franchisee", class: "control-label" %>
+   
+<%= select_tag "franchisee_id", options_from_collection_for_select(Franchisee.all, 'id', 'location'),id: "select", class: "franchisee_select select", multiple: true, prompt: "Select Franchisee"%>
+
+
+
+</div>
+</div>
+
+ </div>
+
+
+ <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<% end %>
+
+
+<script>
+/*$('#select').selectize({
+ 
+});
+*/
+$('#select').select2({
+  allowClear: true,
+  escapeMarkup: function (markup) { return markup; },
+  placeholder: "Service Incharge"
+  });
+
+</script>
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+  $('#announcement_date').flatpickr({
+    minDate: 'today',
+  });
+});
+
+   $('#sending_to_some').click(function(){
+    //alert("hi");
+    $('#msg_receiver').show();
+    $('#msg_receiver').prop('disabled', false);     
+  });
+
+$(document).ready(function(){
+  $('#msg_receiver').hide();
+    $('#msg_receiver').prop('disabled', true);
+})
+</script>

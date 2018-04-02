@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Franchisee Contacts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Franchisee</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Country</th>
+      <th>Email</th>
+      <th>Contact no</th>
+      <th>Land line</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @franchisee_contacts.each do |franchisee_contact| %>
+      <tr>
+        <td><%= franchisee_contact.franchisee %></td>
+        <td><%= franchisee_contact.address %></td>
+        <td><%= franchisee_contact.city %></td>
+        <td><%= franchisee_contact.state %></td>
+        <td><%= franchisee_contact.country %></td>
+        <td><%= franchisee_contact.email_id %></td>
+        <td><%= franchisee_contact.contact_no %></td>
+        <td><%= franchisee_contact.land_line %></td>
+        <td><%= link_to 'Show', franchisee_contact %></td>
+        <td><%= link_to 'Edit', edit_franchisee_contact_path(franchisee_contact) %></td>
+        <td><%= link_to 'Destroy', franchisee_contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Franchisee Contact', new_franchisee_contact_path %>

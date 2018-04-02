@@ -1,0 +1,54 @@
+<div class="card">
+<div class="card-header">
+  <h3>Stock Details</h3>
+</div>
+<div class="card-body">
+<table id="stock_table" class="table table-striped display" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>Item Name</th>
+      <th>Available Quantity</th>
+       <th>&nbsp;</th>
+    <!--   <th>Min Quantity</th> -->
+     <!--  <th>&nbsp;</th> -->
+    </tr>
+  </thead>
+
+  <tbody>
+     <% @company_inventory_stocks.each do |company_inventory_stock| %>
+      <tr>
+        <td><%= company_inventory_stock.inventory_item.book if company_inventory_stock.inventory_item %></td>
+        <td><%= company_inventory_stock.available_qty %></td>
+             
+          <% if company_inventory_stock.available_qty.to_i < company_inventory_stock.inventory_item.min_quantity.to_i %>
+              <td style="background-color: #C70039;">
+                  <p><strong style="color: white; font-size: 12px;">Item Shortage(Min : <%= company_inventory_stock.inventory_item.min_quantity.to_i %>)</strong></p>
+              </td>
+          <% else %>
+            <td></td>
+          <% end %>
+       <!--  <td></td>
+        <td></td> -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+<style type="text/css">
+.btn-orange{
+background-color: #E26616;
+color: #fff;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#stock_table").dataTable({
+    columnDefs: [
+    {orderable: false, targets: -1},
+    {orderable: false, targets: -2},
+    {orderable: false, targets: -3},
+    ]
+  });
+});
+</script>

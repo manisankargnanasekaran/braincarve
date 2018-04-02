@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    </head>
+    <body>
+    
+    <h5>Hi</h5>
+
+    <p> New Order has been placed by <strong><%= @franchisee.location %> - <%= @franchisee.franchisee_type %></strong> on <%= @order_request.order_date.to_date.strftime("%d-%m-%Y") %></p>
+
+    <p> Address : <%= @franchisee.franchisee_agreement.center_address %></p>
+
+        <p>
+          <h5>Owner Details</h5>
+
+          <% @franchisee.franchisee_owners.map do |owner| %>
+              <ul><%= owner.salutation %> <%= owner.first_name %> <%= owner.last_name %> - <%= owner.contact_no %></ul>
+          <%end%>
+        </p>
+
+        <p>Thank You and have a great day!</p>
+
+    </body>
+</html>
+

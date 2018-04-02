@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Royalty Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Franchisee</th>
+      <th>To franchisee</th>
+      <th>Amount</th>
+      <th>Royalty type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @royalty_details.each do |royalty_detail| %>
+
+      <tr>
+        <td><%= royalty_detail.franchisee.location %></td>
+        <td><%= Franchisee.find(royalty_detail.to_franchisee).location %></td>
+        <td><%= royalty_detail.amount %></td>
+        <td><%= royalty_detail.royalty_type %></td>
+        <td><%= link_to 'Show', royalty_detail %></td>
+        <td><%= link_to 'Edit', edit_royalty_detail_path(royalty_detail) %></td>
+        <td><%= link_to 'Destroy', royalty_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Royalty Detail', new_royalty_detail_path %>

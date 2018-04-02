@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Franchisee:</strong>
+  <%= @company_royalty_detail.franchisee %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @company_royalty_detail.amount %>
+</p>
+
+<p>
+  <strong>Royalty type:</strong>
+  <%= @company_royalty_detail.royalty_type %>
+</p>
+
+<%= link_to 'Edit', edit_company_royalty_detail_path(@company_royalty_detail) %> |
+<%= link_to 'Back', company_royalty_details_path %>

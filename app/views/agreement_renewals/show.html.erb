@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Franchisee:</strong>
+  <%= @agreement_renewal.franchisee %>
+</p>
+
+<p>
+  <strong>Renewed date:</strong>
+  <%= @agreement_renewal.renewed_date %>
+</p>
+
+<p>
+  <strong>Franchisee document:</strong>
+  <%= @agreement_renewal.franchisee_document %>
+</p>
+
+<%= link_to 'Edit', edit_agreement_renewal_path(@agreement_renewal) %> |
+<%= link_to 'Back', agreement_renewals_path %>

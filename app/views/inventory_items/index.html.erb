@@ -1,0 +1,56 @@
+<div class="card">
+<div class="card-header">
+  <h3>Inventory Items
+    <%= link_to "<i class='fa fa-plus'></i>".html_safe, new_inventory_item_path, class: "pull-right head-title", :title => "Add Item" %>
+  </h3>
+</div>
+<div class="card-body">
+<table id="inventory_item_table" class="table table-striped display" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>Item</th>
+     <!--  <th>Class</th> -->
+      <th>Minimum Quantity</th>
+      <th>GST(%)</th>
+      <th>Cost Per Item</th>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @inventory_items.each do |inventory_item| %>
+      <tr>
+        <td><%= inventory_item.book %></td>
+        <!-- <td><%#= inventory_item.class_level %></td> -->
+        <td><%= inventory_item.min_quantity %> <%= inventory_item.unit %></td>
+        <td><%= inventory_item.gst_percentage %></td>
+        <td><%= inventory_item.cost_per_item %></td>
+        <td><%= link_to "<i class='btn btn-sm btn-orange fa fa-eye' title='View Inventory Item'></i>".html_safe, inventory_item %></td>
+        <td><%= link_to "<i class='btn btn-sm btn-orange fa fa-pencil' title='Edit Inventory Item'></i>".html_safe, edit_inventory_item_path(inventory_item) %></td>
+        <td><%= link_to "<i class='btn btn-sm btn-orange fa fa-trash' title='Delete Inventory Item'></i>".html_safe, inventory_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<style type="text/css">
+.btn-orange{
+background-color: #E26616;
+color: #fff;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#inventory_item_table").dataTable({
+    columnDefs: [
+    {orderable: false, targets: -1},
+    {orderable: false, targets: -2},
+    {orderable: false, targets: -3},
+    ]
+  });
+});
+</script>
+
+

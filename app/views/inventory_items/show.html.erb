@@ -1,0 +1,51 @@
+<div class="card">
+<div class="card-header">
+  <h3>View Inventory Item
+    <%#= link_to "<i class='btn btn-info btn-sm'> Back</i>".html_safe, inventory_items_path, class: "pull-right" %>
+    <%= link_to "<i class='fa fa-reply'></i>".html_safe, inventory_items_path, class: "head-title pull-right", :title => "Back" %></h3>
+  </h3>
+</div>
+<div class="card-body">
+<div class="row">
+  <div class="col-md-3">Item</div>
+  <div class="col-md-1"><strong>:</strong></div>
+  <div class="col-md-3"><strong> <%= @inventory_item.book %></strong></div>
+</div>
+
+<!-- <div class="row">
+  <div class="col-md-3">Class</div>
+  <div class="col-md-1"><strong>:</strong></div>
+  <div class="col-md-3"><strong> <%#= @inventory_item.class_level %></strong></div>
+</div> -->
+
+<div class="row">
+  <div class="col-md-3">Minimum Quantity</div>
+  <div class="col-md-1"><strong>:</strong></div>
+  <div class="col-md-3"><strong> <%= @inventory_item.min_quantity %></strong></div>
+</div>
+
+<div class="row">
+  <div class="col-md-3">Scale</div>
+  <div class="col-md-1"><strong>:</strong></div>
+  <div class="col-md-3"><strong> <%= @inventory_item.unit %></strong></div>
+</div>
+
+<div class="row">
+  <div class="col-md-3">GST(%)</div>
+  <div class="col-md-1"><strong>:</strong></div>
+  <div class="col-md-3"><strong> <%= @inventory_item.gst_percentage %></strong></div>
+</div>
+
+<div class="row">
+  <div class="col-md-3">Cost Per Item</div>
+  <div class="col-md-1"><strong>:</strong></div>
+  <div class="col-md-3"><strong> <%= @inventory_item.cost_per_item %></strong></div>
+</div>
+
+</div>
+
+<style type="text/css">
+  .card-body{
+    padding: 30px;
+  }
+</style>

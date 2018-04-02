@@ -1,0 +1,77 @@
+<div class="card">
+<div class="card-header">
+  <h3>View Purchase
+    <%#= link_to "<i class='fa fa-reply'></i>".html_safe, purchases_path, class: "pull-right" %>
+    <%= link_to "<i class='fa fa-reply'></i>".html_safe, purchases_path, class: " head-title pull-right" %>
+  </h3>
+</div>
+<div class="card-body">
+<div class="form-group row">
+  <div class="col-md-2">Purchase date</div>
+  <div class="col-md-1"><strong>:</strong></div>
+  <div class="col-md-3"><strong><%= @purchase.purchase_date.to_date.strftime("%d-%m-%Y") if @purchase.purchase_date %></strong></div>
+</div>
+
+<div class="form-group row">
+  <div class="col-md-2">Vendor Name</div>
+  <div class="col-md-1"><strong>:</strong></div>
+  <div class="col-md-3"><strong><%= @purchase.vendor.vendor_name if @purchase.vendor %></strong></div>
+</div>
+
+<div class="form-group row">
+  <div class="col-md-2">Paid status</div>
+  <div class="col-md-1"><strong>:</strong></div>
+  <div class="col-md-3">
+    <strong>
+      <% if @purchase.paid_status == true %>
+          Paid
+      <% elsif @purchase.paid_status == false %>
+          Unpaid
+      <% end %>
+    </strong>
+  </div>
+</div>
+
+<div class="form-group row">
+<div class="col-md-2">Bill no</div>
+<div class="col-md-1"><strong>:</strong></div>
+<div class="col-md-3"><strong><%= @purchase.bill_no %></strong></div>
+</div>
+
+<table class="table table-bordered">
+   <thead>
+     <tr>
+       <th>Item Name</th>
+       <th>Quantity</th>
+       <th>Cost Per Item</th>
+       <th>GST</th>
+       <th>Amount(with GST)</th>
+     </tr>
+   </thead>
+   <tbody>
+     <% @grand_total = @purchase.purchase_items.pluck(:amount_with_gst).sum %>
+     <% @purchase.purchase_items.each do |item| %>
+       <tr>
+         <td><%= item.inventory_item.book %></td>
+         <td><%= item.quantity %></td>
+         <td><%= item.cost_per_item.round if item.cost_per_item %></td>
+         <td><%= item.inventory_item.gst_percentage %></td>
+         <td><%= item.amount_with_gst.round if item.amount_with_gst %></td>
+       </tr>
+     <% end %>
+   </tbody>
+</table>
+
+<div class="row pull-right">
+   <div class="col-md-12">Total : <strong> <%= @grand_total.round if @grand_total %></strong></div>
+  <!--  <div class="col-md-1"><strong>:</strong></div>
+   <div class="col-md-6"></div> -->
+</div>
+</div>
+
+</div>
+<style type="text/css">
+  .card-body{
+    padding: 30px;
+  }
+</style>

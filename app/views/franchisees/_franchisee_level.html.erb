@@ -1,0 +1,24 @@
+<div id="data">
+	<%= nested_form_for @franchisee, :validate=>true do |form| %>
+<%= form.fields_for :franchisee_royalties, :validate=>true do |franchisee_royalty| %>
+
+ <%# 3.times do%>
+<div class="row">
+
+  <div class="col-md">
+    <%= form.label :student_royalty, "Student Royalty(%)" %>
+    <%= franchisee_royalty.text_field :student_royalty, id: :franchisee_royalty_student_royalty, class: "form-control" %>
+  </div>
+
+  <div class="col-md">
+    <%= form.label :franchisee_royalty, "Franchisee Royalty(%)" %>
+    <%= franchisee_royalty.text_field :franchisee_royalty, id: :franchisee_royalty_franchisee_royalty, class: "form-control" %>
+  </div>
+</div>
+<%end%>
+<%end%>
+
+
+  <hr style="border-color:lightgrey;">
+<%# end %>
+</div>

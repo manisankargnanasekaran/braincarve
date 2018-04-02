@@ -1,0 +1,37 @@
+<%= form_with(model: franchisee_royalty, local: true) do |form| %>
+  <% if franchisee_royalty.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(franchisee_royalty.errors.count, "error") %> prohibited this franchisee_royalty from being saved:</h2>
+
+      <ul>
+      <% franchisee_royalty.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :franchisee_id %>
+    <%= form.text_field :franchisee_id, id: :franchisee_royalty_franchisee_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :to_franchisee %>
+    <%= form.number_field :to_franchisee, id: :franchisee_royalty_to_franchisee %>
+  </div>
+
+  <div class="field">
+    <%= form.label :student_royalty %>
+    <%= form.text_field :student_royalty, id: :franchisee_royalty_student_royalty %>
+  </div>
+
+  <div class="field">
+    <%= form.label :franchisee_royalty %>
+    <%= form.text_field :franchisee_royalty, id: :franchisee_royalty_franchisee_royalty %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

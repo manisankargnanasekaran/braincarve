@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Announcement:</strong>
+  <%= @announcement_for.announcement %>
+</p>
+
+<p>
+  <strong>Franchisee:</strong>
+  <%= @announcement_for.franchisee %>
+</p>
+
+<%= link_to 'Edit', edit_announcement_for_path(@announcement_for) %> |
+<%= link_to 'Back', announcement_fors_path %>

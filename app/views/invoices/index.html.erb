@@ -1,0 +1,149 @@
+<div id="invoice_pay_slip-modal" class="modal-dialog-lg modal fade"></div>
+<div id="invoice_payment_detail-modal" class="modal-dialog-lg modal fade"></div>
+
+
+
+<div class="card">
+<div class="card-header">
+  <h3>Inventory Orders</h3>
+</div>
+<div class="card-body">
+<table id="invoice_table" class="table table-striped display" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Franchisee Type</th>
+      <th>Location</th>
+      <!-- <th>Items</th> -->
+      <th>Owner</th>
+      <th>Amount</th>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <% @order_requests.each do |order_request| %>
+      <tr>
+        <td>
+          <% if order_request.invoice.present? %>
+              <%= order_request.invoice.invoice_date.to_date.strftime("%d-%m-%Y") if order_request.invoice.invoice_date %>
+          <% else %>
+              <%= order_request.order_date.to_date.strftime("%d-%m-%Y") if order_request.order_date %>
+          <% end %>  
+        </td>
+        <td><%= order_request.franchisee.franchisee_type if order_request.franchisee %></td>
+        <td><%= order_request.franchisee.location if order_request.franchisee %></td>
+        <td>
+          <% order_request.franchisee.franchisee_owners.map do |owner| %>
+            <li>
+              <%= owner.first_name %> <%= owner.last_name %><br> 
+              <%= owner.contact_no %><br>
+              <%= owner.email_id %><br>
+            </li>
+          <% end %>    
+        </td>
+        <!-- <td>
+          <%# order_request.order_request_items.map do |item| %>
+              <li><%#= item.inventory_item.book %></li>
+          <%# end %>    
+        </td> -->
+        <td><%= order_request.invoice.total_amount.round if order_request.invoice %></td>
+        
+          <% if order_request.invoice.present? %>
+            <td>
+              <% if order_request.invoice.paid_status == true %>
+                  <%= link_to '<i class="btn-sm btn-blue fa fa-money" aria-hidden="true"> Paid</i>'.html_safe, invoices_invoice_payment_detail_path(id: order_request.invoice.id), remote: true %>
+              <% elsif order_request.invoice.paid_status == false %>
+                  <%= link_to '<i class="btn-sm btn-red fa fa-money" aria-hidden="true"> Unpaid</i>'.html_safe, invoices_invoice_pay_slip_path(id: order_request.invoice.id), remote: true %>
+              <% end %>
+            </td>
+            <td><%= link_to "<i class='btn btn-sm btn-orange fa fa-eye' title='View Order'></i>".html_safe, order_request %></td>
+          <% else %>
+            <td><%= link_to '<i class="btn btn-sm btn-green fa fa-pencil" aria-hidden="true"></i>'.html_safe, new_invoice_path(id: order_request.id), class: "head-title" %></td>
+            <td></td>
+          <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<style type="text/css">
+.btn-red{
+background-color: #ea3346;
+color: #fff;
+}
+.btn-blue{
+  background-color: #007bff;
+  color: #fff;
+}
+.btn-orange {
+    background-color: #E26616;
+    color: #fff;
+}
+.btn-green{
+  background-color: #059126;
+  color: #fff;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#invoice_table").dataTable({
+    columnDefs: [
+    {orderable: false, targets: -1},
+    {orderable: false, targets: -2},
+    {orderable: false, targets: -3},
+    ]
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<% if false %>
+
+<p id="notice"><%= notice %></p>
+
+<h1>Orders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Invoice date</th>
+      <th>Order request</th>
+      <th>Total amount</th>
+      <th>Balance amount</th>
+      <th>Paid status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @invoices.each do |invoice| %>
+      <tr>
+        <td><%= invoice.invoice_date %></td>
+        <td><%= invoice.order_request %></td>
+        <td><%= invoice.total_amount %></td>
+        <td><%= invoice.balance_amount %></td>
+        <td><%= invoice.paid_status %></td>
+        <td><%= link_to 'Show', invoice %></td>
+        <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
+        <td><%= link_to 'Destroy', invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Invoice', new_invoice_path %>
+
+<% end %>

@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Franchisee:</strong>
+  <%= @franchisee_agreement.franchisee %>
+</p>
+
+<p>
+  <strong>Agreement date:</strong>
+  <%= @franchisee_agreement.agreement_date %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @franchisee_agreement.duration %>
+</p>
+
+<p>
+  <strong>Renewal date:</strong>
+  <%= @franchisee_agreement.renewal_date %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @franchisee_agreement.location %>
+</p>
+
+<p>
+  <strong>No of centers:</strong>
+  <%= @franchisee_agreement.no_of_centers %>
+</p>
+
+<p>
+  <strong>Advance amount gst:</strong>
+  <%= @franchisee_agreement.advance_amount_gst %>
+</p>
+
+<p>
+  <strong>Balance amount gst:</strong>
+  <%= @franchisee_agreement.balance_amount_gst %>
+</p>
+
+<p>
+  <strong>No of installment:</strong>
+  <%= @franchisee_agreement.no_of_installment %>
+</p>
+
+<p>
+  <strong>Center address:</strong>
+  <%= @franchisee_agreement.center_address %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @franchisee_agreement.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @franchisee_agreement.state %>
+</p>
+
+<p>
+  <strong>Pincode:</strong>
+  <%= @franchisee_agreement.pincode %>
+</p>
+
+<%= link_to 'Edit', edit_franchisee_agreement_path(@franchisee_agreement) %> |
+<%= link_to 'Back', franchisee_agreements_path %>

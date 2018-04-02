@@ -1,0 +1,79 @@
+<div class="modal-dialog modal-lg">
+ <div class="modal-content">
+<div class="modal-header">Invoice Detail<button type="button" class="close" data-dismiss="modal">&times;</button></div>
+<div class="modal-body">
+<div class="table">
+
+<% @invoice_detail = Invoice.find(params[:id]) %>
+
+<div class="row">
+ <div class="col-md-6">Order Date : </div>
+ <!-- <div class="col-md-1"><strong>:</strong></div> -->
+ <div class="col-md-6"><strong><%= @invoice_detail.order_request.order_date.to_date.strftime("%d-%m-%Y") if @invoice_detail.order_request %></strong></div>
+</div>
+
+<hr style="border-color: #E26616
+;">
+
+<!-- <table>
+	<thead>
+		<th>Item Name</th>
+		<th>Quantity</th>
+		<th>Cost Per Item</th>
+	</thead>
+	<tbody>
+		
+	</tbody>
+</table> -->
+
+<% @invoice_detail.invoice_items.map do |item| %>
+
+<div class="row">
+ <div class="col-md-4">Item Name</div>
+ <div class="col-md-4"><strong>:</strong></div>
+ <div class="col-md-4"><strong><%= item.inventory_item.book %></strong></div>
+
+ <div class="col-md-4">Quantity</div>
+ <div class="col-md-4"><strong>:</strong></div>
+ <div class="col-md-4"><strong><%= item.invoice_qty %></strong></div>
+
+ <div class="col-md-4">Cost Per Item</div>
+ <div class="col-md-4"><strong>:</strong></div>
+ <div class="col-md-4"><strong><%= item.cost_per_item.round if item.cost_per_item %></strong></div>
+
+ <div class="col-md-4">GST</div>
+ <div class="col-md-4"><strong>:</strong></div>
+ <div class="col-md-4"><strong><%= item.inventory_item.gst_percentage %></strong></div>
+
+ <div class="col-md-4">Amount</div>
+ <div class="col-md-4"><strong>:</strong></div>
+ <div class="col-md-4"><strong><%= item.amount.round if item.amount %></strong></div>
+
+</div>
+
+<hr style="border-color: #E26616
+;">
+
+<% end %>
+
+
+<div class="row">
+ <div class="col-md-4">Total</div>
+ <div class="col-md-4"><strong>:</strong></div>
+ <div class="col-md-4"><strong><%= @invoice_detail.invoice_items.pluck(:amount).sum.round if @invoice_detail.invoice_items.pluck(:amount).sum %></strong></div>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+
+<style type="text/css">
+ .modal-header{
+   background-color: #646873
+;
+ }
+ .center{
+   align-content: center;  }
+</style>
